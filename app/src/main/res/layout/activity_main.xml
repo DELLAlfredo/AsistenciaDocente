@@ -115,8 +115,8 @@
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:maxLength="8"
+                android:inputType="text"
+                android:maxLength="50"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 tools:text="Usuario" />
