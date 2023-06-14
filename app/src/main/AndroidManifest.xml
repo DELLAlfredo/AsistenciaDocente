@@ -13,6 +13,9 @@
         android:theme="@style/Theme.AsistenciaDocente"
         tools:targetApi="31">
         <activity
+            android:name=".Docentes"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
