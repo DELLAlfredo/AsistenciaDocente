@@ -97,7 +97,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:hint="Numero de control"
+            android:hint="Numero de usuario"
             android:textColorHint="@color/black"
             app:boxStrokeColor="@color/yellow"
             app:counterEnabled="true"
@@ -119,7 +119,7 @@
                 android:maxLength="8"
                 android:singleLine="true"
                 android:textColor="@color/black"
-                tools:text="19160027" />
+                tools:text="Usuario" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
