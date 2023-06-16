@@ -8,46 +8,46 @@
     tools:context=".abcDocentes">
 
     <EditText
-        android:id="@+id/editTextText3"
+        android:id="@+id/etID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:ems="10"
+        android:hint="Clave Maestro"
         android:inputType="text"
-        android:text="Clave Maestro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvmaestros" />
 
     <EditText
-        android:id="@+id/editTextText4"
+        android:id="@+id/etNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:ems="10"
+        android:hint="Nombre Maestro"
         android:inputType="text"
-        android:text="Nombre Maestro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText3" />
+        app:layout_constraintTop_toBottomOf="@+id/etID" />
 
     <EditText
-        android:id="@+id/editTextText5"
+        android:id="@+id/etApellido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:ems="10"
+        android:hint="Apellido Maestro"
         android:inputType="text"
-        android:text="Apellido Maestro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText4" />
+        app:layout_constraintTop_toBottomOf="@+id/etNombre" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/spOpcion"
         android:layout_width="157dp"
         android:layout_height="49dp"
         android:layout_marginStart="16dp"
@@ -56,7 +56,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline12" />
 
     <Spinner
-        android:id="@+id/spinner3"
+        android:id="@+id/spCarrera"
         android:layout_width="157dp"
         android:layout_height="49dp"
         android:layout_marginEnd="16dp"
@@ -72,7 +72,7 @@
         app:layout_constraintGuide_percent="0.53" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnGuardar"
         android:layout_width="216dp"
         android:layout_height="53dp"
         android:layout_marginBottom="44dp"
@@ -108,8 +108,8 @@
         android:textColor="@color/white"
         android:text="Opcion"
         app:layout_constraintBottom_toTopOf="@+id/guideline12"
-        app:layout_constraintEnd_toEndOf="@+id/spinner2"
-        app:layout_constraintStart_toStartOf="@+id/spinner2" />
+        app:layout_constraintEnd_toEndOf="@+id/spOpcion"
+        app:layout_constraintStart_toStartOf="@+id/spOpcion" />
 
     <TextView
         android:id="@+id/textView4"
@@ -118,6 +118,6 @@
         android:textColor="@color/white"
         android:text="Carrera"
         app:layout_constraintBottom_toTopOf="@+id/guideline12"
-        app:layout_constraintEnd_toEndOf="@+id/spinner3"
-        app:layout_constraintStart_toStartOf="@+id/spinner3" />
+        app:layout_constraintEnd_toEndOf="@+id/spCarrera"
+        app:layout_constraintStart_toStartOf="@+id/spCarrera" />
 </androidx.constraintlayout.widget.ConstraintLayout>
