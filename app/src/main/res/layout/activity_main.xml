@@ -101,7 +101,7 @@
             android:textColorHint="@color/black"
             app:boxStrokeColor="@color/yellow"
             app:counterEnabled="true"
-            app:counterMaxLength="8"
+            app:counterMaxLength="100"
             app:counterTextColor="@color/black"
             app:errorEnabled="true"
             app:layout_constraintBottom_toTopOf="@+id/guideline20"
@@ -112,7 +112,7 @@
             app:prefixTextColor="@color/black">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/username"
+                android:id="@+id/nombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
@@ -131,7 +131,7 @@
             android:textColorHint="@color/black"
             app:boxStrokeColor="@color/yellow"
             app:counterEnabled="true"
-            app:counterMaxLength="10"
+            app:counterMaxLength="40"
             app:counterTextColor="@color/black"
             app:errorEnabled="true"
             app:layout_constraintBottom_toTopOf="@+id/guideline23"
@@ -142,7 +142,7 @@
             app:passwordToggleTint="@color/yellow">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/password"
+                android:id="@+id/contraseña"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"

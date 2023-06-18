@@ -44,6 +44,7 @@ public class abcDocentes extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 switch (spOpcion.getSelectedItem().toString()) {
+
                     case "Añadir":
                         if (!etID.getText().toString().isEmpty() &&
                                 !etNombre.getText().toString().isEmpty() &&
@@ -102,7 +103,7 @@ public class abcDocentes extends AppCompatActivity {
         if (spOpcion.equals("Añadir")) {
             if (code != 0) {
                 try {
-                    URL url = new URL("URL_DE_LA_API"); // Reemplaza con la URL de tu API
+                    URL url = new URL("http://192.168.56.1/CHECKTECH/docentesabc.php"); // Reemplaza con la URL de tu API
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
                     conn.setDoOutput(true);
@@ -142,7 +143,7 @@ public class abcDocentes extends AppCompatActivity {
         if (spOpcion.equals("Actualizar")) {
             if (code != 0) {
                 try {
-                    URL url = new URL("URL_DE_LA_API"); // Reemplaza con la URL de tu API
+                    URL url = new URL("http://192.168.56.1/CHECKTECH/docentesabc.php"); // Reemplaza con la URL de tu API
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("PUT");
                     conn.setDoOutput(true);
@@ -182,7 +183,7 @@ public class abcDocentes extends AppCompatActivity {
         if (spOpcion.equals("Eliminar")) {
             if (code != 0) {
                 try {
-                    URL url = new URL("URL_DE_LA_API"); // Reemplaza con la URL de tu API
+                    URL url = new URL("http://192.168.56.1/CHECKTECH/docentesabc.php"); // Reemplaza con la URL de tu API
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("DELETE");
 

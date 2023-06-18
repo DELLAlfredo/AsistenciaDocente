@@ -1,13 +1,14 @@
 package com.example.asistenciadocente;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
+
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -22,21 +23,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    TextInputEditText nombre,contraseña;
+   EditText nombre,contraseña;
     Button ingresar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        nombre= findViewById(R.id.username);
-        contraseña=findViewById(R.id.password);
+        nombre= findViewById(R.id.nombre);
+        contraseña=findViewById(R.id.contraseña);
         ingresar =findViewById(R.id.loginButton);
 
 
         ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validarUsuario("http://192.168.31.26/CHECKTECH/Validar_Usuario.php  ");
+              // Intent inten = new Intent(getApplicationContext(), abcDocentes.class);
+              //startActivity(inten);
+               validarUsuario("http://192.168.56.1:80/CHECKTECH/validar_usuario.php");
             }
         });
     }
@@ -46,20 +49,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 if (!response.isEmpty()){
-                    Intent inten = new Intent(getApplicationContext(),Docentes.class);
+                    Intent inten = new Intent(getApplicationContext(), abcDocentes.class);
                     startActivity(inten);
                 }else{
-                    Toast.makeText(MainActivity.this,"incorrecto",Toast.LENGTH_SHORT).show();
+                    //mensaje en caso de no existir o equivocarse en usuario
+                    Toast.makeText(MainActivity.this,"Usuario o contraseña incorrectos",Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this,"error de usuario",Toast.LENGTH_SHORT).show();
+                //mensaje de error por internet o conexion
+                Toast.makeText(MainActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
             }
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
+                //insersion de datos para validar usuario y comparar
                Map<String,String> parametros = new HashMap<String, String>();
                parametros.put("nombre",nombre.getText().toString());
                 parametros.put("contraseña",contraseña.getText().toString());
