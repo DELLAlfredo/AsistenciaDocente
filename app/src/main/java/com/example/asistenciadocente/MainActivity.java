@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-   EditText nombre,contraseña;
+    EditText nombre,contraseña;
     Button ingresar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
         ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              // Intent inten = new Intent(getApplicationContext(), abcDocentes.class);
-              //startActivity(inten);
-               validarUsuario("http://192.168.56.1:80/CHECKTECH/validar_usuario.php");
+                // Intent inten = new Intent(getApplicationContext(), abcDocentes.class);
+                //startActivity(inten);
+                validarUsuario("http://192.168.0.6:80/Checador/Validar_Usuario.php");
             }
         });
     }
@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 //insersion de datos para validar usuario y comparar
-               Map<String,String> parametros = new HashMap<String, String>();
-               parametros.put("nombre",nombre.getText().toString());
+                Map<String,String> parametros = new HashMap<String, String>();
+                parametros.put("nombre",nombre.getText().toString());
                 parametros.put("contraseña",contraseña.getText().toString());
                 return parametros;
             }
