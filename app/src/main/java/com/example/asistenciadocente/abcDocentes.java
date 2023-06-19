@@ -1,7 +1,5 @@
 package com.example.asistenciadocente;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -9,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedWriter;
 import java.io.OutputStream;
@@ -103,7 +103,7 @@ public class abcDocentes extends AppCompatActivity {
         if (spOpcion.equals("Añadir")) {
             if (code != 0) {
                 try {
-                    URL url = new URL("http://192.168.56.1/CHECKTECH/docentesabc.php"); // Reemplaza con la URL de tu API
+                    URL url = new URL("http://192.168.56.1:80/CHECKTECH/docentesabc.php"); // Reemplaza con la URL de tu API
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
                     conn.setDoOutput(true);

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_Docentes"
+            android:title="Docentes"
+            android:icon="@color/Black"
+            />
+        <item
+            android:id="@+id/nav_Aulas"
+            android:title="Aulas"
+            android:icon="@color/error"
+            />
+        <item
+            android:id="@+id/nav_Clases"
+            android:title="Clases"
+            android:icon="@color/Black"
+            />
+        <item
+            android:id="@+id/nav_Reporte_Semanal"
+            android:title="Reporte Semanal"
+            android:icon="@color/Black"
+            />
+        <item
+            android:id="@+id/logout"
+            android:title="Exit"
+            android:icon="@drawable/logout"
+            />
+
+
+    </group>
+</menu>

@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">AsistenciaDocente</string>
+    <string name="app_name">AsistenciaDocente</string>7
+
+    <string name="navigation_open">Open navigation</string>
+
+    <string name="navigation_close">Close navigation</string>
 </resources>

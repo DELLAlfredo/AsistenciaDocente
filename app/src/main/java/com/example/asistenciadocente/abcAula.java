@@ -1,14 +1,21 @@
 package com.example.asistenciadocente;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-public class abcAula extends AppCompatActivity {
+import com.example.asistenciadocente.databinding.ActivityAbcAulaBinding;
 
+public class abcAula extends menu {
+    ActivityAbcAulaBinding activityAbcAulaBinding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_abc_aula);
+        activityAbcAulaBinding = ActivityAbcAulaBinding.inflate(getLayoutInflater());
+        allocateActivityTitle("Aulas");
+        setContentView(activityAbcAulaBinding.getRoot());
+
+        /*--------------------------------------------------------*/
+
+
     }
+
 }
