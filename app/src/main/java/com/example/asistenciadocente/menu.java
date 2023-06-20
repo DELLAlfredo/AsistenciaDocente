@@ -54,6 +54,11 @@ public class menu extends AppCompatActivity implements NavigationView.OnNavigati
                 if (item.getItemId()== R.id.nav_Clases) {
                     Intent intent = new Intent(getApplicationContext(), Clases.class);
                     startActivity(intent);
+                }else {
+                    if (item.getItemId()== R.id.logout) {
+                        Intent intent = new Intent(getApplicationContext(), Login.class);
+                        startActivity(intent);
+                    }
                 }
             }
         }

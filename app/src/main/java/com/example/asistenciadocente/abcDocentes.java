@@ -2,7 +2,6 @@ package com.example.asistenciadocente;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,19 +17,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.asistenciadocente.databinding.ActivityAbcDocentesBinding;
 
-import java.io.BufferedReader;
-import androidx.appcompat.app.AppCompatActivity;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,26 +49,33 @@ public class abcDocentes extends menu {
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Guardar("http://192.168.0.7:80/Checador/docentes.php");
+                //Guardar("http://192.168.0.7:80/Checador/docentes.php");
+                Guardar("http://192.168.56.1:80/CHECKTECH//docentes.php");
 
             }
         });
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buscarDocente("http://192.168.0.7/Checador/buscar_docente.php?Matricula="+etMatricula.getText()+"");
+                //buscarDocente("http://192.168.0.7/Checador/buscar_docente.php?Matricula="+etMatricula.getText()+"");
+                buscarDocente("http://192.168.56.1:80/CHECKTECH/buscar_docente.php?Matricula="+etMatricula.getText()+"");
+
             }
         });
         btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Guardar("http://192.168.0.7:80/Checador/editar_docente.php");
+                //Guardar("http://192.168.0.7:80/Checador/editar_docente.php");
+               Guardar("http://192.168.56.1:80/CHECKTECH/editar_docente.php");
+
             }
         });
         btnBorrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Borrar("http://192.168.0.7:80/Checador/eliminar_docente.php");
+                //Borrar("http://192.168.0.7:80/Checador/eliminar_docente.php");
+
+                Borrar("http://192.168.56.1:80/CHECKTECH/eliminar_docente.php");
             }
         });
 
@@ -107,7 +104,7 @@ public class abcDocentes extends menu {
                             Toast.makeText(getApplicationContext(), "La matrícula ya existe, ingresa otro valor", Toast.LENGTH_SHORT).show();
                         } else {
                             // La matrícula no existe, proceder a guardar
-                            Toast.makeText(getApplicationContext(), "Se Guardo Correctamente", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Operacion Exitosa", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },

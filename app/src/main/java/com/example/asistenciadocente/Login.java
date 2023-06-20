@@ -20,29 +20,39 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class Login extends AppCompatActivity {
+    //Se definen las variables nombre, contraseña y ingresar para
+    // representar los elementos de la interfaz de usuario en el archivo de diseño XML (activity_main.xml).
     EditText nombre,contraseña;
     Button ingresar;
+    //En el método onCreate, se establece el contenido de la actividad utilizando el archivo de diseño activity_main.xml. Luego,
+    // se asignan los elementos de la interfaz de usuario a las variables correspondientes utilizando findViewById.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         nombre= findViewById(R.id.nombre);
         contraseña=findViewById(R.id.contraseña);
         ingresar =findViewById(R.id.loginButton);
 
-
+        //Se configura un OnClickListener para el botón ingresar.
+        // Cuando el botón se hace clic, se llama al método validarUsuario con la URL del servidor para validar el usuario.
         ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Intent inten = new Intent(getApplicationContext(), abcDocentes.class);
                 //startActivity(inten);
-                validarUsuario("http://192.168.0.7:80/Checador/Validar_Usuario.php");
+               // validarUsuario("http://192.168.0.7:80/Checador/Validar_Usuario.php");
+                validarUsuario("http://192.168.56.1:80/CHECKTECH/Validar_Usuario.php");
             }
         });
     }
-
+//El método validarUsuario realiza una solicitud POST a la URL especificada utilizando Volley.
+// Cuando se recibe una respuesta del servidor,se verifica si la respuesta no está vacía.
+// Si no está vacía, se inicia una nueva actividad (Clases.class) utilizando un Intent.
+//  De lo contrario, se muestra un mensaje de error utilizando Toast.
     private void validarUsuario(String URL){
+        //En el bloque getParams dentro de StringRequest, se definen los parámetros para enviar
         StringRequest StringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -51,14 +61,14 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(inten);
                 }else{
                     //mensaje en caso de no existir o equivocarse en usuario
-                    Toast.makeText(MainActivity.this,"Usuario o contraseña incorrectos",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this,"Usuario o contraseña incorrectos",Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 //mensaje de error por internet o conexion
-                Toast.makeText(MainActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this,error.getMessage(),Toast.LENGTH_SHORT).show();
             }
         }){
             @Override
@@ -73,5 +83,9 @@ public class MainActivity extends AppCompatActivity {
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(StringRequest);
+    }
+    public void moveToRegistration(View view) {
+        startActivity(new Intent(getApplicationContext(), RegistroUsuario.class));
+        finish();
     }
 }
