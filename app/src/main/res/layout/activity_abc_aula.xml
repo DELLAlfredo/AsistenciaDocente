@@ -14,8 +14,8 @@
         android:layout_height="56dp"
         android:layout_marginTop="76dp"
         android:ems="10"
+        android:hint="Numero Aula"
         android:inputType="text"
-        android:text="Numero del Aula"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -24,12 +24,12 @@
         android:id="@+id/etIdAula"
         android:layout_width="267dp"
         android:layout_height="56dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="92dp"
         android:ems="10"
+        android:hint="Identificadir Aula"
         android:inputType="text"
-        android:text="Identificadir Aula"
         app:layout_constraintEnd_toEndOf="@+id/etNombreAula"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/etNombreAula"
         app:layout_constraintTop_toBottomOf="@+id/etNombreAula" />
 
