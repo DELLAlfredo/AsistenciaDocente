@@ -1,5 +1,6 @@
 package com.example.asistenciadocente;
 
+import android.content.Intent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -32,7 +33,8 @@ public class menu extends AppCompatActivity implements NavigationView.OnNavigati
         NavigationView navigationView =  drawerLayout.findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_open,R.string.navigation_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle
+                (this,drawerLayout,toolbar,R.string.navigation_open,R.string.navigation_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
     }
@@ -40,13 +42,20 @@ public class menu extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         drawerLayout.closeDrawer(GravityCompat.START);
-        switch (item.getItemId())
+        if (item.getItemId()== R.id.nav_Aulas)
         {
-           /* case R.id.nav_Aulas:
-                startActivity(new Intent(this, abcAula.class));
-                overridePendingTransition(0,0);
-                break;
-            */
+            Intent intent = new Intent(getApplicationContext(), abcAula.class);
+            startActivity(intent);
+        }else {
+            if (item.getItemId()== R.id.nav_Docentes) {
+                Intent intent = new Intent(getApplicationContext(), abcDocentes.class);
+                startActivity(intent);
+            }else {
+                if (item.getItemId()== R.id.nav_Clases) {
+                    Intent intent = new Intent(getApplicationContext(), Clases.class);
+                    startActivity(intent);
+                }
+            }
         }
         return false;
     }
@@ -55,9 +64,5 @@ public class menu extends AppCompatActivity implements NavigationView.OnNavigati
             getSupportActionBar().setTitle(titleString);
         }
     }
-    /*@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_clases);
-    }*/
+
 }

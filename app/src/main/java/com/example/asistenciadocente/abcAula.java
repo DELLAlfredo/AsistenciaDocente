@@ -10,9 +10,9 @@ public class abcAula extends menu {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityAbcAulaBinding = ActivityAbcAulaBinding.inflate(getLayoutInflater());
-        allocateActivityTitle("Aulas");
-        setContentView(activityAbcAulaBinding.getRoot());
 
+        setContentView(activityAbcAulaBinding.getRoot());
+        allocateActivityTitle("Aulas");
         /*--------------------------------------------------------*/
 
 

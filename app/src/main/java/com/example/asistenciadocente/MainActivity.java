@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Intent inten = new Intent(getApplicationContext(), abcDocentes.class);
                 //startActivity(inten);
-                validarUsuario("http://192.168.0.6:80/Checador/Validar_Usuario.php");
+                validarUsuario("http://192.168.56.1:80/CHECKTECH/Validar_Usuario.php");
             }
         });
     }

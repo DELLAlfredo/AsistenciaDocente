@@ -1,13 +1,9 @@
 package com.example.asistenciadocente;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -17,26 +13,21 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.asistenciadocente.databinding.ActivityAbcDocentesBinding;
 
-import java.io.BufferedReader;
-import androidx.appcompat.app.AppCompatActivity;
-
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class abcDocentes extends AppCompatActivity {
+public class abcDocentes extends menu {
+    ActivityAbcDocentesBinding activityAbcDocentesBinding;
     EditText etAcademia,etNombre, etApellido;
     Button btnGuardar,btnEditar,btnBorrar,btnBuscar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_abc_docentes);
+        activityAbcDocentesBinding = ActivityAbcDocentesBinding.inflate(getLayoutInflater());
+        setContentView(activityAbcDocentesBinding.getRoot());
+        allocateActivityTitle("Docentes");
 
         etAcademia = findViewById(R.id.etAcademia);
         etNombre = findViewById(R.id.etNombre);
