@@ -46,22 +46,16 @@ public class menu extends AppCompatActivity implements NavigationView.OnNavigati
         {
             Intent intent = new Intent(getApplicationContext(), abcAula.class);
             startActivity(intent);
-        }else {
-            if (item.getItemId()== R.id.nav_Docentes) {
+        }else if (item.getItemId()== R.id.nav_Docentes) {
                 Intent intent = new Intent(getApplicationContext(), abcDocentes.class);
                 startActivity(intent);
-            }else {
-                if (item.getItemId()== R.id.nav_Clases) {
+            }else if (item.getItemId()== R.id.nav_Clases) {
                     Intent intent = new Intent(getApplicationContext(), Clases.class);
                     startActivity(intent);
-                }else {
-                    if (item.getItemId()== R.id.logout) {
+                }else if (item.getItemId()== R.id.logout) {
                         Intent intent = new Intent(getApplicationContext(), Login.class);
                         startActivity(intent);
                     }
-                }
-            }
-        }
         return false;
     }
     protected  void  allocateActivityTitle(String titleString){
