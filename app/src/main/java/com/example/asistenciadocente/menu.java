@@ -1,6 +1,8 @@
 package com.example.asistenciadocente;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -53,8 +55,12 @@ public class menu extends AppCompatActivity implements NavigationView.OnNavigati
                     Intent intent = new Intent(getApplicationContext(), Clases.class);
                     startActivity(intent);
                 }else if (item.getItemId()== R.id.logout) {
+                        SharedPreferences preferences =getSharedPreferences("PreferenciasLogin", Context.MODE_PRIVATE);
+                        preferences.edit().clear().commit();
+
                         Intent intent = new Intent(getApplicationContext(), Login.class);
                         startActivity(intent);
+                        finish();
                     }
         return false;
     }

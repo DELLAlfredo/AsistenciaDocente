@@ -83,7 +83,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/rounded_ui"
-        android:backgroundTint="#B2BF9D"
+        android:backgroundTint="#8C9183"
         android:clipChildren="false"
         android:clipToPadding="false"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
@@ -129,7 +129,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:hint="Numero de usuario"
+            android:hint="Email"
             android:textColorHint="@color/black"
             app:boxStrokeColor="@color/yellow"
             app:counterEnabled="true"
@@ -151,7 +151,8 @@
                 android:maxLength="50"
                 android:singleLine="true"
                 android:textColor="@color/black"
-                tools:text="Usuario" />
+                tools:text="Email"
+                android:drawableStart="@drawable/email"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -171,7 +172,7 @@
             app:layout_constraintStart_toStartOf="@+id/guideline16"
             app:layout_constraintTop_toTopOf="@+id/guideline22"
             app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/yellow">
+            app:passwordToggleTint="#D3520D">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/contraseña"
@@ -182,7 +183,8 @@
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textColorHint="#757575"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:drawableStart="@drawable/contrasena"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.constraintlayout.widget.Guideline
@@ -255,7 +257,7 @@
             android:layout_height="0dp"
             android:layout_gravity="center"
             android:autoSizeTextType="none"
-            android:backgroundTint="@color/yellow"
+            android:backgroundTint="@android:color/holo_red_light"
             android:enabled="true"
             android:paddingLeft="10sp"
             android:paddingRight="10sp"

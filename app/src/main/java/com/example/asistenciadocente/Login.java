@@ -1,6 +1,8 @@
 package com.example.asistenciadocente;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +27,7 @@ public class Login extends AppCompatActivity {
     // representar los elementos de la interfaz de usuario en el archivo de diseño XML (activity_main.xml).
     EditText nombre,contraseña;
     Button ingresar;
+    String Usuario,Paswword;
     //En el método onCreate, se establece el contenido de la actividad utilizando el archivo de diseño activity_main.xml. Luego,
     // se asignan los elementos de la interfaz de usuario a las variables correspondientes utilizando findViewById.
     @Override
@@ -35,15 +38,23 @@ public class Login extends AppCompatActivity {
         contraseña=findViewById(R.id.contraseña);
         ingresar =findViewById(R.id.loginButton);
 
+        recuperarPreferencias();
+
         //Se configura un OnClickListener para el botón ingresar.
         // Cuando el botón se hace clic, se llama al método validarUsuario con la URL del servidor para validar el usuario.
         ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Intent inten = new Intent(getApplicationContext(), abcDocentes.class);
-                //startActivity(inten);
-               // validarUsuario("http://192.168.0.7:80/Checador/Validar_Usuario.php");
-                validarUsuario("http://192.168.56.1:80/CHECKTECH/Validar_Usuario.php");
+                Usuario=nombre.getText().toString();
+                Paswword=contraseña.getText().toString();
+                if (!Usuario.isEmpty() && !Paswword.isEmpty()) {
+                    // validarUsuario("http://192.168.0.7:80/Checador/Validar_Usuario.php");
+                    validarUsuario("http://192.168.56.1:80/CHECKTECH/Validar_Usuario.php");
+                }else {
+                    Toast.makeText(Login.this, "No deje campos vacios", Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
     }
@@ -57,8 +68,10 @@ public class Login extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 if (!response.isEmpty()){
+                    guardarPreferencias();
                     Intent inten = new Intent(getApplicationContext(), Clases.class);
                     startActivity(inten);
+                    finish();
                 }else{
                     //mensaje en caso de no existir o equivocarse en usuario
                     Toast.makeText(Login.this,"Usuario o contraseña incorrectos",Toast.LENGTH_SHORT).show();
@@ -75,8 +88,8 @@ public class Login extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 //insersion de datos para validar usuario y comparar
                 Map<String,String> parametros = new HashMap<String, String>();
-                parametros.put("nombre",nombre.getText().toString());
-                parametros.put("contraseña",contraseña.getText().toString());
+                parametros.put("nombre",Usuario);
+                parametros.put("contraseña",Paswword);
                 return parametros;
             }
         };
@@ -87,5 +100,21 @@ public class Login extends AppCompatActivity {
     public void moveToRegistration(View view) {
         startActivity(new Intent(getApplicationContext(), RegistroUsuario.class));
         finish();
+    }
+    private  void guardarPreferencias(){
+        SharedPreferences preferences   = getSharedPreferences("PreferenciasLogin", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor= preferences.edit();
+        editor.putString("nombre",Usuario);
+        editor.putString("contraseña",Paswword);
+        editor.putBoolean("sesion",true);
+        editor.commit();
+    }
+
+    private void recuperarPreferencias(){
+        SharedPreferences preferences=getSharedPreferences("PreferenciasLogin",Context.MODE_PRIVATE);
+        nombre.setText(preferences.getString("nombre","usuario@gmail.com"));
+        contraseña.setText(preferences.getString("contraseña","12345678"));
+
+
     }
 }
