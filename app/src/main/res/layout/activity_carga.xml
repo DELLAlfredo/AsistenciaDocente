@@ -10,12 +10,37 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="-33dp"
+        tools:layout_editor_absoluteY="-80dp"
+        android:background="@drawable/gradient_background"
+        >
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="384dp"
+            android:layout_height="352dp"
+            android:contentDescription="TODO"
+            app:layout_constraintBottom_toTopOf="@+id/guideline3"
+            app:layout_constraintEnd_toStartOf="@+id/guideline5"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
+            app:layout_constraintTop_toTopOf="@+id/guideline6"
+            app:srcCompat="@drawable/logotect"
+            tools:ignore="ImageContrastCheck" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CARGANDO"
+            android:textAlignment="center"
+            android:textSize="34sp"
+            android:textColor="@color/white"/>
 
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="86dp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

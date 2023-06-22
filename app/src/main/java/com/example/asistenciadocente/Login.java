@@ -25,7 +25,7 @@ import java.util.Map;
 public class Login extends AppCompatActivity {
     //Se definen las variables nombre, contraseña y ingresar para
     // representar los elementos de la interfaz de usuario en el archivo de diseño XML (activity_main.xml).
-    EditText nombre,contraseña;
+    EditText email,contraseña;
     Button ingresar;
     String Usuario,Paswword;
     //En el método onCreate, se establece el contenido de la actividad utilizando el archivo de diseño activity_main.xml. Luego,
@@ -34,7 +34,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        nombre= findViewById(R.id.nombre);
+        email= findViewById(R.id.email);
         contraseña=findViewById(R.id.contraseña);
         ingresar =findViewById(R.id.loginButton);
 
@@ -45,7 +45,7 @@ public class Login extends AppCompatActivity {
         ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Usuario=nombre.getText().toString();
+                Usuario=email.getText().toString();
                 Paswword=contraseña.getText().toString();
                 if (!Usuario.isEmpty() && !Paswword.isEmpty()) {
                     // validarUsuario("http://192.168.0.7:80/Checador/Validar_Usuario.php");
@@ -88,7 +88,7 @@ public class Login extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 //insersion de datos para validar usuario y comparar
                 Map<String,String> parametros = new HashMap<String, String>();
-                parametros.put("nombre",Usuario);
+                parametros.put("email",Usuario);
                 parametros.put("contraseña",Paswword);
                 return parametros;
             }
@@ -104,7 +104,7 @@ public class Login extends AppCompatActivity {
     private  void guardarPreferencias(){
         SharedPreferences preferences   = getSharedPreferences("PreferenciasLogin", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor= preferences.edit();
-        editor.putString("nombre",Usuario);
+        editor.putString("email",Usuario);
         editor.putString("contraseña",Paswword);
         editor.putBoolean("sesion",true);
         editor.commit();
@@ -112,8 +112,8 @@ public class Login extends AppCompatActivity {
 
     private void recuperarPreferencias(){
         SharedPreferences preferences=getSharedPreferences("PreferenciasLogin",Context.MODE_PRIVATE);
-        nombre.setText(preferences.getString("nombre","usuario@gmail.com"));
-        contraseña.setText(preferences.getString("contraseña","12345678"));
+        email.setText(preferences.getString("email",""));
+        contraseña.setText(preferences.getString("contraseña",""));
 
 
     }

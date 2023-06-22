@@ -3,7 +3,7 @@
     android:shape="rectangle">
 
     <!-- shape property for the view based on the value particular view would be drawn -->
-    <corners android:radius="50dp" />
+    <corners android:radius="20dp" />
 
     <!--  stroke for defining a border for view -->
 

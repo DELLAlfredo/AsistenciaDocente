@@ -11,11 +11,11 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="400dp"
-        android:layout_height="300dp"
+        android:layout_width="360dp"
+        android:layout_height="253dp"
         android:contentDescription="TODO"
-        android:src="@mipmap/ic_launcher_foreground"
-        android:scaleType="centerCrop"
+
+        android:src="@drawable/logotect"
         tools:ignore="ImageContrastCheck" />
 
     <androidx.cardview.widget.CardView
