@@ -8,53 +8,75 @@
     tools:context=".abcAula">
 
 
-    <EditText
-        android:id="@+id/etNombreAula"
-        android:layout_width="267dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="76dp"
-        android:ems="10"
-        android:hint="Numero Aula"
-        android:inputType="text"
+    <Button
+        android:id="@+id/btnEditarAula"
+        android:layout_width="342dp"
+        android:layout_height="66dp"
+        android:layout_marginBottom="200dp"
+        android:text="Editar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toTopOf="@+id/guideline11" />
+
+    <Button
+        android:id="@+id/btnBuscarAula"
+        android:layout_width="129dp"
+        android:layout_height="50dp"
+        android:text="Buscar"
+        app:layout_constraintBottom_toBottomOf="@+id/etNombreAula"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/etNombreAula"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btnBorrarAula"
+        android:layout_width="342dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="20dp"
+        android:text="Borrar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEditarAula" />
 
     <EditText
         android:id="@+id/etIdAula"
         android:layout_width="267dp"
         android:layout_height="56dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="80dp"
         android:ems="10"
-        android:hint="Identificadir Aula"
+        android:hint="numero aula"
         android:inputType="text"
-        app:layout_constraintEnd_toEndOf="@+id/etNombreAula"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/etNombreAula"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etNombreAula" />
 
-    <Spinner
-        android:id="@+id/spAulaOpcion"
-        android:layout_width="375dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
+    <EditText
+        android:id="@+id/etNombreAula"
+        android:layout_width="267dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="48dp"
+        android:ems="10"
+        android:hint="id Aula"
+        android:inputType="text"
+        app:layout_constraintEnd_toStartOf="@+id/btnBuscarAula"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline11" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.65800273" />
+        app:layout_constraintGuide_percent="0.59" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="52dp"
         android:text="Agregar aulas"
         android:textColor="@color/white"
         android:textSize="30sp"
@@ -67,10 +89,11 @@
         android:id="@+id/btnGuardarAula"
         android:layout_width="342dp"
         android:layout_height="66dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginBottom="36dp"
         android:text="Guardar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spAulaOpcion" />
+        app:layout_constraintTop_toBottomOf="@+id/btnBorrarAula" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,6 +36,13 @@ public class Clases extends menu {
         spOpcion = findViewById(R.id.spOpcion);
         btnGuardarClases = findViewById(R.id.btnGuardarClases);
 
+        String[] horas = {"7AM-8AM","8AM-9AM","9AM-10AM","10AM-11AM","11AM-12AM","12AM-1PM","1PM-2PM","2PM-3PM"};
+        ArrayAdapter<String> Adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, horas);
+        spHora.setAdapter(Adapter);
+        String[] crud = {"IMPARTIDA","NO IMPARTIDA","CLASE INCOMPLETA","SUSPENCION"};
+        ArrayAdapter<String> AdapterCrud = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, crud);
+        spOpcion.setAdapter(AdapterCrud);
+
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder ()
@@ -58,10 +65,10 @@ public class Clases extends menu {
                         List<String> dataList = new ArrayList<>();
 
                         for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            String nombre = jsonObject.getString("nombre"); // Reemplaza "nombre" por el nombre del campo en tu respuesta JSON
-                            String apellidos = jsonObject.getString("apellidos"); // Reemplaza "apellido" por el nombre del campo en tu respuesta JSON
-                            String nombreCompleto = nombre + " " + apellidos;
+                            JSONObject jsonObject = jsonArray.getJSONObject(i); //para obtener un objeto JSON específico de un JSONArray.
+                            String nombre = jsonObject.getString("nombre"); // manda a llamar y muestra lo que contiene el campo nombre
+                            String apellidos = jsonObject.getString("apellidos"); // manda a llamar y muestra lo que contiene el campo nombre
+                            String nombreCompleto = nombre + " " + apellidos; //Une ambos campos para quese muestren
                             dataList.add(nombreCompleto);
                         }
 
@@ -69,7 +76,49 @@ public class Clases extends menu {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Spinner spinner = findViewById(R.id.spDocentes); // Reemplaza "spinner" con el ID de tu Spinner en el layout
+                                Spinner spinner = findViewById(R.id.spDocentes);
+                                ArrayAdapter<String> adapter = new ArrayAdapter<>(Clases.this, android.R.layout.simple_spinner_item, dataList);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                spinner.setAdapter(adapter);
+                            }
+                        });
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        OkHttpClient clientAula = new OkHttpClient();
+        Request aula = new Request.Builder ()
+                .url("http://192.168.0.7:80/Checador/mostrarDatosClasesAula.php")
+                .build();
+
+        clientAula.newCall(aula).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String jsonData = response.body().string();
+
+                    try {
+                        JSONArray jsonArray = new JSONArray(jsonData);
+                        List<String> dataList = new ArrayList<>();
+
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            String nombre_aula = jsonObject.getString("nombre_aula"); // Reemplaza "nombre" por el nombre del campo en tu respuesta JSON
+                            dataList.add(nombre_aula);
+                        }
+
+                        // Poblar el Spinner con los datos
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Spinner spinner = findViewById(R.id.spAula); // Reemplaza "spinner" con el ID de tu Spinner en el layout
                                 ArrayAdapter<String> adapter = new ArrayAdapter<>(Clases.this, android.R.layout.simple_spinner_item, dataList);
                                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                 spinner.setAdapter(adapter);
