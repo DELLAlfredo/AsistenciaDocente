@@ -1,14 +1,11 @@
 package com.example.asistenciadocente;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import androidx.privacysandbox.tools.core.model.Method;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
@@ -16,7 +13,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.asistenciadocente.databinding.ActivityClasesBinding;
-import com.google.androidgamesdk.gametextinput.Listener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,7 +58,7 @@ public class Clases extends menu {
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder ()
-                .url("http://192.168.0.7:80/Checador/mostrarDatosClasesDocentes.php")
+                .url("http://192.168.0.10:80/Checador/mostrarDatosClasesDocentes.php")
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
@@ -108,7 +104,7 @@ public class Clases extends menu {
 
         OkHttpClient clientAula = new OkHttpClient();
         Request aula = new Request.Builder ()
-                .url("http://192.168.0.7:80/Checador/mostrarDatosClasesAula.php")
+                .url("http://192.168.0.10:80/Checador/mostrarDatosClasesAula.php")
                 .build();
 
         clientAula.newCall(aula).enqueue(new Callback() {
@@ -151,26 +147,26 @@ public class Clases extends menu {
         btnGuardarClases.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               guardarDatosClases();
+                guardarDatosClases();
             }
         });
     }
 
 
 
-   private void guardarDatosClases() {
+    private void guardarDatosClases() {
         String docente = spDocentes.getSelectedItem().toString();
         String aula = spAula.getSelectedItem().toString();
         String hora = spHora.getSelectedItem().toString();
         String opcion = spOpcion.getSelectedItem().toString();
 
-        String URL= "http://192.168.0.7:80/Checador/insertar_clases.php";
+        String URL= "http://192.168.0.10:80/Checador/insertar_clases.php";
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());// fecha actual en la que se guarden
         String fechaActual = dateFormat.format(new Date());
 
 
-       StringRequest request = new StringRequest(com.android.volley.Request.Method.POST, URL,
+        StringRequest request = new StringRequest(com.android.volley.Request.Method.POST, URL,
 
                 new com.android.volley.Response.Listener<String>() {
                     @Override
@@ -181,6 +177,7 @@ public class Clases extends menu {
                 new com.android.volley.Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+
                         Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }) {

@@ -17,7 +17,9 @@
         app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintTop_toTopOf="@+id/textView3"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        android:background="@drawable/customspiner"
+        />
 
     <TextView
         android:id="@+id/textView3"
@@ -62,7 +64,9 @@
         app:layout_constraintHorizontal_bias="0.84"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toTopOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.366" />
+        app:layout_constraintVertical_bias="0.366"
+        android:background="@drawable/customspiner"
+        />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline14"
@@ -94,7 +98,9 @@
         app:layout_constraintHorizontal_bias="0.824"
         app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toTopOf="@+id/textView5"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:background="@drawable/customspiner"
+        />
 
     <Button
         android:id="@+id/btnGuardarClases"
@@ -134,5 +140,7 @@
         android:layout_marginTop="52dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        android:background="@drawable/customspiner"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

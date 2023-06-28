@@ -49,19 +49,21 @@ public class menu extends AppCompatActivity implements NavigationView.OnNavigati
             Intent intent = new Intent(getApplicationContext(), abcAula.class);
             startActivity(intent);
         }else if (item.getItemId()== R.id.nav_Docentes) {
-                Intent intent = new Intent(getApplicationContext(), abcDocentes.class);
-                startActivity(intent);
-            }else if (item.getItemId()== R.id.nav_Clases) {
-                    Intent intent = new Intent(getApplicationContext(), Clases.class);
-                    startActivity(intent);
-                }else if (item.getItemId()== R.id.logout) {
-                        SharedPreferences preferences =getSharedPreferences("PreferenciasLogin", Context.MODE_PRIVATE);
-                        preferences.edit().clear().commit();
-
-                        Intent intent = new Intent(getApplicationContext(), Login.class);
-                        startActivity(intent);
-                        finish();
-                    }
+             Intent intent = new Intent(getApplicationContext(), abcDocentes.class);
+             startActivity(intent);
+        }else if (item.getItemId()== R.id.nav_Clases) {
+            Intent intent = new Intent(getApplicationContext(), Clases.class);
+            startActivity(intent);
+        }else if (item.getItemId()== R.id.logout) {
+            SharedPreferences preferences =getSharedPreferences("PreferenciasLogin", Context.MODE_PRIVATE);
+            preferences.edit().clear().commit();
+            Intent intent = new Intent(getApplicationContext(), Login.class);
+            startActivity(intent);
+            finish();
+        }else if (item.getItemId()== R.id.nav_Reporte_Semanal ){
+            Intent intent = new Intent(getApplicationContext(), Reporte.class);
+            startActivity(intent);
+        }
         return false;
     }
     protected  void  allocateActivityTitle(String titleString){
