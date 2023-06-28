@@ -101,11 +101,11 @@
         app:layout_constraintGuide_begin="598dp" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/btnFiltradofecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:text="Button"
+        android:text="fecha"
         app:layout_constraintBottom_toBottomOf="@+id/button6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/button6"
