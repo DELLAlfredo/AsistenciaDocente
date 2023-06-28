@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -36,8 +38,9 @@ import java.util.Map;
 
 public class abcDocentes extends menu {
     ActivityAbcDocentesBinding activityAbcDocentesBinding;
-    EditText etAcademia,etNombre, etApellido, etMatricula;
+    EditText etNombre, etApellido, etMatricula;
     Button btnGuardar,btnEditar,btnBorrar,btnBuscar;
+    Spinner spAcademia;
 
     RequestQueue requestQueue;
     @Override
@@ -47,7 +50,8 @@ public class abcDocentes extends menu {
         setContentView(activityAbcDocentesBinding.getRoot());
         allocateActivityTitle("Docentes");
 
-        etAcademia = findViewById(R.id.etAcademia);
+        //etAcademia = findViewById(R.id.etAcademia);
+        spAcademia = findViewById(R.id.spAcademia);
         etNombre = findViewById(R.id.etNombre);
         etApellido = findViewById(R.id.etApellido);
         btnGuardar = findViewById(R.id.btnGuardar);
@@ -56,10 +60,14 @@ public class abcDocentes extends menu {
         btnBuscar = findViewById(R.id.btnBuscar);
         etMatricula = findViewById(R.id.etMatricula);
 
+        String[] crud = {"ISIC","INVAG","GES","SUSTENTABLE"};
+        ArrayAdapter<String> AdapterCrud = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, crud);
+        spAcademia.setAdapter(AdapterCrud);
+
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Guardar("http://192.168.0.7:80/Checador/docentes.php");
+                Guardar("http://192.168.0.10:80/Checador/docentes.php");
                 //Guardar("http://192.168.56.1:80/CHECKTECH//docentes.php");
 
             }
@@ -67,7 +75,7 @@ public class abcDocentes extends menu {
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buscarDocente("http://192.168.0.7/Checador/buscar_docente.php?Matricula="+etMatricula.getText()+"");
+                buscarDocente("http://192.168.0.10/Checador/buscar_docente.php?Matricula="+etMatricula.getText()+"");
                 //buscarDocente("http://192.168.56.1:80/CHECKTECH/buscar_docente.php?Matricula="+etMatricula.getText()+"");
 
             }
@@ -75,7 +83,7 @@ public class abcDocentes extends menu {
         btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Guardar("http://192.168.0.7:80/Checador/editar_docente.php");
+                Guardar("http://192.168.0.10:80/Checador/editar_docente.php");
                //Guardar("http://192.168.56.1:80/CHECKTECH/editar_docente.php");
 
             }
@@ -83,7 +91,7 @@ public class abcDocentes extends menu {
         btnBorrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Borrar("http://192.168.0.7:80/Checador/eliminar_docente.php");
+                Borrar("http://192.168.0.10:80/Checador/eliminar_docente.php");
 
                 //Borrar("http://192.168.56.1:80/CHECKTECH/eliminar_docente.php");
             }
@@ -94,13 +102,15 @@ public class abcDocentes extends menu {
 
 
     private void Guardar(String URL) {
+        String opcion = spAcademia.getSelectedItem().toString();
         // Validar campos vacíos
         if (etNombre.getText().toString().isEmpty() || etApellido.getText().toString().isEmpty() ||
-                etAcademia.getText().toString().isEmpty() || etMatricula.getText().toString().isEmpty()) {
+                etMatricula.getText().toString().isEmpty()) {
             Toast.makeText(getApplicationContext(), "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
             return;
         }
-        StringRequest guardarRequest = new StringRequest(Request.Method.POST, URL,
+
+        StringRequest guardarRequest = new StringRequest(com.android.volley.Request.Method.POST, URL,
 
                 new Response.Listener<String>() {
                     @Override
@@ -129,7 +139,7 @@ public class abcDocentes extends menu {
                 Map<String, String> parametros = new HashMap<>();
                 parametros.put("nombre", etNombre.getText().toString());
                 parametros.put("apellidos", etApellido.getText().toString());
-                parametros.put("academia", etAcademia.getText().toString());
+                parametros.put("academia", opcion);
                 parametros.put("Matricula", etMatricula.getText().toString());
                 return parametros;
             }
@@ -148,9 +158,12 @@ public class abcDocentes extends menu {
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         jsonObject = response.getJSONObject(i);
-                        etAcademia.setText(jsonObject.getString("academia"));
-                        etNombre.setText(jsonObject.getString("nombre"));
-                        etApellido.setText(jsonObject.getString("apellidos"));
+                        String academia = jsonObject.getString("academia");//llena el campo del spinner con el dato que este en la db
+                        etNombre.setText(jsonObject.getString("nombre"));//llena el campo del editText con el dato que este en la db
+                        etApellido.setText(jsonObject.getString("apellidos"));//llena el campo del editText con el dato que este en la db
+
+                        // Establecer los valores en los elementos correspondientes
+                        spAcademia.setSelection(obtenerIndiceSpinner(spAcademia, academia));
 
                     } catch (JSONException e) {
                         Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -168,6 +181,12 @@ public class abcDocentes extends menu {
         requestQueue=Volley.newRequestQueue(this);
         requestQueue.add(jsonArrayRequest);
     }
+    // Método auxiliar para obtener el índice de un elemento en un Spinner según su valor
+    private int obtenerIndiceSpinner(Spinner spinner, String valor) {
+        ArrayAdapter<String> adapter = (ArrayAdapter<String>) spinner.getAdapter();
+        return adapter.getPosition(valor);
+    }
+
 
 
 
@@ -176,11 +195,13 @@ public class abcDocentes extends menu {
         StringRequest stringRequest= new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                //arroga un mensaje cuando se borra un dato
                 Toast.makeText(getApplicationContext(),"Producto eliminado",Toast.LENGTH_SHORT).show();
                 limpiarFormulario();
             }
         }, new Response.ErrorListener(){
             @Override
+            // se ejecuta cuando ocurre un error en la solicitud de la red.
             public void onErrorResponse(VolleyError error){
                 Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_SHORT).show();
             }
@@ -195,10 +216,11 @@ public class abcDocentes extends menu {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
+    //limpia los campos de los formularios
     private void limpiarFormulario(){
         etMatricula.setText("");
         etNombre.setText("");
         etApellido.setText("");
-        etAcademia.setText("");
+        //etAcademia.setText("");
     }
 }

@@ -13,11 +13,12 @@
         android:id="@+id/etMatricula"
         android:layout_width="246dp"
         android:layout_height="52dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="64dp"
         android:ems="10"
         android:hint="Matricula"
         android:inputType="text"
         app:layout_constraintEnd_toStartOf="@+id/btnBuscar"
+        app:layout_constraintHorizontal_bias="0.695"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,44 +53,33 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/etMatricula" />
 
-    <EditText
-        android:id="@+id/etAcademia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="Academia"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etMatricula" />
 
     <EditText
         android:id="@+id/etNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="Nombre Maestro"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etAcademia" />
+        app:layout_constraintTop_toTopOf="@+id/guideline18" />
 
     <EditText
         android:id="@+id/etApellido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="60dp"
         android:ems="10"
         android:hint="Apellido Maestro"
         android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/guideline12"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.527"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNombre" />
+        app:layout_constraintTop_toBottomOf="@+id/etNombre"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline12"
@@ -111,5 +101,21 @@
         app:layout_constraintStart_toStartOf="@+id/btnBorrar"
         app:layout_constraintTop_toBottomOf="@+id/btnBorrar"
         app:layout_constraintVertical_bias="1.0" />
+
+    <Spinner
+        android:id="@+id/spAcademia"
+        android:layout_width="217dp"
+        android:layout_height="45dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline18"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etMatricula" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.34610122" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
