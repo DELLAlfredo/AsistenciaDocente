@@ -21,4 +21,8 @@
     <color name="INNcolor">#086a2e</color>
     <color name="IGEcolor">#de010a</color>
     <color name="IIAScolor">#737177</color>
+    <color name="colorImpartida">#00FF00</color> <!-- Green color for impartida -->
+    <color name="colorNoImpartida">#FF0000</color> <!-- Red color for no impartida -->
+    <color name="colorRetardo">#FDD835</color> <!-- Green color for retardo -->
+    <color name="colorsuspencion">#FB8C00</color> <!-- Red color for no suspencion -->
 </resources>

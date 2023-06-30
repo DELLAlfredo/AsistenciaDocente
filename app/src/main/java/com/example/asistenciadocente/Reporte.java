@@ -48,7 +48,6 @@ public class Reporte extends menu {
         setContentView(activityReporteBinding.getRoot());
         allocateActivityTitle("Reporte");
 
-
         sphora = findViewById(R.id.sphora);
         String[] hora = {"7AM-8AM", "8AM-9AM", "9AM-10AM", "10AM-11AM", "11AM-12AM", "12AM-1PM", "1PM-2PM", "2PM-3PM"};
         ArrayAdapter<String> Adapterhora = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, hora);
@@ -75,7 +74,7 @@ public class Reporte extends menu {
         tabla = findViewById(R.id.tabla);
 
         // Realizar una solicitud a la API para obtener los datos
-        String url = "http://192.168.56.1:80/checador/reporteselect.php"; // Reemplaza con la URL de tu API
+        String url = "http://192.168.0.10:80/checador/reporteselect.php"; // Reemplaza con la URL de tu API
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -118,6 +117,7 @@ public class Reporte extends menu {
 
                                 TextView txtfecha = new TextView(Reporte.this);
                                 txtfecha.setText(fecha);
+
 
                                 // Agregar los TextViews a la fila
                                 fila.addView(txtdocentes);
@@ -167,6 +167,7 @@ public class Reporte extends menu {
             }
         });
 
+
     }
     public String getfecha(){
 
@@ -195,7 +196,7 @@ public class Reporte extends menu {
     }
 
     private void llenaTablaConAPIFiltrada(String fecha, String hora, String opcion) {
-        String url = "http://192.168.56.1:80/checador/reportefiltrado.php?fecha=" + fecha + "&hora=" + hora + "&opcion=" + opcion; // Reemplaza con la URL de tu API
+        String url = "http://192.168.0.10:80/checador/reportefiltrado.php?fecha=" + fecha + "&hora=" + hora + "&opcion=" + opcion; // Reemplaza con la URL de tu API
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -246,6 +247,17 @@ public class Reporte extends menu {
 
                                 TextView txtfecha = new TextView(Reporte.this);
                                 txtfecha.setText(fecha);
+                                int color = 0;
+                                if (opcion.equals("IMPARTIDA")) {
+                                    color = getResources().getColor(R.color.colorImpartida);
+                                } else if (opcion.equals("NO IMPARTIDA")){
+                                    color = getResources().getColor(R.color.colorNoImpartida);
+                                } else if (opcion.equals("CLASE INCOMPLETA")) {
+                                    color = getResources().getColor(R.color.colorRetardo);
+                                } else if (opcion.equals("SUSPENCION")) {
+                                    color = getResources().getColor(R.color.colorsuspencion);
+                                }
+                                dataRow.setBackgroundColor(color);
 
                                 // Agregar los TextViews a la fila
                                 dataRow.addView(txtdocentes);
@@ -273,7 +285,7 @@ public class Reporte extends menu {
     }
 
     private void llenaTablaConAPIFiltradaporfehca(String fecha) {
-        String url = "http://192.168.56.1/checador/busquedafiltadofecha.php?fecha=" + fecha ; // Reemplaza con la URL de tu API
+        String url = "http://192.168.0.10:80/checador/busquedafiltadofecha.php?fecha=" + fecha ; // Reemplaza con la URL de tu API
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -324,6 +336,20 @@ public class Reporte extends menu {
 
                                 TextView txtfecha = new TextView(Reporte.this);
                                 txtfecha.setText(fecha);
+                                int color = 0;
+                                if (opcion.equals("IMPARTIDA")) {
+                                    color = getResources().getColor(R.color.colorImpartida);
+                                } else if (opcion.equals("NO IMPARTIDA")){
+                                    color = getResources().getColor(R.color.colorNoImpartida);
+                                } else if (opcion.equals("CLASE INCOMPLETA")) {
+                                    color = getResources().getColor(R.color.colorRetardo);
+                                } else if (opcion.equals("SUSPENCION")) {
+                                    color = getResources().getColor(R.color.colorsuspencion);
+                                }
+                                dataRow.setBackgroundColor(color);
+
+// Set the background color of the row
+                                dataRow.setBackgroundColor(color);
 
                                 // Agregar los TextViews a la fila
                                 dataRow.addView(txtdocentes);

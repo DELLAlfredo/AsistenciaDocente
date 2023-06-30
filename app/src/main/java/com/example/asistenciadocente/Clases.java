@@ -21,6 +21,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -63,7 +64,7 @@ public class Clases extends menu {
 
         client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(Call call, IOException e) { ////Este método se ejecuta si la llamada HTTP falla. Imprime el rastro de errores en la consola.
                 e.printStackTrace();
             }
 
@@ -78,10 +79,10 @@ public class Clases extends menu {
 
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i); //para obtener un objeto JSON específico de un JSONArray.
-                            String nombre = jsonObject.getString("nombre"); // manda a llamar y muestra lo que contiene el campo nombre
-                            String apellidos = jsonObject.getString("apellidos"); // manda a llamar y muestra lo que contiene el campo apellido
-                            String nombreCompleto = nombre + " " + apellidos; //Une ambos campos para quese muestren
-                            dataList.add(nombreCompleto);
+                            String nombre = jsonObject.getString("nombre"); // // Extrae el valor de la clave "nombre" del objeto JSON y lo guarda en la variable nombre.
+                            String apellidos = jsonObject.getString("apellidos"); // Extrae el valor de la clave "apellidos" del objeto JSON y lo guarda en la variable apellidos.
+                            String nombreCompleto = nombre + " " + apellidos; //Une ambos campos para que se guarden
+                            dataList.add(nombreCompleto);      //Agrega el nombre del docente a la lista dataList.
                         }
 
                         // Poblar el Spinner con los datos
@@ -107,35 +108,37 @@ public class Clases extends menu {
                 .url("http://192.168.0.10:80/Checador/mostrarDatosClasesAula.php")
                 .build();
 
-        clientAula.newCall(aula).enqueue(new Callback() {
+        clientAula.newCall(aula).enqueue(new Callback() { //: hace una  llamada a una URL específica utilizando el cliente OkHttp y asocia un Callback para manejar la respuesta de la llamada de manera asíncrona.
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(Call call, IOException e) {//Este método se ejecuta si la llamada HTTP falla. Imprime el rastro de errores en la consola.
+                Toast.makeText(getApplicationContext(), "Fallo la solicitud HTTP", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    String jsonData = response.body().string();
+            public void onResponse(Call call, Response response) throws IOException { // Este método se ejecuta cuando se recibe una respuesta HTTP. Verifica si la respuesta es exitosa y luego procesa la respuesta.
+                if (response.isSuccessful()) {                                        //Verifica si la respuesta HTTP fue exitosa (código de respuesta en el rango 200-299 satisfactorias).
+                    String jsonData = response.body().string();                       //Obtiene el cuerpo de la respuesta HTTP como una cadena de texto.
 
                     try {
-                        JSONArray jsonArray = new JSONArray(jsonData);
-                        List<String> dataList = new ArrayList<>();
+                        JSONArray jsonArray = new JSONArray(jsonData);                  //Convierte la cadena de texto JSON en un objeto JSONArray.
+                        List<String> dataList = new ArrayList<>();                      //Crea una lista vacía para almacenar los nombres de las aulas.
 
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            String nombre_aula = jsonObject.getString("nombre_aula"); // muestra el nombre del aula
-                            dataList.add(nombre_aula);
+                        for (int i = 0; i < jsonArray.length(); i++) {                  //Itera (repetir) sobre cada objeto JSON dentro del JSONArray.
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);         //Obtiene el objeto JSON en la posición i dentro del JSONArray.
+                            String nombre_aula = jsonObject.getString("nombre_aula"); // Extrae el valor de la clave "nombre_aula" del objeto JSON y lo guarda en la variable nombre_aula.
+                            dataList.add(nombre_aula);                                         //Agrega el nombre del aula a la lista dataList.
                         }
 
                         // Poblar el Spinner con los datos
-                        runOnUiThread(new Runnable() {
+                        runOnUiThread(new Runnable() {                              //Ejecuta el bloque de código en el subproceso de la interfaz de usuario (UI) principal.
                             @Override
                             public void run() {
-                                Spinner spinner = findViewById(R.id.spAula); //
-                                ArrayAdapter<String> adapter = new ArrayAdapter<>(Clases.this, android.R.layout.simple_spinner_item, dataList);
-                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                spinner.setAdapter(adapter);
+                                Spinner spinner = findViewById(R.id.spAula);        //Obtiene una referencia al Spinner en la interfaz de usuario utilizando su ID = spAula.
+                                ArrayAdapter<String> adapter = new ArrayAdapter<>(Clases.this, android.R.layout.simple_spinner_item, dataList); //Crea un adaptador de ArrayAdapter para vincular los datos de dataList al Spinner. Utiliza el contexto de la actividad  Clases que es este activity,
+                                                                                                                                                        //para mostrar cada elemento en el Spinner y la lista de datos dataList.
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // Especifica el diseño de vista desplegable para el adaptador del Spinner.
+                                spinner.setAdapter(adapter); //Asigna el adaptador al Spinner, lo que muestra los datos en el Spinner y permite al usuario seleccionar un elemento de la lista.
                             }
                         });
                     } catch (JSONException e) {
@@ -143,46 +146,50 @@ public class Clases extends menu {
                     }
                 }
             }
-        });
+        });  //En resumen, el código realiza una solicitud HTTP para obtener una lista de nombres de aulas desde un servidor. Luego, procesa la respuesta JSON obtenida,
+            // extrae los nombres de las aulas y los muestra en un Spinner en la interfaz de usuario de la actividad Clases.
+            // Esto se realiza de forma asíncrona utilizando un Callback para manejar la respuesta de la solicitud HTTP.
+
         btnGuardarClases.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                guardarDatosClases();
-            }
+               guardarDatosClases();
+            } //ejecuta el metodo guardarDatosClases
         });
     }
 
 
 
-    private void guardarDatosClases() {
-        String docente = spDocentes.getSelectedItem().toString();
-        String aula = spAula.getSelectedItem().toString();
-        String hora = spHora.getSelectedItem().toString();
-        String opcion = spOpcion.getSelectedItem().toString();
+   private void guardarDatosClases() {
+        String docente = spDocentes.getSelectedItem().toString(); //Obtiene el elemento seleccionado del Spinner spDocentes y lo convierte en una cadena. Esto obtiene el valor seleccionado del docente.
+        String aula = spAula.getSelectedItem().toString();        //Obtiene el elemento seleccionado del Spinner spAula y lo convierte en una cadena. Esto obtiene el valor seleccionado del aula.
+        String hora = spHora.getSelectedItem().toString();        //Obtiene el elemento seleccionado del Spinner spHora y lo convierte en una cadena. Esto obtiene el valor seleccionado de la hora.
+        String opcion = spOpcion.getSelectedItem().toString();    //Obtiene el elemento seleccionado del Spinner spOpcion y lo convierte en una cadena. Esto obtiene el valor seleccionado de la opción.
 
-        String URL= "http://192.168.0.10:80/Checador/insertar_clases.php";
+        String URL= "http://192.168.0.10/Checador/insertar_Clases.php"; //Define la URL del servidor donde se enviarán los datos de la clase para ser guardados.
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());// fecha actual en la que se guarden
-        String fechaActual = dateFormat.format(new Date());
+       Calendar calendar = Calendar.getInstance();                      //Obtiene una instancia del calendario actual.
+       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());  //Crea un formato de fecha en el estilo "yyyy-MM-dd" utilizando el local predeterminado del dispositivo.
+       String fechaActual = dateFormat.format(calendar.getTime());                                    //Obtiene la fecha actual formateada según el formato establecido.
 
 
-        StringRequest request = new StringRequest(com.android.volley.Request.Method.POST, URL,
+       StringRequest request = new StringRequest(com.android.volley.Request.Method.POST, URL,  //Crea una solicitud de cadena (StringRequest) utilizando el método POST y la URL proporcionada. También se definen los manejadores de respuesta exitosa y de error.
 
                 new com.android.volley.Response.Listener<String>() {
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(String response) {                               //repuesta exitosa
                         Toast.makeText(Clases.this, response, Toast.LENGTH_SHORT).show();
                     }
                 },
                 new com.android.volley.Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                    public void onErrorResponse(VolleyError error) {                        // respuesta de error
+                       // Toast.makeText(getApplicationContext(), "Fallo", Toast.LENGTH_SHORT).show();
+                       Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() throws AuthFailureError { //Sobrescribe el método getParams() para proporcionar los parámetros de la solicitud HTTP. Los datos de la clase (docente, aula, hora, opcion y fechaActual) se agregan a un mapa de parámetros.
                 Map<String, String> parametros = new HashMap<>();
                 parametros.put("docentes", docente);
                 parametros.put("aula", aula);
@@ -194,9 +201,11 @@ public class Clases extends menu {
         };
 
         // Agregar la solicitud a la cola de solicitudes de Volley
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(request);
+        RequestQueue requestQueue = Volley.newRequestQueue(this);   //Crea una nueva cola de solicitudes de Volley.
+        requestQueue.add(request);                                         //Agrega la solicitud a la cola de solicitudes de Volley para que se ejecute.
     }
+    //En resumen, el código recopila los datos de la clase seleccionados por el usuario,
+    // formatea la fecha actual y realiza una solicitud HTTP para guardar los datos en un servidor.
 
 
 }
