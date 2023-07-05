@@ -31,6 +31,7 @@
         app:layout_constraintGuide_percent="0.24213406" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:orientation="vertical"
@@ -64,6 +65,7 @@
                     android:padding="5dp"
                     android:text="Aula"
                     android:textStyle="bold" />
+
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_column="3"
@@ -78,11 +80,12 @@
                     android:padding="5dp"
                     android:text="Acción"
                     android:textStyle="bold" />
+
                 <TextView
                     android:layout_column="5"
                     android:background="@android:color/holo_blue_light"
                     android:padding="5dp"
-                    android:text="fecha"
+                    android:text="Fecha"
                     android:textStyle="bold" />
             </TableRow>
 
@@ -102,26 +105,29 @@
 
     <Button
         android:id="@+id/btnFiltradofecha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:text="fecha"
-        app:layout_constraintBottom_toBottomOf="@+id/button6"
+        android:layout_width="125dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="4dp"
+        android:backgroundTint="@color/IIALcolor"
+        android:text="Buscar por fecha"
+        app:layout_constraintBottom_toBottomOf="@+id/btnfecharegistro"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/button6"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="@+id/btnfecharegistro"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/button6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="92dp"
+        android:id="@+id/btnfecharegistro"
+        android:layout_width="135dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="144dp"
         android:layout_marginBottom="52dp"
-        android:text="Button"
+        android:text="Buscar fecha y registro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnFiltradofecha"
         app:layout_constraintTop_toTopOf="@+id/guideline21"
-        app:layout_constraintVertical_bias="0.575" />
+        app:layout_constraintVertical_bias="0.6" />
 
     <EditText
         android:id="@+id/etfecha"
@@ -151,17 +157,16 @@
 
     <Button
         android:id="@+id/BtnBusqueda_filtrada"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:text="Busqueda filtrada"
+        android:layout_width="134dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="8dp"
         android:backgroundTint="@color/INNcolor"
-        app:layout_constraintBottom_toBottomOf="@+id/spopcion"
+        android:text="Busqueda filtrada"
+        app:layout_constraintBottom_toBottomOf="@+id/btnfecharegistro"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.857"
-        app:layout_constraintStart_toEndOf="@+id/spopcion"
-        app:layout_constraintTop_toTopOf="@+id/spopcion"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toEndOf="@+id/btnfecharegistro"
+        app:layout_constraintTop_toTopOf="@+id/btnfecharegistro" />
 
     <Spinner
         android:id="@+id/spopcion"
@@ -190,5 +195,18 @@
         app:layout_constraintHorizontal_bias="0.337"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline18"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btnPDF"
+        android:layout_width="156dp"
+        android:layout_height="51dp"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:text="GENERAR PDF"
+        app:layout_constraintBottom_toBottomOf="@+id/spopcion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.684"
+        app:layout_constraintStart_toEndOf="@+id/spopcion"
+        app:layout_constraintTop_toTopOf="@+id/spopcion"
         app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -59,7 +58,7 @@ public class Clases extends menu {
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder ()
-                .url("http://192.168.0.10:80/Checador/mostrarDatosClasesDocentes.php")
+                .url("http://192.168.56.1:80/Checador/mostrarDatosClasesDocentes.php")
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
@@ -105,7 +104,7 @@ public class Clases extends menu {
 
         OkHttpClient clientAula = new OkHttpClient();
         Request aula = new Request.Builder ()
-                .url("http://192.168.0.10:80/Checador/mostrarDatosClasesAula.php")
+                .url("http://192.168.56.1:80/Checador/mostrarDatosClasesAula.php")
                 .build();
 
         clientAula.newCall(aula).enqueue(new Callback() { //: hace una  llamada a una URL específica utilizando el cliente OkHttp y asocia un Callback para manejar la respuesta de la llamada de manera asíncrona.
@@ -166,7 +165,7 @@ public class Clases extends menu {
         String hora = spHora.getSelectedItem().toString();        //Obtiene el elemento seleccionado del Spinner spHora y lo convierte en una cadena. Esto obtiene el valor seleccionado de la hora.
         String opcion = spOpcion.getSelectedItem().toString();    //Obtiene el elemento seleccionado del Spinner spOpcion y lo convierte en una cadena. Esto obtiene el valor seleccionado de la opción.
 
-        String URL= "http://192.168.0.10/Checador/insertar_Clases.php"; //Define la URL del servidor donde se enviarán los datos de la clase para ser guardados.
+        String URL= "http://192.168.56.1:80/Checador/insertar_clases.php";
 
        Calendar calendar = Calendar.getInstance();                      //Obtiene una instancia del calendario actual.
        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());  //Crea un formato de fecha en el estilo "yyyy-MM-dd" utilizando el local predeterminado del dispositivo.
