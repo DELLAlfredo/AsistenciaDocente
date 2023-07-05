@@ -57,15 +57,15 @@ public class abcDocentes extends menu {
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Guardar("http://192.168.56.1:80/Checador/docentes.php");
-                //Guardar("http://192.168.56.1:80/CHECKTECH//docentes.php");
+                //Guardar("http://192.168.56.1:80/Checador/docentes.php");
+                Guardar("http://192.168.0.6:80/CHECKTECH//docentes.php");
 
             }
         });
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buscarDocente("http://192.168.56.1:80Checador/buscar_docente.php?Matricula="+etMatricula.getText()+"");
+                buscarDocente("http://192.168.0.6:80Checador/buscar_docente.php?Matricula="+etMatricula.getText()+"");
                 //buscarDocente("http://192.168.56.1:80/CHECKTECH/buscar_docente.php?Matricula="+etMatricula.getText()+"");
 
             }
@@ -73,7 +73,7 @@ public class abcDocentes extends menu {
         btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Guardar("http://192.168.56.1:80/Checador/editar_docente.php");
+                Guardar("http://192.168.0.6:80/Checador/editar_docente.php");
                //Guardar("http://192.168.56.1:80/CHECKTECH/editar_docente.php");
 
             }
@@ -81,7 +81,7 @@ public class abcDocentes extends menu {
         btnBorrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Borrar("http://192.168.56.1:80/Checador/eliminar_docente.php");
+                Borrar("http://192.168.0.6:80/Checador/eliminar_docente.php");
 
                 //Borrar("http://192.168.56.1:80/CHECKTECH/eliminar_docente.php");
             }

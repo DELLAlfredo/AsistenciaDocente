@@ -1,8 +1,11 @@
 package com.example.asistenciadocente;
 
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.content.FileProvider;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,10 +29,29 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.asistenciadocente.databinding.ActivityReporteBinding;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+//import org.w3c.dom.Document;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 
 public class Reporte extends menu {
@@ -73,10 +96,11 @@ public class Reporte extends menu {
             }
         });
 
+
         tabla = findViewById(R.id.tabla);
 
         // Realizar una solicitud a la API para obtener los datos
-        String url = "http://192.168.56.1:80/checador/reporteselect.php"; // Reemplaza con la URL de tu API
+        String url = "http://192.168.0.6:80/checador/reporteselect.php"; // Reemplaza con la URL de tu API
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -189,8 +213,119 @@ public class Reporte extends menu {
             }
         });
 
+        btnPDF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                generarPDF();
+            }
+        });
+
+
     }
-    public String getfecha(){
+    private void generarPDF() {
+        String nombreBase = "Asistencia Docente "; // para dar el nombre al documento
+        String fechaActual = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());// para sacar la fecha actual
+        String nombreArchivo = nombreBase + fechaActual + ".pdf"; // une ambos balores del nombre y fecha y jenera el documento en PDF
+        File directorioDescargas = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS); // GUARDA EL DOCUMENTO EN LA CARPETA DE DESCARGAS
+        String filePath = directorioDescargas.getAbsolutePath() + File.separator + nombreArchivo;
+        Document document = new Document();
+
+
+        try {
+            PdfWriter.getInstance(document, new FileOutputStream(filePath));
+            document.open();
+
+            // Agregar un título al documento
+            String titulo = "Tabla de Asistencia ";
+            Font fontTitulo = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18, Font.UNDERLINE);
+            Paragraph paragraphTitulo = new Paragraph(titulo, fontTitulo);
+            paragraphTitulo.setAlignment(Element.ALIGN_CENTER);
+            paragraphTitulo.setSpacingAfter(20);
+            document.add(paragraphTitulo);
+
+
+            // Obtén los datos de la tabla
+            List<String> datosTabla = obtenerDatosTabla();
+            // Crear una tabla y definir el número de columnas
+            PdfPTable table = new PdfPTable(5);
+
+            // Crear celdas de encabezado de tabla
+            PdfPCell columna1 = new PdfPCell(new Paragraph("Nombre de Docente", FontFactory.getFont(FontFactory.HELVETICA_BOLD)));
+            PdfPCell columna2 = new PdfPCell(new Paragraph("Aula", FontFactory.getFont(FontFactory.HELVETICA_BOLD)));
+            PdfPCell columna3 = new PdfPCell(new Paragraph("Hora", FontFactory.getFont(FontFactory.HELVETICA_BOLD)));
+            PdfPCell columna4 = new PdfPCell(new Paragraph("Acción", FontFactory.getFont(FontFactory.HELVETICA_BOLD)));
+            PdfPCell columna5 = new PdfPCell(new Paragraph("Fecha", FontFactory.getFont(FontFactory.HELVETICA_BOLD)));
+
+            // Agregar celdas de encabezado a la tabla
+            table.addCell(columna1);
+            table.addCell(columna2);
+            table.addCell(columna3);
+            table.addCell(columna4);
+            table.addCell(columna5);
+
+            // Agregar los datos a la tabla
+            for (String dato : datosTabla) {
+                String[] campos = dato.split("\\|"); // Separar los campos por el carácter '|'
+
+                // Agregar una celda para cada campo en la fila
+                for (String campo : campos) {
+                    PdfPCell celda = new PdfPCell(new Paragraph(campo.trim())); // Trim para eliminar espacios en blanco
+                    table.addCell(celda);
+                }
+            }
+
+            // Agregar la tabla al documento
+            document.add(table);
+
+            document.close();
+
+            // Mostrar mensaje de éxito
+            Toast.makeText(this, "PDF generado y guardado en: " + filePath, Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Mostrar mensaje de error
+            mostrarMensaje("Error al generar el PDF");
+        }
+    }
+
+    private void mostrarMensaje(String mensaje) {
+        Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+    }
+
+    private List<String> obtenerDatosTabla() {
+        List<String> datosTabla = new ArrayList<>();
+
+        // Obtén los datos de la tabla de la interfaz de usuario o de la base de datos
+        // Aquí deberías reemplazar esto con tu propia lógica para obtener los datos
+
+        // Iterar sobre las filas de la tabla
+        for (int i = 1; i < tabla.getChildCount(); i++) {
+            TableRow fila = (TableRow) tabla.getChildAt(i);
+
+            // Obtener los TextViews de cada columna de la fila
+            TextView txtDocente = (TextView) fila.getChildAt(0);
+            TextView txtAula = (TextView) fila.getChildAt(1);
+            TextView txtHora = (TextView) fila.getChildAt(2);
+            TextView txtAccion = (TextView) fila.getChildAt(3);
+            TextView txtFecha = (TextView) fila.getChildAt(4);
+
+            String docente = txtDocente.getText().toString();
+            String aula = txtAula.getText().toString();
+            String hora = txtHora.getText().toString();
+            String accion = txtAccion.getText().toString();
+            String fecha = txtFecha.getText().toString();
+
+            // Concatenar los datos y agregarlos a la lista
+            String datoTabla = docente + " | " + aula + " | " + hora + " | " + accion + " | " + fecha;
+            datosTabla.add(datoTabla);
+        }
+
+        return datosTabla;
+    }
+
+
+            public String getfecha(){
 
             String dia = "";
             if (dpfecha != null) {
@@ -217,7 +352,7 @@ public class Reporte extends menu {
     }
 
     private void llenaTablaConAPIFiltrada(String fecha, String hora, String opcion) {
-        String url = "http://192.168.56.1:80/checador/reportefiltrado.php?fecha=" + fecha + "&hora=" + hora + "&opcion=" + opcion; // Reemplaza con la URL de tu API
+        String url = "http://192.168.0.6:80/checador/reportefiltrado.php?fecha=" + fecha + "&hora=" + hora + "&opcion=" + opcion; // Reemplaza con la URL de tu API
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -322,7 +457,7 @@ public class Reporte extends menu {
     }
 
     private void llenaTablaConAPIFiltradaporfehca(String fecha) {
-        String url = "http://192.168.56.1/checador/busquedafiltadofecha.php?fecha=" + fecha; // Reemplaza con la URL de tu API
+        String url = "http://192.168.0.6/checador/busquedafiltadofecha.php?fecha=" + fecha; // Reemplaza con la URL de tu API
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -436,7 +571,7 @@ public class Reporte extends menu {
     }
 
     private void llenaTablaConAPIFechaRegistro(String fecha, String opcion) {
-        String url = "http://192.168.56.1:80/checador/filtroFechaRegistro.php?fecha=" + fecha  + "&opcion=" + opcion; // Reemplaza con la URL de tu API
+        String url = "http://192.168.0.6:80/checador/filtroFechaRegistro.php?fecha=" + fecha  + "&opcion=" + opcion; // Reemplaza con la URL de tu API
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -530,6 +665,6 @@ public class Reporte extends menu {
         // Agregar la solicitud a la cola
         queue.add(jsonArrayRequest);
     }
-   
+
 
 }

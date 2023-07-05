@@ -42,11 +42,26 @@
         app:layout_constraintTop_toTopOf="@+id/guideline18"
         tools:context=".ReporteSemanal">
 
+        <ScrollView
+            android:id="@+id/scrollvertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:layout_weight="1">
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/scrollhorizontal"
+                android:scrollbars="horizontal"
+                android:layout_weight="1">
+
         <TableLayout
             android:id="@+id/tabla"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:stretchColumns="1">
+
 
             <!-- Fila de encabezados -->
             <TableRow android:layout_height="85dp">
@@ -93,6 +108,8 @@
             <!-- Se agregarán dinámicamente desde el código Java -->
 
         </TableLayout>
+    </HorizontalScrollView>
+    </ScrollView>
 
     </LinearLayout>
 

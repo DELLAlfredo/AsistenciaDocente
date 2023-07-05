@@ -59,7 +59,7 @@ public class RegistroUsuario extends AppCompatActivity {
             return;
         } else {
             progressDialog.show();
-            StringRequest request = new StringRequest(Request.Method.POST, "http://192.168.0.7:80/Checador/Insertar_Usuario.php",
+            StringRequest request = new StringRequest(Request.Method.POST, "http://192.168.0.6:80/Checador/Insertar_Usuario.php",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
