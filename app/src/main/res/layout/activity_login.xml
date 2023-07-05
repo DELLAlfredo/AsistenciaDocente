@@ -88,10 +88,10 @@
         android:clipToPadding="false"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toTopOf="@+id/guideline7"
-        app:layout_constraintVertical_bias="0.5">
+        app:layout_constraintVertical_bias="0.0">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -116,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="2dp"
-                android:layout_marginRight="33dp"
+                android:layout_marginRight="34dp"
                 android:onClick="moveToRegistration"
                 android:text="Registrate"
                 android:textColor="@color/purple_500"
@@ -129,7 +129,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:hint="Email"
+            android:hint="Correo electonico"
             android:textColorHint="@color/black"
             app:boxStrokeColor="@color/yellow"
             app:counterEnabled="true"
@@ -147,12 +147,13 @@
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:drawableStart="@drawable/email"
                 android:inputType="text"
                 android:maxLength="50"
                 android:singleLine="true"
                 android:textColor="@color/black"
-                tools:text="Email"
-                android:drawableStart="@drawable/email"/>
+                tools:text="Correo electonico" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -172,19 +173,21 @@
             app:layout_constraintStart_toStartOf="@+id/guideline16"
             app:layout_constraintTop_toTopOf="@+id/guideline22"
             app:passwordToggleEnabled="true"
-            app:passwordToggleTint="#D3520D">
+            app:passwordToggleTint="@color/colorNoImpartida">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/contraseña"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:drawableStart="@drawable/contrasena"
                 android:inputType="textPassword"
                 android:maxLength="10"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textColorHint="#757575"
-                android:textSize="16sp"
-                android:drawableStart="@drawable/contrasena"/>
+                android:textSize="16sp" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.constraintlayout.widget.Guideline
@@ -292,6 +295,22 @@
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/txtrecuperarcontraseña"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recuperar Contraseña"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline17"
+            app:layout_constraintStart_toStartOf="@+id/guideline16"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="34dp"
+            android:onClick="Recuperarcontraseña"
+            android:textColor="@color/purple_500"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.Guideline
@@ -306,7 +325,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.85" />
+        app:layout_constraintGuide_percent="0.86" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/snackBar"

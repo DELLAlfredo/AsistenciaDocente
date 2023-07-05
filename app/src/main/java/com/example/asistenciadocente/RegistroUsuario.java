@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegistroUsuario extends AppCompatActivity {
-    EditText txtName, txtEmail, pass;
+    EditText txtName, txtEmail, pass,passconfirm;
     Button btn_insert;
 
     @Override
@@ -33,6 +33,7 @@ public class RegistroUsuario extends AppCompatActivity {
         txtName = findViewById(R.id.ednombre);
         txtEmail = findViewById(R.id.etemail);
         pass = findViewById(R.id.etcontraseña);
+        passconfirm=findViewById(R.id.etcontraseñavalidar);
         btn_insert = findViewById(R.id.btn_register);
 
         btn_insert.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +48,7 @@ public class RegistroUsuario extends AppCompatActivity {
         final String nombre = txtName.getText().toString().trim();
         final String email = txtEmail.getText().toString().trim();
         final String password = pass.getText().toString().trim();
+        final String passwordConfirm = passconfirm.getText().toString().trim();
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Cargando...");
@@ -57,43 +59,50 @@ public class RegistroUsuario extends AppCompatActivity {
         } else if (email.isEmpty()) {
             txtEmail.setError("Complete los campos");
             return;
-        } else {
-            progressDialog.show();
-            StringRequest request = new StringRequest(Request.Method.POST, "http://192.168.0.6:80/Checador/Insertar_Usuario.php",
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            progressDialog.dismiss();
-                            if (!response.equalsIgnoreCase("Usuario registrado correctamente")) {
-                                Toast.makeText(RegistroUsuario.this, "Usuario registrado correctamente", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(), Login.class);
-                                startActivity(intent);
-                                finish(); // Finaliza la actividad actual
-                            } else {
-                                Toast.makeText(RegistroUsuario.this, "no jala tu", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    progressDialog.dismiss();
-                    Toast.makeText(RegistroUsuario.this, "No se puede insertar", Toast.LENGTH_SHORT).show();
-                }
-            }) {
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put("nombre", nombre);
-                    params.put("email", email);
-                    params.put("contraseña", password);
-                    return params;
-                }
-            };
-
-            RequestQueue requestQueue = Volley.newRequestQueue(RegistroUsuario.this);
-            requestQueue.add(request);
+        } else if (password.isEmpty()) {
+            pass.setError("Complete los campos");
+            return;
+        } else if (!password.equals(passwordConfirm)) {
+            passconfirm.setError("Las contraseñas no coinciden");
+            return;
         }
+
+        progressDialog.show();
+        StringRequest request = new StringRequest(Request.Method.POST, "http://192.168.56.1:80/Checador/Insertar_Usuario.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        if (!response.equalsIgnoreCase("Usuario registrado correctamente")) {
+                            Toast.makeText(RegistroUsuario.this, "Usuario registrado correctamente", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), Login.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(RegistroUsuario.this, "No se pudo registrar el usuario", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(RegistroUsuario.this, "No se puede insertar", Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("nombre", nombre);
+                params.put("email", email);
+                params.put("contraseña", password);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(RegistroUsuario.this);
+        requestQueue.add(request);
     }
+
 
     @Override
     public void onBackPressed() {

@@ -1,8 +1,6 @@
 package com.example.asistenciadocente;
 
-import android.content.Intent;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -19,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
-import androidx.core.content.FileProvider;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,6 +26,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.asistenciadocente.databinding.ActivityReporteBinding;
+import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
@@ -36,14 +34,10 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.pdf.PdfWriter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-//import org.w3c.dom.Document;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -100,7 +94,7 @@ public class Reporte extends menu {
         tabla = findViewById(R.id.tabla);
 
         // Realizar una solicitud a la API para obtener los datos
-        String url = "http://192.168.0.6:80/checador/reporteselect.php"; // Reemplaza con la URL de tu API
+        String url = "http://192.168.56.1:80/checador/reporteselect.php"; // Reemplaza con la URL de tu API
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -208,8 +202,8 @@ public class Reporte extends menu {
         btnPDF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             
-                
+
+
             }
         });
 
@@ -226,8 +220,9 @@ public class Reporte extends menu {
         String nombreBase = "Asistencia Docente "; // para dar el nombre al documento
         String fechaActual = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());// para sacar la fecha actual
         String nombreArchivo = nombreBase + fechaActual + ".pdf"; // une ambos balores del nombre y fecha y jenera el documento en PDF
-        File directorioDescargas = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS); // GUARDA EL DOCUMENTO EN LA CARPETA DE DESCARGAS
-        String filePath = directorioDescargas.getAbsolutePath() + File.separator + nombreArchivo;
+        File directorioDescargas = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS); // se utiliza para obtener el directorio de descargas del dispositivo.
+        String filePath = directorioDescargas.getAbsolutePath() + File.separator + nombreArchivo;         // se encarga de construir la ruta completa del archivo PDF que se generará.
+
         Document document = new Document();
 
 
@@ -236,12 +231,12 @@ public class Reporte extends menu {
             document.open();
 
             // Agregar un título al documento
-            String titulo = "Tabla de Asistencia ";
-            Font fontTitulo = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18, Font.UNDERLINE);
-            Paragraph paragraphTitulo = new Paragraph(titulo, fontTitulo);
-            paragraphTitulo.setAlignment(Element.ALIGN_CENTER);
-            paragraphTitulo.setSpacingAfter(20);
-            document.add(paragraphTitulo);
+            String titulo = "Tabla de Asistencia "; // Texto del título del documento
+            Font fontTitulo = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18, Font.UNDERLINE); // Fuente y estilo del título
+            Paragraph paragraphTitulo = new Paragraph(titulo, fontTitulo); // Crea un párrafo con el título y la fuente
+            paragraphTitulo.setAlignment(Element.ALIGN_CENTER); // Alinea el párrafo al centro
+            paragraphTitulo.setSpacingAfter(20); // Establece el espacio después del párrafo
+            document.add(paragraphTitulo); // Agrega el párrafo al documento
 
 
             // Obtén los datos de la tabla
@@ -325,24 +320,24 @@ public class Reporte extends menu {
     }
 
 
-            public String getfecha(){
+    public String getfecha(){
 
-            String dia = "";
-            if (dpfecha != null) {
-                dia = String.format("%02d", dpfecha.getDayOfMonth()-1);
-            }
+        String dia = "";
+        if (dpfecha != null) {
+            dia = String.format("%02d", dpfecha.getDayOfMonth()-1);
+        }
 
-            String mes = "";
-            if (dpfecha != null) {
-                mes = String.format("%02d", dpfecha.getMonth() + 1);
-            }
+        String mes = "";
+        if (dpfecha != null) {
+            mes = String.format("%02d", dpfecha.getMonth() + 1);
+        }
 
-            String año = "";
-            if (dpfecha != null) {
-                año = String.format("%04d", dpfecha.getYear());
-            }
+        String año = "";
+        if (dpfecha != null) {
+            año = String.format("%04d", dpfecha.getYear());
+        }
 
-            return año + "-" + mes + "-" + dia;
+        return año + "-" + mes + "-" + dia;
 
 
     }
@@ -352,7 +347,7 @@ public class Reporte extends menu {
     }
 
     private void llenaTablaConAPIFiltrada(String fecha, String hora, String opcion) {
-        String url = "http://192.168.0.6:80/checador/reportefiltrado.php?fecha=" + fecha + "&hora=" + hora + "&opcion=" + opcion; // Reemplaza con la URL de tu API
+        String url = "http://192.168.56.1:80/checador/reportefiltrado.php?fecha=" + fecha + "&hora=" + hora + "&opcion=" + opcion; // Reemplaza con la URL de tu API
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -377,64 +372,64 @@ public class Reporte extends menu {
                             }
                             tabla.addView(headerRow);
                             if (response.length()!=0){
-                            // Agregar las filas con los datos filtrados
-                            for (int i = 0; i < response.length(); i++) {
-                                JSONObject rowData = response.getJSONObject(i);
-                                TableRow dataRow = new TableRow(Reporte.this);
+                                // Agregar las filas con los datos filtrados
+                                for (int i = 0; i < response.length(); i++) {
+                                    JSONObject rowData = response.getJSONObject(i);
+                                    TableRow dataRow = new TableRow(Reporte.this);
 
-                                // Obtener los valores de las columnas de la respuesta JSON
-                                String docentes = rowData.getString("docentes");
-                                String aula = rowData.getString("aula");
-                                String hora = rowData.getString("hora");
-                                String opcion = rowData.getString("opcion");
-                                String fecha = rowData.getString("fecha");
-                                // Crear los TextViews para mostrar los datos en la fila
-                                TextView txtdocentes = new TextView(Reporte.this);
-                                txtdocentes.setText(docentes);
+                                    // Obtener los valores de las columnas de la respuesta JSON
+                                    String docentes = rowData.getString("docentes");
+                                    String aula = rowData.getString("aula");
+                                    String hora = rowData.getString("hora");
+                                    String opcion = rowData.getString("opcion");
+                                    String fecha = rowData.getString("fecha");
+                                    // Crear los TextViews para mostrar los datos en la fila
+                                    TextView txtdocentes = new TextView(Reporte.this);
+                                    txtdocentes.setText(docentes);
 
-                                TextView txtaula = new TextView(Reporte.this);
-                                txtaula.setText(aula);
+                                    TextView txtaula = new TextView(Reporte.this);
+                                    txtaula.setText(aula);
 
-                                TextView txthora = new TextView(Reporte.this);
-                                txthora.setText(hora);
+                                    TextView txthora = new TextView(Reporte.this);
+                                    txthora.setText(hora);
 
-                                TextView txtopcion = new TextView(Reporte.this);
-                                txtopcion.setText(opcion);
+                                    TextView txtopcion = new TextView(Reporte.this);
+                                    txtopcion.setText(opcion);
 
-                                TextView txtfecha = new TextView(Reporte.this);
-                                txtfecha.setText(fecha);
-                                int color = 0;
-                                if (opcion.equals("IMPARTIDA")) {
-                                    color = getResources().getColor(R.color.colorImpartida);
-                                } else if (opcion.equals("NO IMPARTIDA")){
-                                    color = getResources().getColor(R.color.colorNoImpartida);
-                                } else if (opcion.equals("CLASE INCOMPLETA")) {
-                                    color = getResources().getColor(R.color.colorRetardo);
-                                } else if (opcion.equals("SUSPENCION")) {
-                                    color = getResources().getColor(R.color.colorsuspencion);
+                                    TextView txtfecha = new TextView(Reporte.this);
+                                    txtfecha.setText(fecha);
+                                    int color = 0;
+                                    if (opcion.equals("IMPARTIDA")) {
+                                        color = getResources().getColor(R.color.colorImpartida);
+                                    } else if (opcion.equals("NO IMPARTIDA")){
+                                        color = getResources().getColor(R.color.colorNoImpartida);
+                                    } else if (opcion.equals("CLASE INCOMPLETA")) {
+                                        color = getResources().getColor(R.color.colorRetardo);
+                                    } else if (opcion.equals("SUSPENCION")) {
+                                        color = getResources().getColor(R.color.colorsuspencion);
+                                    }
+                                    int colortabla = 0;
+
+                                    colortabla =getResources().getColor(R.color.white);
+                                    dataRow.setBackgroundColor(colortabla);
+                                    txtopcion.setBackgroundColor(color);
+
+                                    // Agregar los TextViews a la fila
+                                    dataRow.addView(txtdocentes);
+                                    dataRow.addView(txtaula);
+                                    dataRow.addView(txthora);
+                                    dataRow.addView(txtopcion);
+                                    dataRow.addView(txtfecha);
+
+                                    txtdocentes.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
+                                    txtaula.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
+                                    txthora.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
+                                    txtopcion.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
+                                    txtfecha.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
+                                    // Agregar la fila a la tabla
+                                    tabla.addView(dataRow);
+
                                 }
-                                int colortabla = 0;
-
-                                colortabla =getResources().getColor(R.color.white);
-                                dataRow.setBackgroundColor(colortabla);
-                                txtopcion.setBackgroundColor(color);
-
-                                // Agregar los TextViews a la fila
-                                dataRow.addView(txtdocentes);
-                                dataRow.addView(txtaula);
-                                dataRow.addView(txthora);
-                                dataRow.addView(txtopcion);
-                                dataRow.addView(txtfecha);
-
-                                txtdocentes.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
-                                txtaula.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
-                                txthora.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
-                                txtopcion.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
-                                txtfecha.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
-                                // Agregar la fila a la tabla
-                                tabla.addView(dataRow);
-
-                            }
                             }else {
                                 Toast.makeText(Reporte.this, "no hay datos", Toast.LENGTH_SHORT).show();
                             }
@@ -457,7 +452,7 @@ public class Reporte extends menu {
     }
 
     private void llenaTablaConAPIFiltradaporfehca(String fecha) {
-        String url = "http://192.168.0.6/checador/busquedafiltadofecha.php?fecha=" + fecha; // Reemplaza con la URL de tu API
+        String url = "http://192.168.56.1:80/checador/busquedafiltadofecha.php?fecha=" + fecha; // Reemplaza con la URL de tu API
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -571,7 +566,7 @@ public class Reporte extends menu {
     }
 
     private void llenaTablaConAPIFechaRegistro(String fecha, String opcion) {
-        String url = "http://192.168.0.6:80/checador/filtroFechaRegistro.php?fecha=" + fecha  + "&opcion=" + opcion; // Reemplaza con la URL de tu API
+        String url = "http://192.168.56.1:80/checador/filtroFechaRegistro.php?fecha=" + fecha  + "&opcion=" + opcion; // Reemplaza con la URL de tu API
 
         RequestQueue queue = Volley.newRequestQueue(this);
 

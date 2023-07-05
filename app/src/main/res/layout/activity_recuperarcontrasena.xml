@@ -44,38 +44,16 @@
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Regístrate"
+                    android:text="Recuperar Contraseña"
                     android:textColor="@android:color/black"
                     android:textSize="28sp"
                     android:textStyle="bold"
-                 />
+                    />
 
-                <TextView
-                    android:id="@+id/txtsignup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="0dp"
-                    android:onClick="login"
-                    android:text="Iniciar sesión"
-                    android:textColor="@color/purple_500"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+
 
                 <EditText
-                    android:id="@+id/ednombre"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/custumimput"
-                    android:hint="Nombre de Usuario"
-                    android:textColorHint="@color/black"
-                    android:inputType="textPersonName"
-                    android:padding="10dp"
-                    android:drawableStart="@drawable/user"/>
-
-                <EditText
-                    android:id="@+id/etemail"
+                    android:id="@+id/editTextEmail"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="20dp"
@@ -87,7 +65,7 @@
                     android:drawableStart="@drawable/email"/>
 
                 <EditText
-                    android:id="@+id/etcontraseña"
+                    android:id="@+id/editTextNewPassword"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="20dp"
@@ -99,7 +77,7 @@
                     android:drawableStart="@drawable/contrasena"
                     />
                 <EditText
-                    android:id="@+id/etcontraseñavalidar"
+                    android:id="@+id/editTextConfirmPassword"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="20dp"
@@ -112,12 +90,12 @@
                     />
 
                 <Button
-                    android:id="@+id/btn_register"
+                    android:id="@+id/buttonRecover"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="32dp"
                     android:backgroundTint="@color/INNcolor"
-                    android:text="Registrarse"
+                    android:text="Confirmar"
                     android:textColor="@android:color/white"
                     android:textSize="15sp" />
 

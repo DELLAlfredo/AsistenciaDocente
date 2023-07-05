@@ -48,8 +48,8 @@ public class Login extends AppCompatActivity {
                 Usuario=email.getText().toString();
                 Paswword=contraseña.getText().toString();
                 if (!Usuario.isEmpty() && !Paswword.isEmpty()) {
-                     validarUsuario("http://192.168.0.6:80/Checador/Validar_Usuario.php");
-                    //validarUsuario("http://192.168.56.1:80/Checador/Validar_Usuario.php");
+                     //validarUsuario("http://192.168.0.6:80/Checador/Validar_Usuario.php");
+                    validarUsuario("http://192.168.56.1:80/Checador/Validar_Usuario.php");
                 }else {
                     Toast.makeText(Login.this, "No deje campos vacios", Toast.LENGTH_SHORT).show();
                 }
@@ -114,7 +114,10 @@ public class Login extends AppCompatActivity {
         SharedPreferences preferences=getSharedPreferences("PreferenciasLogin",Context.MODE_PRIVATE);
         email.setText(preferences.getString("email",""));
         contraseña.setText(preferences.getString("contraseña",""));
+    }
 
-
+    public void Recuperarcontraseña(View view) {
+        startActivity(new Intent(getApplicationContext(), recuperarcontrasena.class));
+        finish();
     }
 }
