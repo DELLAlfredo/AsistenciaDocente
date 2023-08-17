@@ -1,24 +1,29 @@
 package com.example.asistenciadocente;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
-import com.android.volley.Request;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import org.json.JSONException;
-import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class recuperarcontrasena extends AppCompatActivity {
 
-    private EditText editTextEmail,edtContraseña,edtConfirmpass;
+    private EditText editTextEmail, edtContraseña, edtConfirmpass;
     private Button buttonRecover;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,68 +38,64 @@ public class recuperarcontrasena extends AppCompatActivity {
         buttonRecover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = editTextEmail.getText().toString().trim();
-                String newPassword = edtContraseña.getText().toString().trim();
-                String confirmNewPassword = edtConfirmpass.getText().toString().trim();
+                String email = editTextEmail.getText().toString();
+                String password = edtContraseña.getText().toString();
+                String confirmPassword = edtConfirmpass.getText().toString();
 
-                if (email.isEmpty() || newPassword.isEmpty() || confirmNewPassword.isEmpty()) {
-                    Toast.makeText(recuperarcontrasena.this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
-                    return;
+                if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
+                } else if (!password.equals(confirmPassword)) {
+                    Toast.makeText(getApplicationContext(), "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+                } else {
+                    guardar("http://192.168.56.1:80/Checador/obtenerCorreo.php", email, password);
                 }
-
-                if (!newPassword.equals(confirmNewPassword)) {
-                    Toast.makeText(recuperarcontrasena.this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                cambiarContrasena(email, newPassword);
             }
         });
     }
 
-    private void cambiarContrasena(String email, String newPassword) {
-        // URL de la API para cambiar la contraseña
-        String url = "http://192.168.56.1:80/checador/obtenerCorreo.php";
+    private void guardar(String URL, String email, String password) {
+        StringRequest guardarRequest = new StringRequest(com.android.volley.Request.Method.POST, URL,
 
-        // Construir el objeto JSON con los datos necesarios para la API
-        JSONObject requestData = new JSONObject();
-        try {
-            requestData.put("email", email);
-            requestData.put("newPassword", newPassword);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        // Crear la solicitud POST a la API de cambio de contraseña
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, requestData,
-                new Response.Listener<JSONObject>() {
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            boolean success = response.getBoolean("success");
-                            if (success) {
-                                // La contraseña se cambió exitosamente
-                                Toast.makeText(getApplicationContext(), "Contraseña cambiada exitosamente", Toast.LENGTH_SHORT).show();
-                            } else {
-                                // Hubo un error al cambiar la contraseña
-                                Toast.makeText(getApplicationContext(), "Error al cambiar la contraseña", Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Toast.makeText(getApplicationContext(), "Error de respuesta del servidor", Toast.LENGTH_SHORT).show();
+                    public void onResponse(String response) {
+                        String trimmedResponse = response.trim();
+                        Log.d("RESPONSE", trimmedResponse);
+
+                        if (trimmedResponse.equals("CORREO_NO_REGISTRADO")) {
+                            Toast.makeText(getApplicationContext(), "Correo no registrado", Toast.LENGTH_SHORT).show();
+                        } else if (trimmedResponse.equals("CONTRASEÑA_CAMBIADA")) {
+                            Toast.makeText(getApplicationContext(), "Contraseña cambiada", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), Login.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Error al cambiar la contraseña", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // Error de conexión
-                        Toast.makeText(getApplicationContext(), "Error de conexión", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
                     }
-                });
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parametros = new HashMap<>();
+                parametros.put("email", email);
+                parametros.put("contraseña", password);
+                return parametros;
+            }
+        };
 
-        // Agregar la solicitud a la cola de solicitudes de Volley
-        Volley.newRequestQueue(getApplicationContext()).add(request);
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(guardarRequest);
+    }
+
+    public void login(View v) {
+        startActivity(new Intent(getApplicationContext(), Login.class));
+        finish();
     }
 
 

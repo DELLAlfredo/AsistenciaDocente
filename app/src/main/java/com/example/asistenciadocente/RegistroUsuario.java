@@ -106,12 +106,16 @@ public class RegistroUsuario extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        finish();
+        Intent intent = new Intent(this, Login.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
+
 
     public void login(View v) {
         startActivity(new Intent(getApplicationContext(), Login.class));
         finish();
     }
+
+
 }

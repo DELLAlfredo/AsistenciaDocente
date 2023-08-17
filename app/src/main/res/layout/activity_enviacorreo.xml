@@ -14,7 +14,6 @@
         android:layout_width="360dp"
         android:layout_height="253dp"
         android:contentDescription="TODO"
-
         android:src="@drawable/logotect"
         tools:ignore="ImageContrastCheck" />
 
@@ -44,11 +43,10 @@
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Recuperar Contraseña"
+                    android:text="Ingresa Correo"
                     android:textColor="@android:color/black"
                     android:textSize="28sp"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtsignup"
@@ -62,45 +60,44 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <EditText
-                    android:id="@+id/editTextEmail"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/custumimput"
-                    android:hint="Correo electronico"
-                    android:textColorHint="@color/black"
-                    android:inputType="textEmailAddress"
-                    android:padding="10dp"
-                    android:drawableStart="@drawable/email"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/edtCorreo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/custumimput"
+                        android:drawableStart="@drawable/email"
+                        android:hint="Correo electrónico"
+                        android:inputType="textEmailAddress"
+                        android:padding="10dp"
+                        android:textColorHint="@color/black" />
+
+                    <ImageButton
+                        android:id="@+id/enviacorreo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/correo" />
+                </LinearLayout>
 
                 <EditText
-                    android:id="@+id/editTextNewPassword"
+                    android:id="@+id/Clave"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/custumimput"
-                    android:hint="Contraseña"
+                    android:hint="Código"
                     android:textColorHint="@color/black"
-                    android:inputType="textPassword"
+                    android:inputType="number"
                     android:padding="10dp"
-                    android:drawableStart="@drawable/contrasena"
-                    />
-                <EditText
-                    android:id="@+id/editTextConfirmPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/custumimput"
-                    android:hint="Confirmar Contraseña"
-                    android:textColorHint="@color/black"
-                    android:inputType="textPassword"
-                    android:padding="10dp"
-                    android:drawableStart="@drawable/contrasena"
-                    />
+                    android:drawableStart="@drawable/contrasena" />
 
                 <Button
-                    android:id="@+id/buttonRecover"
+                    android:id="@+id/btnCorreo"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="32dp"
@@ -108,7 +105,6 @@
                     android:text="Confirmar"
                     android:textColor="@android:color/white"
                     android:textSize="15sp" />
-
 
                 <Space
                     android:layout_width="match_parent"

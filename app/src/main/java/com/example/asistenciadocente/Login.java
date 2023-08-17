@@ -1,6 +1,7 @@
 package com.example.asistenciadocente;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
@@ -117,7 +119,30 @@ public class Login extends AppCompatActivity {
     }
 
     public void Recuperarcontraseña(View view) {
-        startActivity(new Intent(getApplicationContext(), recuperarcontrasena.class));
+        startActivity(new Intent(getApplicationContext(), enviacorreo.class));
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Salir");
+        builder.setMessage("¿Desea salir de la aplicación?");
+        builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finishAffinity(); // Cerrar todas las actividades y salir de la aplicación
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 }

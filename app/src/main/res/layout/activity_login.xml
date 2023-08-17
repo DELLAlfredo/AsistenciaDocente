@@ -209,7 +209,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.9" />
+            app:layout_constraintGuide_percent="0.92" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline24"
@@ -300,17 +300,18 @@
             android:id="@+id/txtrecuperarcontraseña"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Recuperar Contraseña"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="34dp"
+            android:layout_marginBottom="4dp"
+            android:onClick="Recuperarcontraseña"
+            android:text="Olvidaste tu Contraseña"
+            android:textColor="@color/purple_500"
+            android:textSize="15sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline17"
-            app:layout_constraintStart_toStartOf="@+id/guideline16"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="2dp"
-            android:layout_marginRight="34dp"
-            android:onClick="Recuperarcontraseña"
-            android:textColor="@color/purple_500"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
+            app:layout_constraintHorizontal_bias="0.787"
+            app:layout_constraintStart_toStartOf="@+id/guideline16" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.Guideline
@@ -325,7 +326,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.86" />
+        app:layout_constraintGuide_percent="0.89" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/snackBar"
