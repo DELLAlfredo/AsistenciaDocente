@@ -49,26 +49,26 @@ public class abcAula extends menu {
         btnGuardarAula.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Insetar("http://192.168.0.6:80/Checador/insertar_aula.php");
+                Insetar("https://checador.tech/api_checador/aulas");
 
             }
         });
         btnBuscarAula.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buscarAula("http://192.168.0.6:80/Checador/buscar_aula.php?idAula="+etIdAula.getText()+"");
+                buscarAula("https://checador.tech/api_checador/aulas?idAula="+etIdAula.getText()+"");
             }
         });
         btnEditarAula.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Insetar("http://192.168.0.6:80/Checador/editar_aula.php");
+                Insetar("https://checador.tech/api_checador/aulas/update");
             }
         });
         btnBorrarAula.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Borrar("http://192.168.0.6:80/Checador/eliminar_aula.php");
+                Borrar("https://checador.tech/api_checador/aulas/delete");
             }
         });
 

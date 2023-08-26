@@ -94,8 +94,8 @@ public class Reporte extends menu {
         tabla = findViewById(R.id.tabla);
 
         // Realizar una solicitud a la API para obtener los datos
-        String url = "http://192.168.56.1:80/checador/reporteselect.php"; // Reemplaza con la URL de tu API
-
+       // String url = "http://192.168.56.1:80/checador/reporteselect.php"; // Reemplaza con la URL de tu API
+        String url = "https://checador.tech/api_checador/obtener-clases";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -347,7 +347,8 @@ public class Reporte extends menu {
     }
 
     private void llenaTablaConAPIFiltrada(String fecha, String hora, String opcion) {
-        String url = "http://192.168.56.1:80/checador/reportefiltrado.php?fecha=" + fecha + "&hora=" + hora + "&opcion=" + opcion; // Reemplaza con la URL de tu API
+        String url = "https://checador.tech/api_checador/filtrar-reporte?fecha=" + fecha + "&hora=" + hora + "&opcion=" + opcion; // Reemplaza con la URL de tu API
+        // String url = "http://192.168.56.1:80/checador/reportefiltrado.php?fecha=" + fecha + "&hora=" + hora + "&opcion=" + opcion;
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -452,7 +453,8 @@ public class Reporte extends menu {
     }
 
     private void llenaTablaConAPIFiltradaporfehca(String fecha) {
-        String url = "http://192.168.56.1:80/checador/busquedafiltadofecha.php?fecha=" + fecha; // Reemplaza con la URL de tu API
+        String url = "https://checador.tech/api_checador/filtrar-clases-fecha?fecha=" + fecha; // Reemplaza con la URL de tu API
+        //String url = "http://192.168.56.1:80/checador/busquedafiltadofecha.php?fecha=" + fecha;
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -566,7 +568,7 @@ public class Reporte extends menu {
     }
 
     private void llenaTablaConAPIFechaRegistro(String fecha, String opcion) {
-        String url = "http://192.168.56.1:80/checador/filtroFechaRegistro.php?fecha=" + fecha  + "&opcion=" + opcion; // Reemplaza con la URL de tu API
+        String url = "https://checador.tech/api_checador/filtrar-fecha?fecha=" + fecha  + "&opcion=" + opcion; // Reemplaza con la URL de tu API
 
         RequestQueue queue = Volley.newRequestQueue(this);
 

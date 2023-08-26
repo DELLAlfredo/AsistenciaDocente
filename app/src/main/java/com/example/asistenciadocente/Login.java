@@ -50,8 +50,8 @@ public class Login extends AppCompatActivity {
                 Usuario=email.getText().toString();
                 Paswword=contraseña.getText().toString();
                 if (!Usuario.isEmpty() && !Paswword.isEmpty()) {
-                     //validarUsuario("http://192.168.0.6:80/Checador/Validar_Usuario.php");
-                    validarUsuario("http://192.168.56.1:80/Checador/Validar_Usuario.php");
+                     validarUsuario("https://checador.tech/api_checador/validar_usuario");
+                    //validarUsuario("http://192.168.56.1:80/Checador/Validar_Usuario.php");
                 }else {
                     Toast.makeText(Login.this, "No deje campos vacios", Toast.LENGTH_SHORT).show();
                 }
