@@ -65,7 +65,7 @@ public class abcDocentes extends menu {
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buscarDocente("https://checador.tech/api_checador/docentes?Matricula="+etMatricula.getText()+"");
+                buscarDocente("https://checador.tech/api_checador/docentes?Matricula"+etMatricula.getText()+"");
                 //buscarDocente("http://192.168.56.1:80/CHECKTECH/buscar_docente.php?Matricula="+etMatricula.getText()+"");
 
             }

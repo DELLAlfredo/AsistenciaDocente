@@ -41,8 +41,8 @@ public class abcAula extends menu {
         btnEditarAula=findViewById(R.id.btnEditarAula);
         btnBuscarAula=findViewById(R.id.btnBuscarAula);
         btnGuardarAula=findViewById(R.id.btnGuardarAula);
-        etNombreAula=findViewById(R.id.etIdAula);
-        etIdAula=findViewById(R.id.etNombreAula);
+        etNombreAula=findViewById(R.id.etNombreAula);
+        etIdAula=findViewById(R.id.etIdAula);
 
 
         /*--------------------------------------------------------*/
@@ -56,7 +56,8 @@ public class abcAula extends menu {
         btnBuscarAula.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buscarAula("https://checador.tech/api_checador/aulas?idAula="+etIdAula.getText()+"");
+                buscarAula("https://checador.tech/api_checador/aulas?idAula"+etIdAula.getText()+"");
+
             }
         });
         btnEditarAula.setOnClickListener(new View.OnClickListener() {
@@ -123,15 +124,20 @@ public class abcAula extends menu {
             public void onResponse(JSONArray response) {
                 JSONObject jsonObject = null;
                 for (int i = 0; i < response.length(); i++) {
+
                     try {
+
                         jsonObject = response.getJSONObject(i);
                         etNombreAula.setText(jsonObject.getString("nombre_aula"));
 
-
                     } catch (JSONException e) {
                         Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+
                     }
+
+
                 }
+
 
             }
         }, new Response.ErrorListener() {
