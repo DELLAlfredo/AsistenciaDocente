@@ -21,6 +21,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,8 +58,16 @@ public class abcAula extends menu {
         btnBuscarAula.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buscarAula("https://checador.tech/api_checador/aulas?idAula"+etIdAula.getText()+"");
+                String idAula = etIdAula.getText().toString();
+                Log.d("DEBUG", "ID de aula a buscar: " + idAula);  // Agregar este log
 
+                if (idAula.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Ingrese un ID de aula válido", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                String url = "https://checador.tech/api_checador/aulas?idAula=" + idAula;
+                buscarAula(url);
             }
         });
         btnEditarAula.setOnClickListener(new View.OnClickListener() {
@@ -123,10 +133,10 @@ public class abcAula extends menu {
             @Override
             public void onResponse(JSONArray response) {
                 JSONObject jsonObject = null;
+
                 for (int i = 0; i < response.length(); i++) {
 
                     try {
-
                         jsonObject = response.getJSONObject(i);
                         etNombreAula.setText(jsonObject.getString("nombre_aula"));
 
@@ -137,6 +147,7 @@ public class abcAula extends menu {
 
 
                 }
+                Log.d("DEBUG", "Respuesta de la API: " + response.toString());  // Agregar este log
 
 
             }

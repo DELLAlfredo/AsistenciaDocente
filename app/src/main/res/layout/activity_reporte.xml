@@ -28,88 +28,89 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.24213406" />
+        app:layout_constraintGuide_percent="0.24487004" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_width="405dp"
+        android:layout_height="386dp"
+        android:layout_marginTop="5dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/guideline21"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.207"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline18"
+        app:layout_constraintVertical_bias="0.0"
         tools:context=".ReporteSemanal">
 
         <ScrollView
             android:id="@+id/scrollvertical"
-            android:layout_width="wrap_content"
+            android:layout_width="398dp"
             android:layout_height="wrap_content"
-            android:scrollbars="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:scrollbars="vertical">
 
             <HorizontalScrollView
+                android:id="@+id/scrollhorizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/scrollhorizontal"
-                android:scrollbars="horizontal"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:scrollbars="horizontal">
 
-        <TableLayout
-            android:id="@+id/tabla"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stretchColumns="1">
+                <TableLayout
+                    android:id="@+id/tabla"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="1">
 
 
-            <!-- Fila de encabezados -->
-            <TableRow android:layout_height="85dp">
+                    <!-- Fila de encabezados -->
+                    <TableRow android:layout_height="85dp">
 
-                <TextView
-                    android:layout_column="1"
-                    android:background="@android:color/holo_blue_light"
-                    android:padding="5dp"
-                    android:text="Nombre de Docente"
-                    android:textStyle="bold" />
+                        <TextView
+                            android:layout_column="1"
+                            android:background="@android:color/holo_blue_light"
+                            android:padding="5dp"
+                            android:text="Nombre de Docente"
+                            android:textStyle="bold" />
 
-                <TextView
-                    android:layout_height="match_parent"
-                    android:layout_column="2"
-                    android:background="@android:color/holo_blue_light"
-                    android:padding="5dp"
-                    android:text="Aula"
-                    android:textStyle="bold" />
+                        <TextView
+                            android:layout_height="match_parent"
+                            android:layout_column="2"
+                            android:background="@android:color/holo_blue_light"
+                            android:padding="5dp"
+                            android:text="Aula"
+                            android:textStyle="bold" />
 
-                <TextView
-                    android:layout_height="match_parent"
-                    android:layout_column="3"
-                    android:background="@android:color/holo_blue_light"
-                    android:padding="5dp"
-                    android:text="Hora"
-                    android:textStyle="bold" />
+                        <TextView
+                            android:layout_height="match_parent"
+                            android:layout_column="3"
+                            android:background="@android:color/holo_blue_light"
+                            android:padding="5dp"
+                            android:text="Hora"
+                            android:textStyle="bold" />
 
-                <TextView
-                    android:layout_column="4"
-                    android:background="@android:color/holo_blue_light"
-                    android:padding="5dp"
-                    android:text="Acción"
-                    android:textStyle="bold" />
+                        <TextView
+                            android:layout_column="4"
+                            android:background="@android:color/holo_blue_light"
+                            android:padding="5dp"
+                            android:text="Acción"
+                            android:textStyle="bold" />
 
-                <TextView
-                    android:layout_column="5"
-                    android:background="@android:color/holo_blue_light"
-                    android:padding="5dp"
-                    android:text="Fecha"
-                    android:textStyle="bold" />
-            </TableRow>
+                        <TextView
+                            android:layout_column="5"
+                            android:background="@android:color/holo_blue_light"
+                            android:padding="5dp"
+                            android:text="Fecha"
+                            android:textStyle="bold" />
+                    </TableRow>
 
-            <!-- Filas dinámicas para mostrar los datos -->
-            <!-- Se agregarán dinámicamente desde el código Java -->
+                    <!-- Filas dinámicas para mostrar los datos -->
+                    <!-- Se agregarán dinámicamente desde el código Java -->
 
-        </TableLayout>
-    </HorizontalScrollView>
-    </ScrollView>
+                </TableLayout>
+            </HorizontalScrollView>
+        </ScrollView>
 
     </LinearLayout>
 
@@ -138,7 +139,7 @@
         android:layout_height="61dp"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="144dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="30dp"
         android:backgroundTint="@color/ISCcolor"
         android:text="Buscar fecha y registro"
         app:layout_constraintBottom_toBottomOf="parent"

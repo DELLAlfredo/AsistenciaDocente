@@ -65,9 +65,25 @@ public class abcDocentes extends menu {
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buscarDocente("https://checador.tech/api_checador/docentes?Matricula"+etMatricula.getText()+"");
-                //buscarDocente("http://192.168.56.1:80/CHECKTECH/buscar_docente.php?Matricula="+etMatricula.getText()+"");
+                String idMatricula = etMatricula.getText().toString();
+                Log.d("DEBUG", "Matricula a buscar: " + idMatricula);  // Agregar este log
 
+                if (idMatricula.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Ingrese un ID de aula válido", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                String url = "https://checador.tech/api_checador/docentes/" + idMatricula;
+                buscarDocente(url);
+
+
+
+
+
+
+               // buscarDocente("https://checador.tech/api_checador/docentes?Matricula="+etMatricula.getText()+"");
+                //buscarDocente("http://192.168.56.1:80/CHECKTECH/buscar_docente.php?Matricula="+etMatricula.getText()+"");
+                //Log.d("DEBUG", "ID de aula a buscar: " + etMatricula);  // Agregar este log
             }
         });
         btnEditar.setOnClickListener(new View.OnClickListener() {
