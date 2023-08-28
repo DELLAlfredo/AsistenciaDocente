@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -24,6 +25,7 @@ public class recuperarcontrasena extends AppCompatActivity {
 
     private EditText editTextEmail, edtContraseña, edtConfirmpass;
     private Button buttonRecover;
+    String Usuario,Paswword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,30 +49,31 @@ public class recuperarcontrasena extends AppCompatActivity {
                 } else if (!password.equals(confirmPassword)) {
                     Toast.makeText(getApplicationContext(), "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
                 } else {
-                    guardar("https://checador.tech/api_checador/cambiar-contrasena", email, password);
+                    guardar("https://checador.tech/api_checador/cambiar-contraseña", email, password);
                 }
             }
         });
     }
 
     private void guardar(String URL, String email, String password) {
-        StringRequest guardarRequest = new StringRequest(com.android.volley.Request.Method.POST, URL,
-
+        StringRequest guardarRequest = new StringRequest(Request.Method.POST, URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         String trimmedResponse = response.trim();
                         Log.d("RESPONSE", trimmedResponse);
 
-                        if (trimmedResponse.equals("CORREO_NO_REGISTRADO")) {
-                            Toast.makeText(getApplicationContext(), "Correo no registrado", Toast.LENGTH_SHORT).show();
-                        } else if (trimmedResponse.equals("CONTRASEÑA_CAMBIADA")) {
-                            Toast.makeText(getApplicationContext(), "Contraseña cambiada", Toast.LENGTH_SHORT).show();
+                        if (response.equals("{\"message\":\"CORREO_NO_REGISTRADO\"}")){
+                            Toast.makeText(recuperarcontrasena.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+                        } else if (response.equals("{\"email\":\"" + Usuario + "\",\"contraseña\":\"" + Paswword + "\"}")) {
+                            // Respuesta inesperada del servidor
+                            Log.e("Unexpected Response", response);
+                        } else {
+                            // Iniciar actividad después de la autenticación exitosa
+                            Toast.makeText(recuperarcontrasena.this, "Contraseña cambiada", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), Login.class);
                             startActivity(intent);
                             finish();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Error al cambiar la contraseña", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
@@ -82,16 +85,17 @@ public class recuperarcontrasena extends AppCompatActivity {
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> parametros = new HashMap<>();
-                parametros.put("email", email);
-                parametros.put("contraseña", password);
-                return parametros;
+                Map<String, String> params = new HashMap<>();
+                params.put("email", email);
+                params.put("contraseña", password);  // Asegúrate de usar "contraseña" aquí si es la clave correcta en el servidor
+                return params;
             }
         };
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(guardarRequest);
     }
+
 
     public void login(View v) {
         startActivity(new Intent(getApplicationContext(), Login.class));

@@ -83,8 +83,6 @@ public class Login extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), Clases.class);
                     startActivity(intent);
                     finish();
-
-
                 }
 
             }
