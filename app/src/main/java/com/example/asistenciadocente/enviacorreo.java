@@ -8,12 +8,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.asistenciadocente.Login;
-import com.example.asistenciadocente.R;
+import com.android.volley.AuthFailureError;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -23,23 +30,39 @@ import okhttp3.Response;
 
 public class enviacorreo extends AppCompatActivity {
 
-    private EditText Correo;
+    private EditText Correo,Clave;
     private ImageButton enviacodigo;
     private OkHttpClient client;
+    private Button btnCorreo;
+    String Usuario,Paswword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enviacorreo);
 
+        Clave=findViewById(R.id.Clave);
         Correo = findViewById(R.id.edtCorreo);
         enviacodigo = findViewById(R.id.enviacorreo);
+        btnCorreo=findViewById(R.id.btnCorreo);
         client = new OkHttpClient();
 
         enviacodigo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 enviarCorreo();
+            }
+        });
+        btnCorreo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Usuario=Correo.getText().toString();
+                Paswword=Clave.getText().toString();
+                if (!Usuario.isEmpty() && !Paswword.isEmpty()) {
+                    validarrecupeacion("https://checador.tech/api_checador/validar_recuperacion");
+                }else {
+                    Toast.makeText(enviacorreo.this, "No deje campos vacios", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -60,10 +83,12 @@ public class enviacorreo extends AppCompatActivity {
 
     public void enviarCorreo() {
         String emailAddress = Correo.getText().toString();
-        String serverUrl = "http://192.168.0.11:80/Checador/verificacion.php"; // Replace with your server URL
+        int randomNumber = generateRandomNumber(1, 5); // Generate a random number between 1 and 5
+        String serverUrl = "https://checador.tech/api_checador/Validacion"; // Replace with your server URL
 
         FormBody requestBody = new FormBody.Builder()
                 .add("email", emailAddress)
+                .add("recuperacion", String.valueOf(randomNumber)) // Add the random number to the request
                 .build();
 
         Request request = new Request.Builder()
@@ -92,8 +117,6 @@ public class enviacorreo extends AppCompatActivity {
                         @Override
                         public void run() {
                             Toast.makeText(enviacorreo.this, "Solicitud enviada con éxito", Toast.LENGTH_SHORT).show();
-                            // Aquí puedes abrir la pantalla de cambio de contraseña
-                            // Ejemplo: startActivity(new Intent(enviacorreo.this, CambioContrasenaActivity.class));
                         }
                     });
                 } else {
@@ -109,5 +132,44 @@ public class enviacorreo extends AppCompatActivity {
                 response.close();
             }
         });
+    }
+
+    private int generateRandomNumber(int min, int max) {
+        return (int) (Math.random() * (max - min + 1)) + min;
+    }
+
+    private void validarrecupeacion(String URL){
+        //En el bloque getParams dentro de StringRequest, se definen los parámetros para enviar
+        StringRequest StringRequest = new StringRequest(com.android.volley.Request.Method.POST, URL, new com.android.volley.Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (!response.isEmpty()){
+                    Intent inten = new Intent(getApplicationContext(), recuperarcontrasena.class);
+                    startActivity(inten);
+                    finish();
+                }else{
+                    //mensaje en caso de no existir o equivocarse en usuario
+                    Toast.makeText(enviacorreo.this,"correo invalido",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //mensaje de error por internet o conexion
+                Toast.makeText(enviacorreo.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                //insersion de datos para validar usuario y comparar
+                Map<String,String> parametros = new HashMap<String, String>();
+                parametros.put("email",Usuario);
+                parametros.put("recuperacion",Paswword);
+                return parametros;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(StringRequest);
     }
 }
