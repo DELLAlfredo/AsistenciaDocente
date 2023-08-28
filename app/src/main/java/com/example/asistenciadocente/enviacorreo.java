@@ -143,13 +143,18 @@ public class enviacorreo extends AppCompatActivity {
         StringRequest StringRequest = new StringRequest(com.android.volley.Request.Method.POST, URL, new com.android.volley.Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if (!response.isEmpty()){
-                    Intent inten = new Intent(getApplicationContext(), recuperarcontrasena.class);
-                    startActivity(inten);
+                if (response.equals("{\"message\":\"Login failed\"}")){
+                    Toast.makeText(enviacorreo.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+                } else if (response.equals("{\"email\":\"" + Usuario + "\",\"recuperacion\":\"" + Paswword + "\"}")) {
+                    // Respuesta inesperada del servidor
+                    Log.e("Unexpected Response", response);
+                } else {
+                    // Iniciar actividad después de la autenticación exitosa
+                    Intent intent = new Intent(getApplicationContext(), recuperarcontrasena.class);
+                    startActivity(intent);
                     finish();
-                }else{
-                    //mensaje en caso de no existir o equivocarse en usuario
-                    Toast.makeText(enviacorreo.this,"correo invalido",Toast.LENGTH_SHORT).show();
+
+
                 }
             }
         }, new com.android.volley.Response.ErrorListener() {

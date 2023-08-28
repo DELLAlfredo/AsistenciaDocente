@@ -150,14 +150,14 @@
         android:id="@+id/etfecha"
         android:layout_width="143dp"
         android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/custumimput"
         android:ems="10"
         android:inputType="date"
         app:layout_constraintBottom_toBottomOf="@+id/BtnCalendario"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/BtnCalendario"
-        app:layout_constraintVertical_bias="0.0"
-        android:background="@drawable/custumimput"
-        />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
         android:id="@+id/BtnCalendario"
@@ -189,6 +189,7 @@
         android:id="@+id/spopcion"
         android:layout_width="198dp"
         android:layout_height="40dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/customspiner"
         app:layout_constraintBottom_toTopOf="@+id/guideline18"

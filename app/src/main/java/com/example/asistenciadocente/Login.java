@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,8 +51,8 @@ public class Login extends AppCompatActivity {
                 Usuario=email.getText().toString();
                 Paswword=contraseña.getText().toString();
                 if (!Usuario.isEmpty() && !Paswword.isEmpty()) {
-                     validarUsuario("https://checador.tech/api_checador/validar_usuario");
-                    //validarUsuario("http://192.168.56.1:80/Checador/Validar_Usuario.php");
+                    validarUsuario("https://checador.tech/api_checador/validar_usuario");
+                    //validarUsuario("http://192.168.0.8:80/Checador/Validar_Usuario.php");
                 }else {
                     Toast.makeText(Login.this, "No deje campos vacios", Toast.LENGTH_SHORT).show();
                 }
@@ -69,15 +70,23 @@ public class Login extends AppCompatActivity {
         StringRequest StringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if (!response.isEmpty()){
+                Log.d("RESPONSE", response);
+
+                if (response.equals("{\"message\":\"Login failed\"}")){
+                    Toast.makeText(Login.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+                } else if (response.equals("{\"email\":\"" + Usuario + "\",\"contraseña\":\"" + Paswword + "\"}")) {
+                    // Respuesta inesperada del servidor
+                    Log.e("Unexpected Response", response);
+                } else {
+                    // Iniciar actividad después de la autenticación exitosa
                     guardarPreferencias();
-                    Intent inten = new Intent(getApplicationContext(), Clases.class);
-                    startActivity(inten);
+                    Intent intent = new Intent(getApplicationContext(), Clases.class);
+                    startActivity(intent);
                     finish();
-                }else{
-                    //mensaje en caso de no existir o equivocarse en usuario
-                    Toast.makeText(Login.this,"Usuario o contraseña incorrectos",Toast.LENGTH_SHORT).show();
+
+
                 }
+
             }
         }, new Response.ErrorListener() {
             @Override
