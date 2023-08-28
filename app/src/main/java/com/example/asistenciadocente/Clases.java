@@ -42,6 +42,7 @@ public class Clases extends menu {
         super.onCreate(savedInstanceState);
         activityClasesBinding = ActivityClasesBinding.inflate(getLayoutInflater());
         setContentView(activityClasesBinding.getRoot());
+
         spDocentes = findViewById(R.id.spDocentes);
         spAula = findViewById(R.id.spAula);
         spHora = findViewById(R.id.spHora);

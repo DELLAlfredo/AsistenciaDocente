@@ -50,7 +50,7 @@ public class abcDocentes extends menu {
         btnBuscar = findViewById(R.id.btnBuscar);
         etMatricula = findViewById(R.id.etMatricula);
 
-        String[] crud = {"ISIC","INVAG","GES","SUSTENTABLE"};
+        String[] crud = {"ISC","IIAS","II","IGE","IIAL"};
         ArrayAdapter<String> AdapterCrud = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, crud);
         spAcademia.setAdapter(AdapterCrud);
 
@@ -75,10 +75,6 @@ public class abcDocentes extends menu {
 
                 String url = "https://checador.tech/api_checador/docentes/" + idMatricula;
                 buscarDocente(url);
-
-
-
-
 
 
                // buscarDocente("https://checador.tech/api_checador/docentes?Matricula="+etMatricula.getText()+"");
@@ -171,7 +167,8 @@ public class abcDocentes extends menu {
                         spAcademia.setSelection(obtenerIndiceSpinner(spAcademia, academia));
 
                     } catch (JSONException e) {
-                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Numero de Matricula Inexistente",Toast.LENGTH_SHORT).show();
+
                     }
                 }
 
@@ -179,7 +176,8 @@ public class abcDocentes extends menu {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"Numero de Matricula Inexistente",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+
             }
         }
         );

@@ -21,8 +21,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,7 +64,7 @@ public class abcAula extends menu {
                     return;
                 }
 
-                String url = "https://checador.tech/api_checador/aulas?idAula=" + idAula;
+                String url = "https://checador.tech/api_checador/aulas/" + idAula;
                 buscarAula(url);
             }
         });
@@ -128,8 +126,8 @@ public class abcAula extends menu {
         requestQueue.add(guardarRequest);
 
     }
-    private void buscarAula(String URL){
-        JsonArrayRequest jsonArrayRequest=new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
+    private void buscarAula(String URL) {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 JSONObject jsonObject = null;
@@ -138,34 +136,39 @@ public class abcAula extends menu {
 
                     try {
                         jsonObject = response.getJSONObject(i);
-                        etNombreAula.setText(jsonObject.getString("nombre_aula"));
+                        final String nombreAula = jsonObject.getString("nombre_aula");
 
+                        // Ejecuta el código en el hilo de la IU usando runOnUiThread
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                etNombreAula.setText(nombreAula);
+                            }
+                        });
                     } catch (JSONException e) {
-                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(getApplicationContext(), "Numero de ID Inexistente", Toast.LENGTH_SHORT).show();
                     }
-
-
                 }
                 Log.d("DEBUG", "Respuesta de la API: " + response.toString());  // Agregar este log
-
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"Numero de ID Inexistente",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+
             }
-        }
-        );
-        requestQueue=Volley.newRequestQueue(this);
+        });
+
+        requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonArrayRequest);
     }
+
     private void Borrar(String URL){
         StringRequest stringRequest= new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(),"Producto eliminado",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Aula eliminada",Toast.LENGTH_SHORT).show();
                 limpiarFormulario();
             }
         }, new Response.ErrorListener(){

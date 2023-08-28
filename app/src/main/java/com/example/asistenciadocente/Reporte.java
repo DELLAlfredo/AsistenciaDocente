@@ -432,7 +432,7 @@ public class Reporte extends menu {
 
                                 }
                             }else {
-                                Toast.makeText(Reporte.this, "no hay datos", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Reporte.this, "SIN DATOS EN ESTA BUSQUEDA", Toast.LENGTH_SHORT).show();
                             }
 
 
@@ -592,7 +592,11 @@ public class Reporte extends menu {
                                 headerRow.addView(textView);
                             }
                             tabla.addView(headerRow);
-
+                            if (response.length() == 0) {
+                                // Mostrar un mensaje indicando que no hay registros disponibles
+                                Toast.makeText(Reporte.this, "No se encontraron registros para la fecha y registro", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
                             // Agregar las filas con los datos filtrados
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject rowData = response.getJSONObject(i);

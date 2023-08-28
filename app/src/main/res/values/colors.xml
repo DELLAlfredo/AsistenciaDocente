@@ -26,5 +26,7 @@
     <color name="colorRetardo">#FDD835</color> <!-- Green color for retardo -->
     <color name="colorsuspencion">#FB8C00</color> <!-- Red color for no suspencion -->
     <color name="tabla">#33B5E5</color>
+    <color name="ButtonGuardar">#43A047</color>
+
 
 </resources>

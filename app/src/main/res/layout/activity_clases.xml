@@ -104,10 +104,13 @@
 
     <Button
         android:id="@+id/btnGuardarClases"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="202dp"
+        android:layout_height="69dp"
         android:layout_marginBottom="28dp"
         android:text="Guardar"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:backgroundTint="#39E811"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

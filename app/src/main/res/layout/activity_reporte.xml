@@ -9,19 +9,17 @@
     >
 
 
-
     <Spinner
         android:id="@+id/sphora"
         android:layout_width="143dp"
         android:layout_height="50dp"
+        android:background="@drawable/customspiner"
         app:layout_constraintBottom_toBottomOf="@+id/BtnCalendario"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.741"
+        app:layout_constraintHorizontal_bias="0.563"
         app:layout_constraintStart_toEndOf="@+id/BtnCalendario"
         app:layout_constraintTop_toTopOf="@+id/BtnCalendario"
-        app:layout_constraintVertical_bias="0.0"
-        android:background="@drawable/customspiner"
-        />
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline18"

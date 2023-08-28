@@ -4,23 +4,23 @@
         <item
             android:id="@+id/nav_Clases"
             android:title="Clases"
-            android:icon="@color/Black"
+            android:icon="@drawable/clases"
             />
         <item
             android:id="@+id/nav_Docentes"
             android:title="Docentes"
-            android:icon="@color/Black"
+            android:icon="@drawable/docentes"
             />
         <item
             android:id="@+id/nav_Aulas"
             android:title="Aulas"
-            android:icon="@color/error"
+            android:icon="@drawable/aula"
             />
 
         <item
             android:id="@+id/nav_Reporte_Semanal"
             android:title="Reporte Semanal"
-            android:icon="@color/Black"
+            android:icon="@drawable/reporte"
             />
         <item
             android:id="@+id/logout"

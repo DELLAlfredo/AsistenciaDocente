@@ -83,7 +83,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/rounded_ui"
-        android:backgroundTint="#8C9183"
+        android:backgroundTint="#9b9b9b"
         android:clipChildren="false"
         android:clipToPadding="false"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"

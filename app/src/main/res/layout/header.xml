@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="200dp"
     android:orientation="vertical"
-    android:background="@drawable/f4"
+    android:background="@color/ISCcolor"
     android:gravity="bottom"
     android:padding="20dp">
 
@@ -11,13 +11,14 @@
     <ImageView
         android:layout_width="90dp"
         android:layout_height="90dp"
-        android:src="@drawable/logo" />
+        android:src="@drawable/logotect" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/baloo"
         android:text="Asistencia Docentes"
+        android:textColor="@color/white"
         android:textSize="25dp" />
 </LinearLayout>
 
