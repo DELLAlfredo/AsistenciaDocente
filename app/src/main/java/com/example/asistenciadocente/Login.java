@@ -76,6 +76,8 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
                 } else if (response.equals("{\"email\":\"" + Usuario + "\",\"contraseña\":\"" + Paswword + "\"}")) {
                     // Respuesta inesperada del servidor
+                    Toast.makeText(Login.this, "Error servidor ", Toast.LENGTH_SHORT).show();
+
                     Log.e("Unexpected Response", response);
                 } else {
                     // Iniciar actividad después de la autenticación exitosa

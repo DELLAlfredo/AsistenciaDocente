@@ -18,8 +18,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="384dp"
-            android:layout_height="352dp"
+            android:layout_width="328dp"
+            android:layout_height="290dp"
             android:contentDescription="TODO"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintEnd_toStartOf="@+id/guideline5"

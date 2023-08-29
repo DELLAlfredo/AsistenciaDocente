@@ -648,7 +648,12 @@ public class Reporte extends menu {
                                 dataRow.addView(txthora);
                                 dataRow.addView(txtopcion);
                                 dataRow.addView(txtfecha);
-
+                                
+                                txtdocentes.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
+                                txtaula.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
+                                txthora.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
+                                txtopcion.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
+                                txtfecha.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
                                 // Agregar la fila a la tabla
                                 tabla.addView(dataRow);
                             }
