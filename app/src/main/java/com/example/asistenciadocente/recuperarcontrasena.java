@@ -46,6 +46,8 @@ public class recuperarcontrasena extends AppCompatActivity {
 
                 if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
+                } else if (!isValidEmail(email)) {
+                    Toast.makeText(getApplicationContext(), "Ingresa un correo electrónico válido", Toast.LENGTH_SHORT).show();
                 } else if (!password.equals(confirmPassword)) {
                     Toast.makeText(getApplicationContext(), "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
                 } else {
@@ -54,7 +56,9 @@ public class recuperarcontrasena extends AppCompatActivity {
             }
         });
     }
-
+    private boolean isValidEmail(CharSequence target) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+    }
     private void guardar(String URL, String email, String password) {
         StringRequest guardarRequest = new StringRequest(Request.Method.POST, URL,
                 new Response.Listener<String>() {

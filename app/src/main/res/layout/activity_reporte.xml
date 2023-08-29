@@ -44,7 +44,7 @@
         <ScrollView
             android:id="@+id/scrollvertical"
             android:layout_width="398dp"
-            android:layout_height="wrap_content"
+            android:layout_height="406dp"
             android:layout_weight="1"
             android:scrollbars="vertical">
 

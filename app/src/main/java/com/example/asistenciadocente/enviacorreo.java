@@ -50,25 +50,37 @@ public class enviacorreo extends AppCompatActivity {
         enviacodigo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enviarCorreo();
+                Usuario = Correo.getText().toString();
+                if (isValidEmail(Usuario)) { // Verificar si el correo es válido
+                    enviarCorreo();
+                } else {
+                    Toast.makeText(enviacorreo.this, "Ingrese un correo electrónico válido", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         btnCorreo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Usuario=Correo.getText().toString();
-                Paswword=Clave.getText().toString();
+                Usuario = Correo.getText().toString();
+                Paswword = Clave.getText().toString();
+
                 if (!Usuario.isEmpty() && !Paswword.isEmpty()) {
-                    validarrecupeacion("https://checador.tech/api_checador/validar_recuperacion");
-                }else {
-                    Toast.makeText(enviacorreo.this, "No deje campos vacios", Toast.LENGTH_SHORT).show();
+                    if (isValidEmail(Usuario)) { // Verificar si el correo es válido
+                        validarrecupeacion("https://checador.tech/api_checador/validar_recuperacion");
+                    } else {
+                        Toast.makeText(enviacorreo.this, "Ingrese un correo electrónico válido", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(enviacorreo.this, "No deje campos vacíos", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
 
-
+    private boolean isValidEmail(CharSequence target) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+    }
     public void login(View v) {
         startActivity(new Intent(getApplicationContext(), Login.class));
         finish();

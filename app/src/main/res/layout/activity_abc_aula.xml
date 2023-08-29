@@ -30,6 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        android:backgroundTint="@color/IIAScolor"
         app:layout_constraintTop_toBottomOf="@+id/etNombreAula" />
 
     <Button
@@ -37,6 +38,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Buscar"
+        android:backgroundTint="@android:color/holo_red_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/etIdAula"
         app:layout_constraintTop_toTopOf="@+id/etIdAula" />

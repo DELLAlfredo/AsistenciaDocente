@@ -48,15 +48,18 @@ public class Login extends AppCompatActivity {
         ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Usuario=email.getText().toString();
-                Paswword=contraseña.getText().toString();
-                if (!Usuario.isEmpty() && !Paswword.isEmpty()) {
-                    validarUsuario("https://checador.tech/api_checador/validar_usuario");
-                    //validarUsuario("http://192.168.0.8:80/Checador/Validar_Usuario.php");
-                }else {
-                    Toast.makeText(Login.this, "No deje campos vacios", Toast.LENGTH_SHORT).show();
-                }
+                Usuario = email.getText().toString();
+                Paswword = contraseña.getText().toString();
 
+                if (!Usuario.isEmpty() && !Paswword.isEmpty()) {
+                    if (isValidEmail(Usuario)) { // Verificar si el correo es válido
+                        validarUsuario("https://checador.tech/api_checador/validar_usuario");
+                    } else {
+                        Toast.makeText(Login.this, "Ingrese un correo electrónico válido", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(Login.this, "No deje campos vacíos", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -65,6 +68,9 @@ public class Login extends AppCompatActivity {
 // Cuando se recibe una respuesta del servidor,se verifica si la respuesta no está vacía.
 // Si no está vacía, se inicia una nueva actividad (Clases.class) utilizando un Intent.
 //  De lo contrario, se muestra un mensaje de error utilizando Toast.
+    private boolean isValidEmail(CharSequence target) {
+         return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+    }
     private void validarUsuario(String URL){
         //En el bloque getParams dentro de StringRequest, se definen los parámetros para enviar
         StringRequest StringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {

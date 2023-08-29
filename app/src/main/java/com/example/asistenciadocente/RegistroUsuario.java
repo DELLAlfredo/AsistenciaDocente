@@ -39,11 +39,43 @@ public class RegistroUsuario extends AppCompatActivity {
         btn_insert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                insertData();
+                if (isValidRegistrationInput()) { // Verificar si los datos de registro son válidos
+                    insertData();
+                }
             }
         });
     }
+    private boolean isValidEmail(CharSequence target) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+    }
+    private boolean isValidRegistrationInput() {
+        final String nombre = txtName.getText().toString().trim();
+        final String email = txtEmail.getText().toString().trim();
+        final String password = pass.getText().toString().trim();
+        final String passwordConfirm = passconfirm.getText().toString().trim();
 
+        if (nombre.isEmpty()) {
+            txtName.setError("Complete los campos");
+            return false;
+        } else if (email.isEmpty()) {
+            txtEmail.setError("Complete los campos");
+            return false;
+        } else if (!isValidEmail(email)) {
+            txtEmail.setError("Ingrese un correo electrónico válido");
+            return false;
+        } else if (password.isEmpty()) {
+            pass.setError("Complete los campos");
+            return false;
+        } else if (password.length() < 6) {
+            pass.setError("La contraseña debe tener al menos 6 caracteres");
+            return false;
+        } else if (!password.equals(passwordConfirm)) {
+            passconfirm.setError("Las contraseñas no coinciden");
+            return false;
+        }
+
+        return true;
+    }
     private void insertData() {
         final String nombre = txtName.getText().toString().trim();
         final String email = txtEmail.getText().toString().trim();
