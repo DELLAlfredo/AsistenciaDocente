@@ -95,7 +95,11 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/tilUsername"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/textView"
@@ -173,7 +177,7 @@
             app:layout_constraintStart_toStartOf="@+id/guideline16"
             app:layout_constraintTop_toTopOf="@+id/guideline22"
             app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/colorNoImpartida">
+            app:passwordToggleTint="@color/black">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/contraseña"
@@ -260,7 +264,7 @@
             android:layout_height="0dp"
             android:layout_gravity="center"
             android:autoSizeTextType="none"
-            android:backgroundTint="@android:color/holo_red_light"
+            android:backgroundTint="@color/INNcolor"
             android:enabled="true"
             android:paddingLeft="10sp"
             android:paddingRight="10sp"

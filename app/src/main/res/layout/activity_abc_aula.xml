@@ -15,8 +15,11 @@
         android:background="@drawable/custumimput"
         android:ems="10"
         android:hint="Nombre"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
         android:inputType="number"
         android:visibility="visible"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline26" />
@@ -27,10 +30,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Editar"
+        android:backgroundTint="@color/IIAScolor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        android:backgroundTint="@color/IIAScolor"
         app:layout_constraintTop_toBottomOf="@+id/etNombreAula" />
 
     <Button
@@ -38,7 +41,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Buscar"
-        android:backgroundTint="@android:color/holo_red_dark"
+        android:backgroundTint="@color/error"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/etIdAula"
         app:layout_constraintTop_toTopOf="@+id/etIdAula" />
@@ -49,6 +53,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:text="Borrar"
+        android:backgroundTint="@color/error"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,6 +68,8 @@
         android:background="@drawable/custumimput"
         android:ems="10"
         android:hint="id Aula"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
         android:inputType="number"
         android:visibility="visible"
         app:layout_constraintEnd_toStartOf="@+id/btnBuscarAula"
@@ -87,6 +95,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Guardar"
+        android:backgroundTint="@color/INNcolor"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

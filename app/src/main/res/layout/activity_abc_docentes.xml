@@ -15,6 +15,8 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/custumimput"
         android:ems="10"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
         android:hint="Matricula"
         android:inputType="number"
         app:layout_constraintEnd_toStartOf="@+id/btnBuscar"
@@ -27,6 +29,8 @@
         android:layout_height="53dp"
         android:layout_marginTop="20dp"
         android:text="Borrar"
+        android:backgroundTint="@color/error"
+
         app:layout_constraintEnd_toEndOf="@+id/btnEditar"
         app:layout_constraintStart_toStartOf="@+id/btnEditar"
         app:layout_constraintTop_toBottomOf="@+id/btnEditar" />
@@ -37,6 +41,8 @@
         android:layout_height="53dp"
         android:layout_marginTop="20dp"
         android:text="Editar"
+        android:backgroundTint="@color/IIAScolor"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline12" />
@@ -46,6 +52,7 @@
         android:layout_width="0dp"
         android:layout_height="51dp"
         android:text="Buscar"
+        android:backgroundTint="@color/error"
         app:layout_constraintBottom_toBottomOf="@+id/etMatricula"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/etMatricula" />
@@ -59,6 +66,8 @@
         android:ems="10"
         android:hint="Nombre Maestro"
         android:inputType="text"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline18" />
@@ -67,12 +76,15 @@
         android:id="@+id/etApellido"
         android:layout_width="0dp"
         android:layout_height="51dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="36dp"
         android:background="@drawable/custumimput"
         android:ems="10"
         android:hint="Apellido Maestro"
         android:inputType="text"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/etNombre"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/etNombre"
         app:layout_constraintTop_toBottomOf="@+id/etNombre" />
 
@@ -90,6 +102,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="35dp"
         android:text="Guardar"
+        android:backgroundTint="@color/INNcolor"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/btnBorrar"
         app:layout_constraintStart_toStartOf="@+id/btnBorrar"
@@ -102,14 +116,16 @@
         android:background="@drawable/customspiner"
         app:layout_constraintBottom_toTopOf="@+id/guideline18"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etMatricula" />
+        app:layout_constraintTop_toBottomOf="@+id/etMatricula"
+        app:layout_constraintVertical_bias="0.666" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.34610122" />
+        app:layout_constraintGuide_percent="0.29" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
