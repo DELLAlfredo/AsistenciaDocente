@@ -157,7 +157,7 @@ public class enviacorreo extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 if (response.equals("{\"message\":\"Login failed\"}")){
-                    Toast.makeText(enviacorreo.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(enviacorreo.this, "Usuario o Codigo incorrectos", Toast.LENGTH_SHORT).show();
                 } else if (response.equals("{\"email\":\"" + Usuario + "\",\"recuperacion\":\"" + Paswword + "\"}")) {
                     // Respuesta inesperada del servidor
                     Log.e("Unexpected Response", response);

@@ -1,5 +1,6 @@
 package com.example.asistenciadocente;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -120,12 +121,19 @@ public class abcDocentes extends menu {
                         String trimmedResponse = response.trim(); // Eliminar espacios en blanco antes y después
                         Log.d("RESPONSE", trimmedResponse); // Imprimir la respuesta para verificar
 
-                        if (trimmedResponse.equals("EXISTE")) {
-                            // La matrícula ya existe
-                            Toast.makeText(getApplicationContext(), "La matrícula ya existe, ingresa otro valor", Toast.LENGTH_SHORT).show();
+
+                        if (trimmedResponse.equals("{\"message\":\"EXISTE\"}")) {
+                            Toast.makeText(abcDocentes.this, "La matrícula ya existe, ingresa otro valor", Toast.LENGTH_SHORT).show();
+
+
+                        } else if (trimmedResponse.equals("{\"Matricula\":\"" + etMatricula + "\",\"nombre\":\"" + etNombre + "\",\"apellidos\":\"" + etApellido + "\",\"academia\":\"" + opcion + "\"}")) {
+                            // Respuesta inesperada del servidor
+                            Toast.makeText(abcDocentes.this, "Error servidor ", Toast.LENGTH_SHORT).show();
+
+                            Log.e("Unexpected Response", trimmedResponse);
                         } else {
-                            // La matrícula no existe, proceder a guardar
-                            Toast.makeText(getApplicationContext(), "Operacion Exitosa", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Se Realizo La Operacion Correctamente", Toast.LENGTH_SHORT).show();
+
                         }
                     }
                 },
@@ -199,7 +207,7 @@ public class abcDocentes extends menu {
             @Override
             public void onResponse(String response) {
                 //arroga un mensaje cuando se borra un dato
-                Toast.makeText(getApplicationContext(),"Producto eliminado",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Docente Borrado",Toast.LENGTH_SHORT).show();
                 limpiarFormulario();
             }
         }, new Response.ErrorListener(){

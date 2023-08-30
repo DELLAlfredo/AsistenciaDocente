@@ -181,7 +181,7 @@ public class Clases extends menu {
                 new com.android.volley.Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {                               //repuesta exitosa
-                        Toast.makeText(Clases.this, response, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Clases.this, "Clase guardada exitsamente", Toast.LENGTH_SHORT).show();
                     }
                 },
                 new com.android.volley.Response.ErrorListener() {
