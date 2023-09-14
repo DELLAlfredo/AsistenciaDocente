@@ -100,7 +100,7 @@ public class RegistroUsuario extends AppCompatActivity {
         }
 
         progressDialog.show();
-        StringRequest request = new StringRequest(Request.Method.POST, "https://checador.tech/api_checador/usuarios/registro",
+        StringRequest request = new StringRequest(Request.Method.POST, "http://201.164.155.166/api_checador/usuarios/registro",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

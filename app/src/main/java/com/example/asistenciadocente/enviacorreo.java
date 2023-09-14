@@ -66,7 +66,7 @@ public class enviacorreo extends AppCompatActivity {
 
                 if (!Usuario.isEmpty() && !Paswword.isEmpty()) {
                     if (isValidEmail(Usuario)) { // Verificar si el correo es válido
-                        validarrecupeacion("https://checador.tech/api_checador/validar_recuperacion");
+                        validarrecupeacion("http://201.164.155.166/api_checador/validar_recuperacion");
                     } else {
                         Toast.makeText(enviacorreo.this, "Ingrese un correo electrónico válido", Toast.LENGTH_SHORT).show();
                     }
@@ -96,7 +96,7 @@ public class enviacorreo extends AppCompatActivity {
     public void enviarCorreo() {
         String emailAddress = Correo.getText().toString();
         int randomNumber = generateRandomNumber(1, 5); // Generate a random number between 1 and 5
-        String serverUrl = "https://checador.tech/api_checador/Validacion"; // Replace with your server URL
+        String serverUrl = "http://201.164.155.166/api_checador/Validacion"; // Replace with your server URL
 
         FormBody requestBody = new FormBody.Builder()
                 .add("email", emailAddress)

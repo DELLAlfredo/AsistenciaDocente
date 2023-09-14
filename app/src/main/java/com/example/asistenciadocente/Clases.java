@@ -42,6 +42,7 @@ public class Clases extends menu {
         super.onCreate(savedInstanceState);
         activityClasesBinding = ActivityClasesBinding.inflate(getLayoutInflater());
         setContentView(activityClasesBinding.getRoot());
+        allocateActivityTitle("Clases");
 
         spDocentes = findViewById(R.id.spDocentes);
         spAula = findViewById(R.id.spAula);
@@ -59,7 +60,7 @@ public class Clases extends menu {
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder ()
-                .url("https://checador.tech/api_checador/obtener-docentes")
+                .url("http://201.164.155.166/api_checador/obtener-docentes")
                // .url("http://192.168.56.1:80/Checador/mostrarDatosClasesDocentes.php")
                 .build();
 
@@ -106,7 +107,7 @@ public class Clases extends menu {
 
         OkHttpClient clientAula = new OkHttpClient();
         Request aula = new Request.Builder ()
-                .url("https://checador.tech/api_checador/aulas")
+                .url("http://201.164.155.166/api_checador/aulas")
                 //.url("http://192.168.56.1:80/Checador/mostrarDatosClasesAula.php")
                 .build();
 
@@ -168,7 +169,7 @@ public class Clases extends menu {
         String hora = spHora.getSelectedItem().toString();        //Obtiene el elemento seleccionado del Spinner spHora y lo convierte en una cadena. Esto obtiene el valor seleccionado de la hora.
         String opcion = spOpcion.getSelectedItem().toString();    //Obtiene el elemento seleccionado del Spinner spOpcion y lo convierte en una cadena. Esto obtiene el valor seleccionado de la opción.
 
-        String URL= "https://checador.tech/api_checador/insertar-clase";
+        String URL= "http://201.164.155.166/api_checador/insertar-clase";
        //String URL= "http://192.168.56.1:80/Checador/insertar_clases.php";
 
        Calendar calendar = Calendar.getInstance();                      //Obtiene una instancia del calendario actual.
@@ -188,7 +189,7 @@ public class Clases extends menu {
                     @Override
                     public void onErrorResponse(VolleyError error) {                        // respuesta de error
                        // Toast.makeText(getApplicationContext(), "Fallo", Toast.LENGTH_SHORT).show();
-                       Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override

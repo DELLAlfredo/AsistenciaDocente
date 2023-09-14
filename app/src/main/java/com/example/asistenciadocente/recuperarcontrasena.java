@@ -51,7 +51,7 @@ public class recuperarcontrasena extends AppCompatActivity {
                 } else if (!password.equals(confirmPassword)) {
                     Toast.makeText(getApplicationContext(), "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
                 } else {
-                    guardar("https://checador.tech/api_checador/cambiar-contraseña", email, password);
+                    guardar("http://201.164.155.166/api_checador/cambiar-contraseña", email, password);
                 }
             }
         });

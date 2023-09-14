@@ -1,6 +1,5 @@
 package com.example.asistenciadocente;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -59,7 +58,7 @@ public class abcDocentes extends menu {
             @Override
             public void onClick(View view) {
                 //Guardar("http://192.168.56.1:80/Checador/docentes.php");
-                Guardar("https://checador.tech/api_checador/docentes");
+                Guardar("http://201.164.155.166/api_checador/docentes");
 
             }
         });
@@ -74,7 +73,7 @@ public class abcDocentes extends menu {
                     return;
                 }
 
-                String url = "https://checador.tech/api_checador/docentes/" + idMatricula;
+                String url = "http://201.164.155.166/api_checador/docentes/" + idMatricula;
                 buscarDocente(url);
 
 
@@ -86,7 +85,7 @@ public class abcDocentes extends menu {
         btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Guardar("https://checador.tech/api_checador/actualizar-docente");
+                Guardar("http://201.164.155.166/api_checador/actualizar-docente");
                //Guardar("http://192.168.56.1:80/CHECKTECH/editar_docente.php");
 
             }
@@ -94,7 +93,7 @@ public class abcDocentes extends menu {
         btnBorrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Borrar("https://checador.tech/api_checador/eliminar-docente");
+                Borrar("http://201.164.155.166/api_checador/eliminar-docente");
 
                 //Borrar("http://192.168.56.1:80/CHECKTECH/eliminar_docente.php");
             }

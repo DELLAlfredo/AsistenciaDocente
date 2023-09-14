@@ -19,7 +19,7 @@
 
         <item
             android:id="@+id/nav_Reporte_Semanal"
-            android:title="Reporte Semanal"
+            android:title="Reporte De Asistencia"
             android:icon="@drawable/reporte"
             />
         <item

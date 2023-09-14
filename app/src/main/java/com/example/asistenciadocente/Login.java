@@ -53,7 +53,7 @@ public class Login extends AppCompatActivity {
 
                 if (!Usuario.isEmpty() && !Paswword.isEmpty()) {
                     if (isValidEmail(Usuario)) { // Verificar si el correo es válido
-                        validarUsuario("https://checador.tech/api_checador/validar_usuario");
+                        validarUsuario("http://201.164.155.166/api_checador/validar_usuario");
                     } else {
                         Toast.makeText(Login.this, "Ingrese un correo electrónico válido", Toast.LENGTH_SHORT).show();
                     }
@@ -98,7 +98,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 //mensaje de error por internet o conexion
-                Toast.makeText(Login.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, "Conexion Inestable Verfique Su Conexion", Toast.LENGTH_SHORT).show();
             }
         }){
             @Override

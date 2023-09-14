@@ -1,6 +1,5 @@
 package com.example.asistenciadocente;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -50,7 +49,7 @@ public class abcAula extends menu {
         btnGuardarAula.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Insetar("https://checador.tech/api_checador/aulas");
+                Insetar("http://201.164.155.166/api_checador/aulas");
 
             }
         });
@@ -65,20 +64,20 @@ public class abcAula extends menu {
                     return;
                 }
 
-                String url = "https://checador.tech/api_checador/aulas/" + idAula;
+                String url = "http://201.164.155.166/api_checador/aulas/" + idAula;
                 buscarAula(url);
             }
         });
         btnEditarAula.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Insetar("https://checador.tech/api_checador/aulas/update");
+                Insetar("http://201.164.155.166/api_checador/aulas/update");
             }
         });
         btnBorrarAula.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Borrar("https://checador.tech/api_checador/aulas/delete");
+                Borrar("http://201.164.155.166/api_checador/aulas/delete");
             }
         });
 
