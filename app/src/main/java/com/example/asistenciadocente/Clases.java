@@ -53,15 +53,15 @@ public class Clases extends menu {
         String[] horas = {"7AM-8AM","8AM-9AM","9AM-10AM","10AM-11AM","11AM-12AM","12AM-1PM","1PM-2PM","2PM-3PM"};
         ArrayAdapter<String> Adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, horas);
         spHora.setAdapter(Adapter);
-        String[] crud = {"IMPARTIDA","NO IMPARTIDA","CLASE INCOMPLETA","SUSPENCION"};
+        String[] crud = {"IMPARTIDA","NO IMPARTIDA","CLASE INCOMPLETA","SUSPENCION","EVENTO ACADEMICO","REUNION","VISITA EMPRESARIAL","ACTIVIDAD DE CAMPO","JUSTIFICANTE"};
         ArrayAdapter<String> AdapterCrud = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, crud);
         spOpcion.setAdapter(AdapterCrud);
 
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder ()
-                .url("http://201.164.155.166/api_checador/obtener-docentes")
-               // .url("http://192.168.56.1:80/Checador/mostrarDatosClasesDocentes.php")
+               // .url("http://201.164.155.166/api_checador/obtener-docentes")
+               .url("http://192.168.56.1:80/api_checador/obtener-docentes")
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
@@ -107,8 +107,8 @@ public class Clases extends menu {
 
         OkHttpClient clientAula = new OkHttpClient();
         Request aula = new Request.Builder ()
-                .url("http://201.164.155.166/api_checador/aulas")
-                //.url("http://192.168.56.1:80/Checador/mostrarDatosClasesAula.php")
+               // .url("http://201.164.155.166/api_checador/aulas")
+                .url("http://192.168.56.1:80/api_checador/aulas")
                 .build();
 
         clientAula.newCall(aula).enqueue(new Callback() { //: hace una  llamada a una URL específica utilizando el cliente OkHttp y asocia un Callback para manejar la respuesta de la llamada de manera asíncrona.
@@ -169,8 +169,8 @@ public class Clases extends menu {
         String hora = spHora.getSelectedItem().toString();        //Obtiene el elemento seleccionado del Spinner spHora y lo convierte en una cadena. Esto obtiene el valor seleccionado de la hora.
         String opcion = spOpcion.getSelectedItem().toString();    //Obtiene el elemento seleccionado del Spinner spOpcion y lo convierte en una cadena. Esto obtiene el valor seleccionado de la opción.
 
-        String URL= "http://201.164.155.166/api_checador/insertar-clase";
-       //String URL= "http://192.168.56.1:80/Checador/insertar_clases.php";
+       // String URL= "http://201.164.155.166/api_checador/insertar-clase";
+       String URL= "http://192.168.56.1:80/api_checador/insertar-clase";
 
        Calendar calendar = Calendar.getInstance();                      //Obtiene una instancia del calendario actual.
        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());  //Crea un formato de fecha en el estilo "yyyy-MM-dd" utilizando el local predeterminado del dispositivo.
@@ -181,8 +181,18 @@ public class Clases extends menu {
 
                 new com.android.volley.Response.Listener<String>() {
                     @Override
-                    public void onResponse(String response) {                               //repuesta exitosa
-                        Toast.makeText(Clases.this, "Clase guardada exitsamente", Toast.LENGTH_SHORT).show();
+                    public void onResponse(String response) {
+
+                        //repuesta exitosa
+
+                        if (response.equalsIgnoreCase("Ya existe un registro con estos valores")) {
+                            Toast.makeText(Clases.this, "Clase Registrada Exitosamente", Toast.LENGTH_SHORT).show();
+
+
+                        } else{
+                            Toast.makeText(Clases.this, "Esta Clase Ya Existe", Toast.LENGTH_SHORT).show();
+
+                        }
                     }
                 },
                 new com.android.volley.Response.ErrorListener() {

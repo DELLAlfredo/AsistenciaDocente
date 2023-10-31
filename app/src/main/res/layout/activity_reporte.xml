@@ -15,8 +15,10 @@
         android:background="@drawable/customspiner"
         app:layout_constraintBottom_toBottomOf="@+id/BtnCalendario"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/BtnCalendario"
-        app:layout_constraintTop_toTopOf="@+id/BtnCalendario" />
+        app:layout_constraintTop_toTopOf="@+id/BtnCalendario"
+        app:layout_constraintVertical_bias="0.181" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline18"
@@ -40,7 +42,7 @@
         <ScrollView
             android:id="@+id/scrollvertical"
             android:layout_width="match_parent"
-            android:layout_height="323dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:scrollbars="vertical">
 
@@ -131,6 +133,7 @@
         android:id="@+id/btnfecharegistro"
         android:layout_width="138dp"
         android:layout_height="61dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="24dp"
         android:backgroundTint="@color/ISCcolor"
         android:text="Buscar fecha y registro"
@@ -152,15 +155,15 @@
 
     <ImageButton
         android:id="@+id/BtnCalendario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="47dp"
         android:layout_marginTop="24dp"
         android:clickable="false"
         android:onClick="muestraCalendario"
         app:layout_constraintBottom_toTopOf="@+id/guideline18"
         app:layout_constraintStart_toEndOf="@+id/etfecha"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.225"
+        app:layout_constraintVertical_bias="0.182"
         app:srcCompat="@android:drawable/ic_menu_today" />
 
     <Button
@@ -171,7 +174,7 @@
         android:text="Busqueda filtrada"
         app:layout_constraintBottom_toBottomOf="@+id/btnfecharegistro"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.238"
+        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toEndOf="@+id/btnfecharegistro"
         app:layout_constraintTop_toTopOf="@+id/btnfecharegistro"
         app:layout_constraintVertical_bias="0.0" />
@@ -190,9 +193,9 @@
 
     <DatePicker
         android:id="@+id/dtfecha"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="108dp"
+        android:layout_width="401dp"
+        android:layout_height="358dp"
+        android:layout_marginBottom="42dp"
         android:background="@color/white"
         android:hapticFeedbackEnabled="false"
         android:headerBackground="@color/error"
@@ -204,8 +207,8 @@
 
     <Button
         android:id="@+id/btnPDF"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="178dp"
+        android:layout_height="49dp"
         android:backgroundTint="@android:color/holo_red_dark"
         android:text="GENERAR PDF"
         app:layout_constraintBottom_toBottomOf="@+id/spopcion"

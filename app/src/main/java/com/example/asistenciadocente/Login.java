@@ -30,7 +30,7 @@ public class Login extends AppCompatActivity {
     // representar los elementos de la interfaz de usuario en el archivo de diseño XML (activity_main.xml).
     EditText email,contraseña;
     Button ingresar;
-    String Usuario,Paswword;
+    String Usuario="Admin",Paswword="@admin";
     //En el método onCreate, se establece el contenido de la actividad utilizando el archivo de diseño activity_main.xml. Luego,
     // se asignan los elementos de la interfaz de usuario a las variables correspondientes utilizando findViewById.
     @Override
@@ -48,21 +48,26 @@ public class Login extends AppCompatActivity {
         ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Usuario = email.getText().toString();
-                Paswword = contraseña.getText().toString();
+                String frase = email.getText().toString();
+                String pass = contraseña.getText().toString();
+                if(email.getText().toString().equalsIgnoreCase(Usuario)&& contraseña.getText().toString().equalsIgnoreCase(Paswword)){
+                    Toast.makeText(getApplicationContext(),"Ha iniciado sesión correctamente",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Login.this, Clases.class);  //Creamos el intent y le indicamos desde donde vamos (this) y a donde vamos (OtraActividad.class)
+                    startActivity(intent);  //Abrimos la otra actividad
+                    guardarPreferencias();
+                }else{
+                    email.setError("Ingresa tu nombre de usuario correcto");
+                    contraseña.setError("Ingresa la contraseña correcta");
+                    Toast.makeText(getApplicationContext(),"Usuario o contraseña incorrectos",Toast.LENGTH_SHORT).show();
 
-                if (!Usuario.isEmpty() && !Paswword.isEmpty()) {
-                    if (isValidEmail(Usuario)) { // Verificar si el correo es válido
-                        validarUsuario("http://201.164.155.166/api_checador/validar_usuario");
-                    } else {
-                        Toast.makeText(Login.this, "Ingrese un correo electrónico válido", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(Login.this, "No deje campos vacíos", Toast.LENGTH_SHORT).show();
+                    camposVacios();
                 }
 
             }
         });
+    }
+    private void camposVacios(){
+        Toast.makeText(Login.this, "Campos vacios", Toast.LENGTH_SHORT).show();
     }
 //El método validarUsuario realiza una solicitud POST a la URL especificada utilizando Volley.
 // Cuando se recibe una respuesta del servidor,se verifica si la respuesta no está vacía.
