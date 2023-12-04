@@ -1,6 +1,7 @@
 package com.example.asistenciadocente;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -185,12 +186,21 @@ public class Clases extends menu {
 
                         //repuesta exitosa
 
-                        if (response.equalsIgnoreCase("Ya existe un registro con estos valores")) {
+                        if (response.equals("{\"message\":\"Ya existe un registro con estos valores\"}")) {
+                            Toast.makeText(Clases.this, "Ya existe un registro con estos valores", Toast.LENGTH_SHORT).show();
+
+                        } else if (response.equals(
+                                "{\"docentes\":\"" + docente + "\"," +
+                                "\"aula\":\"" + aula + "\",\"hora\":\"" + hora + "\"," +
+                                "\"opcion\":\"" + opcion + "\"," +
+                                "\"fecha\":\"" + fechaActual + "\"}")) {
+                            // Respuesta inesperada del servidor
+                            Toast.makeText(Clases.this, "Error servidor ", Toast.LENGTH_SHORT).show();
+
+                            Log.e("Unexpected Response", response);
+                        } else {
+                            // Iniciar actividad después de la autenticación exitosa
                             Toast.makeText(Clases.this, "Clase Registrada Exitosamente", Toast.LENGTH_SHORT).show();
-
-
-                        } else{
-                            Toast.makeText(Clases.this, "Esta Clase Ya Existe", Toast.LENGTH_SHORT).show();
 
                         }
                     }

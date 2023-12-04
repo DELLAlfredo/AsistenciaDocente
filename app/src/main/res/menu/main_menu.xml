@@ -24,7 +24,7 @@
             />
         <item
             android:id="@+id/logout"
-            android:title="Exit"
+            android:title="Cerrar Sesion"
             android:icon="@drawable/logout"
             />
 

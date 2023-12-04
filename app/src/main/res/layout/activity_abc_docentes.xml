@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,79 +10,104 @@
 
     <EditText
         android:id="@+id/etMatricula"
-        android:layout_width="0dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="248dp"
+        android:layout_height="54dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="17dp"
         android:background="@drawable/custumimput"
         android:ems="10"
-        android:textColorHint="@color/black"
-        android:textColor="@color/black"
         android:hint="Matricula"
         android:inputType="number"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/btnBuscar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnBorrar"
-        android:layout_width="0dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="20dp"
-        android:text="Borrar"
-        android:backgroundTint="@color/error"
+        android:layout_width="336dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="450dp"
+        android:layout_marginStart="38dp"
 
+        android:layout_marginEnd="38dp"
+        android:backgroundTint="@color/error"
+        android:text="Borrar"
         app:layout_constraintEnd_toEndOf="@+id/btnEditar"
         app:layout_constraintStart_toStartOf="@+id/btnEditar"
         app:layout_constraintTop_toBottomOf="@+id/btnEditar" />
 
     <Button
         android:id="@+id/btnEditar"
-        android:layout_width="0dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="20dp"
-        android:text="Editar"
-        android:backgroundTint="@color/IIAScolor"
+        android:layout_width="336dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
 
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="380dp"
+        android:layout_marginEnd="38dp"
+        android:backgroundTint="@color/IIAScolor"
+        android:text="Editar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline12" />
 
     <Button
         android:id="@+id/btnBuscar"
-        android:layout_width="0dp"
-        android:layout_height="51dp"
-        android:text="Buscar"
+        android:layout_width="130dp"
+        android:layout_height="54dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="260dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="25dp"
         android:backgroundTint="@color/error"
+        android:text="Buscar"
         app:layout_constraintBottom_toBottomOf="@+id/etMatricula"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/etMatricula" />
 
     <EditText
         android:id="@+id/etNombre"
-        android:layout_width="0dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="400dp"
+        android:layout_height="54dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="204dp"
         android:background="@drawable/custumimput"
         android:ems="10"
         android:hint="Nombre Maestro"
         android:inputType="text"
-        android:textColorHint="@color/black"
         android:textColor="@color/black"
+        android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline18" />
 
     <EditText
         android:id="@+id/etApellido"
-        android:layout_width="0dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="400dp"
+        android:layout_height="54dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="291dp"
         android:background="@drawable/custumimput"
         android:ems="10"
         android:hint="Apellido Maestro"
         android:inputType="text"
-        android:textColorHint="@color/black"
         android:textColor="@color/black"
+        android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/etNombre"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/etNombre"
@@ -97,13 +122,16 @@
 
     <Button
         android:id="@+id/btnGuardar"
-        android:layout_width="0dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="336dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="525dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginEnd="38dp"
         android:layout_marginBottom="35dp"
-        android:text="Guardar"
         android:backgroundTint="@color/INNcolor"
-
+        android:text="Guardar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/btnBorrar"
         app:layout_constraintStart_toStartOf="@+id/btnBorrar"
@@ -111,8 +139,12 @@
 
     <Spinner
         android:id="@+id/spAcademia"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
+        android:layout_width="400dp"
+        android:layout_height="54dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="113dp"
         android:background="@drawable/customspiner"
         app:layout_constraintBottom_toTopOf="@+id/guideline18"
         app:layout_constraintEnd_toEndOf="parent"
@@ -128,4 +160,4 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.29" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

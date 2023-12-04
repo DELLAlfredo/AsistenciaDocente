@@ -84,7 +84,7 @@ public class Reporte extends menu {
         dpfecha.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                String fechaSeleccionada = String.format("%04d-%02d-%02d", year, monthOfYear + 1, dayOfMonth + 1);
+                String fechaSeleccionada = String.format("%04d-%02d-%02d", year, monthOfYear + 1, dayOfMonth);
                 txtfecha.setText(fechaSeleccionada);
                 dpfecha.setVisibility(View.GONE);
             }
