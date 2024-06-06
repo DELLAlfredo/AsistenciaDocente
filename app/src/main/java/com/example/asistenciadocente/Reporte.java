@@ -73,7 +73,7 @@ public class Reporte extends menu {
         sphora.setAdapter(Adapterhora);
 
         spopcion = findViewById(R.id.spopcion);
-        String[] opcion = {"IMPARTIDA","NO IMPARTIDA","CLASE INCOMPLETA","SUSPENCION","EVENTO ACADEMICO","REUNION","VISITA EMPRESARIAL","ACTIVIDAD DE CAMPO","JUSTIFICANTE"};
+        String[] opcion = {"IMPARTIDA","NO IMPARTIDA","CLASE INCOMPLETA","SUSPENSION","EVENTO ACADEMICO","REUNION","VISITA EMPRESARIAL","ACTIVIDAD DE CAMPO","JUSTIFICANTE"};
         ArrayAdapter<String> Adapteropcion = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, opcion);
         spopcion.setAdapter(Adapteropcion);
 
@@ -94,8 +94,8 @@ public class Reporte extends menu {
         tabla = findViewById(R.id.tabla);
 
         // Realizar una solicitud a la API para obtener los datos
-       // String url = "http://192.168.56.1:80/checador/reporteselect.php"; // Reemplaza con la URL de tu API
-        String url = "http://201.164.155.166/api_checador/obtener-clases";
+       String url = "http://192.168.56.1:80/api_checador/obtener-clases"; // Reemplaza con la URL de tu API reporteselect.php
+       // String url = "http://201.164.155.166/api_checador/obtener-clases";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -347,8 +347,8 @@ public class Reporte extends menu {
     }
 
     private void llenaTablaConAPIFiltrada(String fecha, String hora, String opcion) {
-        String url = "http://201.164.155.166/api_checador/filtrar-reporte?fecha=" + fecha + "&hora=" + hora + "&opcion=" + opcion; // Reemplaza con la URL de tu API
-        // String url = "http://192.168.56.1:80/checador/reportefiltrado.php?fecha=" + fecha + "&hora=" + hora + "&opcion=" + opcion;
+        //String url = "http://201.164.155.166/api_checador/filtrar-reporte?fecha=" + fecha + "&hora=" + hora + "&opcion=" + opcion; // Reemplaza con la URL de tu API reportefiltrado.php?fecha=
+         String url = "http://192.168.56.1:80/api_checador/filtrar-reporte?fecha=" + fecha + "&hora=" + hora + "&opcion=" + opcion;
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -407,7 +407,7 @@ public class Reporte extends menu {
                                         color = getResources().getColor(R.color.colorNoImpartida);
                                     } else if (opcion.equals("CLASE INCOMPLETA")) {
                                         color = getResources().getColor(R.color.colorRetardo);
-                                    } else if (opcion.equals("SUSPENCION")) {
+                                    } else if (opcion.equals("SUSPENSION")) {
                                         color = getResources().getColor(R.color.colorsuspencion);
                                     }   else if (opcion.equals("EVENTO ACADEMICO")) {
                                     color = getResources().getColor(R.color.colorEVENTO_ACADEMICO);
@@ -464,8 +464,8 @@ public class Reporte extends menu {
     }
 
     private void llenaTablaConAPIFiltradaporfehca(String fecha) {
-        String url = "http://201.164.155.166/api_checador/filtrar-clases-fecha?fecha=" + fecha; // Reemplaza con la URL de tu API
-        //String url = "http://192.168.56.1:80/checador/busquedafiltadofecha.php?fecha=" + fecha;
+        //String url = "http://201.164.155.166/api_checador/filtrar-clases-fecha?fecha=" + fecha; // Reemplaza con la URL de tu API  busquedafiltadofecha.php?fecha=
+        String url = "http://192.168.56.1:80/api_checador/filtrar-clases-fecha?fecha=" + fecha;
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -533,7 +533,7 @@ public class Reporte extends menu {
                                     color = getResources().getColor(R.color.colorNoImpartida);
                                 } else if (opcion.equals("CLASE INCOMPLETA")) {
                                     color = getResources().getColor(R.color.colorRetardo);
-                                } else if (opcion.equals("SUSPENCION")) {
+                                } else if (opcion.equals("SUSPENSION")) {
                                     color = getResources().getColor(R.color.colorsuspencion);
                                 }   else if (opcion.equals("EVENTO ACADEMICO")) {
                                     color = getResources().getColor(R.color.colorEVENTO_ACADEMICO);
@@ -589,7 +589,8 @@ public class Reporte extends menu {
     }
 
     private void llenaTablaConAPIFechaRegistro(String fecha, String opcion) {
-        String url = "http://201.164.155.166/api_checador/filtrar-fecha?fecha=" + fecha  + "&opcion=" + opcion; // Reemplaza con la URL de tu API
+        //String url = "http://201.164.155.166/api_checador/filtrar-fecha?fecha=" + fecha  + "&opcion=" + opcion; // Reemplaza con la URL de tu API
+        String url = "http://192.168.56.1:80/api_checador/filtrar-fecha?fecha=" + fecha  + "&opcion=" + opcion;
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -651,7 +652,7 @@ public class Reporte extends menu {
                                     color = getResources().getColor(R.color.colorNoImpartida);
                                 } else if (opcion.equals("CLASE INCOMPLETA")) {
                                     color = getResources().getColor(R.color.colorRetardo);
-                                } else if (opcion.equals("SUSPENCION")) {
+                                } else if (opcion.equals("SUSPENSION")) {
                                     color = getResources().getColor(R.color.colorsuspencion);
                                 }   else if (opcion.equals("EVENTO ACADEMICO")) {
                                     color = getResources().getColor(R.color.colorEVENTO_ACADEMICO);

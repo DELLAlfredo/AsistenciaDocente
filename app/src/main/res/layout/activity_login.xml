@@ -134,7 +134,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:hint="Correo electonico"
+            android:hint="Usuario"
             android:textColorHint="@color/black"
             app:boxStrokeColor="@color/yellow"
             app:counterEnabled="true"
@@ -154,11 +154,11 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:drawableStart="@drawable/email"
+                android:inputType="textEmailAddress"
                 android:maxLength="50"
                 android:singleLine="true"
-                android:inputType="textEmailAddress"
                 android:textColor="@color/black"
-                tools:text="Correo electonico" />
+                tools:text="Usuario" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
