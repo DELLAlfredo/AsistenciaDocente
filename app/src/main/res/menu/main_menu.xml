@@ -23,6 +23,11 @@
             android:icon="@drawable/reporte"
             />
         <item
+            android:id="@+id/nav_Administrador"
+            android:title="Editar Informe"
+            android:icon="@drawable/administrador"
+            />
+        <item
             android:id="@+id/logout"
             android:title="Cerrar Sesion"
             android:icon="@drawable/logout"

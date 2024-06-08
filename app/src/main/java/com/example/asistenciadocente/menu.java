@@ -63,6 +63,9 @@ public class menu extends AppCompatActivity implements NavigationView.OnNavigati
         }else if (item.getItemId()== R.id.nav_Reporte_Semanal ){
             Intent intent = new Intent(getApplicationContext(), Reporte.class);
             startActivity(intent);
+        }else if (item.getItemId()== R.id.nav_Administrador ){
+            Intent intent = new Intent(getApplicationContext(), AccesoAdministrador.class);
+            startActivity(intent);
         }
         return false;
     }

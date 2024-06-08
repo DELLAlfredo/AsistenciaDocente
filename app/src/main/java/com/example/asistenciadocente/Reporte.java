@@ -56,7 +56,7 @@ public class Reporte extends menu {
     ImageButton Btncalendario;
     DatePicker dpfecha;
     TableLayout tabla;
-    Button btnbusquedafiltrada,btnbusquedafiltradaporfecha,btnFechaRegistro,btnPDF;
+    Button btnbusquedafiltrada,btnbusquedafiltradaporfecha,btnFechaRegistro,btnfechaHora,btnPDF;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -73,7 +73,7 @@ public class Reporte extends menu {
         sphora.setAdapter(Adapterhora);
 
         spopcion = findViewById(R.id.spopcion);
-        String[] opcion = {"IMPARTIDA","NO IMPARTIDA","CLASE INCOMPLETA","SUSPENCION","EVENTO ACADEMICO","REUNION","VISITA EMPRESARIAL","ACTIVIDAD DE CAMPO","JUSTIFICANTE"};
+        String[] opcion = {"IMPARTIDA","NO IMPARTIDA","CLASE INCOMPLETA","SUSPENSION","EVENTO ACADEMICO","REUNION","VISITA EMPRESARIAL","ACTIVIDAD DE CAMPO","JUSTIFICANTE"};
         ArrayAdapter<String> Adapteropcion = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, opcion);
         spopcion.setAdapter(Adapteropcion);
 
@@ -94,8 +94,8 @@ public class Reporte extends menu {
         tabla = findViewById(R.id.tabla);
 
         // Realizar una solicitud a la API para obtener los datos
-       // String url = "http://192.168.56.1:80/checador/reporteselect.php"; // Reemplaza con la URL de tu API
-        String url = "http://201.164.155.166/api_checador/obtener-clases";
+        String url = "http://192.168.56.1:80/api_checador/obtener-clases"; // Reemplaza con la URL de tu API
+        //String url = "http://201.164.155.166/api_checador/obtener-clases";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -186,7 +186,17 @@ public class Reporte extends menu {
                 llenaTablaConAPIFiltradaporfehca(fecha);
             }
         });
-
+        // fecha y hora
+        btnfechaHora=findViewById(R.id.btnfechaYHora);
+        btnfechaHora.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String fecha = txtfecha.getText().toString();
+                String hora = sphora.getSelectedItem().toString();
+                llenaTablaConAPIFechahora(fecha, hora);
+            }
+        });
+                // fecha y registro
         btnFechaRegistro=findViewById(R.id.btnfecharegistro);
 
         btnFechaRegistro.setOnClickListener(new View.OnClickListener() {
@@ -347,8 +357,8 @@ public class Reporte extends menu {
     }
 
     private void llenaTablaConAPIFiltrada(String fecha, String hora, String opcion) {
-        String url = "http://201.164.155.166/api_checador/filtrar-reporte?fecha=" + fecha + "&hora=" + hora + "&opcion=" + opcion; // Reemplaza con la URL de tu API
-        // String url = "http://192.168.56.1:80/checador/reportefiltrado.php?fecha=" + fecha + "&hora=" + hora + "&opcion=" + opcion;
+       // String url = "http://201.164.155.166/api_checador/filtrar-reporte?fecha=" + fecha + "&hora=" + hora + "&opcion=" + opcion; // Reemplaza con la URL de tu API
+         String url = "http://192.168.56.1:80/api_checador/filtrar-reporte?fecha=" + fecha + "&hora=" + hora + "&opcion=" + opcion;
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -407,7 +417,7 @@ public class Reporte extends menu {
                                         color = getResources().getColor(R.color.colorNoImpartida);
                                     } else if (opcion.equals("CLASE INCOMPLETA")) {
                                         color = getResources().getColor(R.color.colorRetardo);
-                                    } else if (opcion.equals("SUSPENCION")) {
+                                    } else if (opcion.equals("SUSPENSION")) {
                                         color = getResources().getColor(R.color.colorsuspencion);
                                     }   else if (opcion.equals("EVENTO ACADEMICO")) {
                                     color = getResources().getColor(R.color.colorEVENTO_ACADEMICO);
@@ -464,8 +474,8 @@ public class Reporte extends menu {
     }
 
     private void llenaTablaConAPIFiltradaporfehca(String fecha) {
-        String url = "http://201.164.155.166/api_checador/filtrar-clases-fecha?fecha=" + fecha; // Reemplaza con la URL de tu API
-        //String url = "http://192.168.56.1:80/checador/busquedafiltadofecha.php?fecha=" + fecha;
+        //String url = "http://201.164.155.166/api_checador/filtrar-clases-fecha?fecha=" + fecha; // Reemplaza con la URL de tu API
+        String url = "http://192.168.56.1:80/api_checador/filtrar-clases-fecha?fecha=" + fecha;
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -533,7 +543,7 @@ public class Reporte extends menu {
                                     color = getResources().getColor(R.color.colorNoImpartida);
                                 } else if (opcion.equals("CLASE INCOMPLETA")) {
                                     color = getResources().getColor(R.color.colorRetardo);
-                                } else if (opcion.equals("SUSPENCION")) {
+                                } else if (opcion.equals("SUSPENSION")) {
                                     color = getResources().getColor(R.color.colorsuspencion);
                                 }   else if (opcion.equals("EVENTO ACADEMICO")) {
                                     color = getResources().getColor(R.color.colorEVENTO_ACADEMICO);
@@ -588,9 +598,9 @@ public class Reporte extends menu {
         queue.add(jsonArrayRequest);
     }
 
-    private void llenaTablaConAPIFechaRegistro(String fecha, String opcion) {
-        String url = "http://201.164.155.166/api_checador/filtrar-fecha?fecha=" + fecha  + "&opcion=" + opcion; // Reemplaza con la URL de tu API
-
+    private void llenaTablaConAPIFechahora(String fecha, String hora) {
+        //String url = "http://201.164.155.166/api_checador/filtrar-fecha?fecha=" + fecha  + "&opcion=" + opcion; // Reemplaza con la URL de tu API
+        String url = "http://192.168.56.1:80/api_checador/filtrar-FECHAHORA?fecha=" + fecha  + "&hora=" + hora;
         RequestQueue queue = Volley.newRequestQueue(this);
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
@@ -651,7 +661,7 @@ public class Reporte extends menu {
                                     color = getResources().getColor(R.color.colorNoImpartida);
                                 } else if (opcion.equals("CLASE INCOMPLETA")) {
                                     color = getResources().getColor(R.color.colorRetardo);
-                                } else if (opcion.equals("SUSPENCION")) {
+                                } else if (opcion.equals("SUSPENSION")) {
                                     color = getResources().getColor(R.color.colorsuspencion);
                                 }   else if (opcion.equals("EVENTO ACADEMICO")) {
                                     color = getResources().getColor(R.color.colorEVENTO_ACADEMICO);
@@ -680,6 +690,120 @@ public class Reporte extends menu {
                                 dataRow.addView(txtopcion);
                                 dataRow.addView(txtfecha);
                                 
+                                txtdocentes.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
+                                txtaula.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
+                                txthora.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
+                                txtopcion.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
+                                txtfecha.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
+                                // Agregar la fila a la tabla
+                                tabla.addView(dataRow);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+        // Agregar la solicitud a la cola
+        queue.add(jsonArrayRequest);
+    }
+    private void llenaTablaConAPIFechaRegistro(String fecha, String opcion) {
+        //String url = "http://201.164.155.166/api_checador/filtrar-fecha?fecha=" + fecha  + "&opcion=" + opcion; // Reemplaza con la URL de tu API
+        String url = "http://192.168.56.1:80/api_checador/filtrar-fecha?fecha=" + fecha  + "&opcion=" + opcion;
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Limpiar la tabla antes de agregar los nuevos datos
+                        tabla.removeAllViews();
+
+                        try {
+                            // Crear la fila de encabezados
+                            TableRow headerRow = new TableRow(Reporte.this);
+                            String[] headers = {"Nombre de Docente", "Aula", "Hora","Accion","Fecha"};
+                            for (String header : headers) {
+                                TextView textView = new TextView(Reporte.this);
+                                textView.setText(header);
+                                textView.setPadding(5, 5, 5, 5);
+                                textView.setBackgroundResource(R.color.tabla);
+                                textView.setTypeface(null, Typeface.BOLD);
+                                headerRow.addView(textView);
+                            }
+                            tabla.addView(headerRow);
+                            if (response.length() == 0) {
+                                // Mostrar un mensaje indicando que no hay registros disponibles
+                                Toast.makeText(Reporte.this, "No se encontraron registros para la fecha y registro", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            // Agregar las filas con los datos filtrados
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject rowData = response.getJSONObject(i);
+                                TableRow dataRow = new TableRow(Reporte.this);
+
+                                // Obtener los valores de las columnas de la respuesta JSON
+                                String docentes = rowData.getString("docentes");
+                                String aula = rowData.getString("aula");
+                                String hora = rowData.getString("hora");
+                                String opcion = rowData.getString("opcion");
+                                String fecha = rowData.getString("fecha");
+                                // Crear los TextViews para mostrar los datos en la fila
+                                TextView txtdocentes = new TextView(Reporte.this);
+                                txtdocentes.setText(docentes);
+
+                                TextView txtaula = new TextView(Reporte.this);
+                                txtaula.setText(aula);
+
+                                TextView txthora = new TextView(Reporte.this);
+                                txthora.setText(hora);
+
+                                TextView txtopcion = new TextView(Reporte.this);
+                                txtopcion.setText(opcion);
+
+                                TextView txtfecha = new TextView(Reporte.this);
+                                txtfecha.setText(fecha);
+                                int color = 0;
+                                if (opcion.equals("IMPARTIDA")) {
+                                    color = getResources().getColor(R.color.colorImpartida);
+                                } else if (opcion.equals("NO IMPARTIDA")){
+                                    color = getResources().getColor(R.color.colorNoImpartida);
+                                } else if (opcion.equals("CLASE INCOMPLETA")) {
+                                    color = getResources().getColor(R.color.colorRetardo);
+                                } else if (opcion.equals("SUSPENSION")) {
+                                    color = getResources().getColor(R.color.colorsuspencion);
+                                }   else if (opcion.equals("EVENTO ACADEMICO")) {
+                                    color = getResources().getColor(R.color.colorEVENTO_ACADEMICO);
+                                } else if (opcion.equals("REUNION")) {
+                                    color = getResources().getColor(R.color.colorReunion);
+                                }  else if (opcion.equals("VISITA EMPRESARIAL")) {
+                                    color = getResources().getColor(R.color.colorVISITAEMPRESARIAL);
+                                } else if (opcion.equals("ACTIVIDAD DE CAMPO")) {
+                                    color = getResources().getColor(R.color.colorACTIVIDADDECAMPO);
+                                }else if (opcion.equals("JUSTIFICANTE")) {
+                                    color = getResources().getColor(R.color.colorJUSTIFICANTE);
+                                }
+                                // Establecer el color de fondo de la fila
+
+                                int colortabla = 0;
+
+                                colortabla =getResources().getColor(R.color.white);
+                                dataRow.setBackgroundColor(colortabla);
+                                txtopcion.setBackgroundColor(color);
+
+
+                                // Agregar los TextViews a la fila
+                                dataRow.addView(txtdocentes);
+                                dataRow.addView(txtaula);
+                                dataRow.addView(txthora);
+                                dataRow.addView(txtopcion);
+                                dataRow.addView(txtfecha);
+
                                 txtdocentes.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
                                 txtaula.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
                                 txthora.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));

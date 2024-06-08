@@ -28,15 +28,15 @@
 
     <Button
         android:id="@+id/btnBorrar"
-        android:layout_width="336dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="450dp"
-        android:layout_marginStart="38dp"
+        android:layout_width="169dp"
+        android:layout_height="48dp"
 
-        android:layout_marginEnd="38dp"
+        android:layout_below="@+id/etApellido"
+        android:layout_alignBottom="@+id/btnEditar"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="1dp"
         android:backgroundTint="@color/error"
         android:text="Borrar"
         app:layout_constraintEnd_toEndOf="@+id/btnEditar"
@@ -45,14 +45,13 @@
 
     <Button
         android:id="@+id/btnEditar"
-        android:layout_width="336dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+        android:layout_width="164dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etApellido"
 
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="380dp"
-        android:layout_marginEnd="38dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="51dp"
         android:backgroundTint="@color/IIAScolor"
         android:text="Editar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -122,14 +121,12 @@
 
     <Button
         android:id="@+id/btnGuardar"
-        android:layout_width="336dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="525dp"
-        android:layout_marginStart="38dp"
-        android:layout_marginEnd="38dp"
-        android:layout_marginBottom="35dp"
+        android:layout_width="171dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnEditar"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="50dp"
         android:backgroundTint="@color/INNcolor"
         android:text="Guardar"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -159,5 +156,23 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.29" />
+
+    <Button
+        android:id="@+id/ListaDocente"
+        android:layout_width="171dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnBorrar"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="25dp"
+        android:backgroundTint="@color/ligh_gray"
+        android:drawableEnd="@drawable/docentes"
+        android:text="Lista docentes"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btnBorrar"
+        app:layout_constraintStart_toStartOf="@+id/btnBorrar"
+        app:layout_constraintTop_toBottomOf="@+id/btnBorrar" />
+
 
 </RelativeLayout>

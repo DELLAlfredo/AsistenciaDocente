@@ -1,5 +1,6 @@
 package com.example.asistenciadocente;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,7 +30,7 @@ import java.util.Map;
 public class abcDocentes extends menu {
     ActivityAbcDocentesBinding activityAbcDocentesBinding;
     EditText etNombre, etApellido, etMatricula;
-    Button btnGuardar,btnEditar,btnBorrar,btnBuscar;
+    Button btnGuardar,btnEditar,btnBorrar,btnBuscar,ListaDocente;
     Spinner spAcademia;
 
     RequestQueue requestQueue;
@@ -48,6 +49,7 @@ public class abcDocentes extends menu {
         btnEditar = findViewById(R.id.btnEditar);
         btnBorrar = findViewById(R.id.btnBorrar);
         btnBuscar = findViewById(R.id.btnBuscar);
+        ListaDocente=findViewById(R.id.ListaDocente);
         etMatricula = findViewById(R.id.etMatricula);
 
         String[] crud = {"ISC","IIAS","II","IGE","IIAL"};
@@ -57,11 +59,18 @@ public class abcDocentes extends menu {
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Guardar("http://192.168.56.1:80/api_checador/docentes");
-                //Guardar("http://201.164.155.166/api_checador/docentes");
+                 Guardar("http://192.168.56.1:80/api_checador/docentes");
+               //Guardar("http://201.164.155.166/api_checador/docentes");
 
             }
         });
+        ListaDocente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(abcDocentes.this, ListaDocentes.class);  //Creamos el intent y le indicamos desde donde vamos (this) y a donde vamos (OtraActividad.class)
+                startActivity(intent);  //Abrimos la otra actividad
+            }
+            });
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,7 +82,7 @@ public class abcDocentes extends menu {
                     return;
                 }
 
-                //String url = "http://201.164.155.166/api_checador/docentes/" + idMatricula;
+               //String url = "http://201.164.155.166/api_checador/docentes/" + idMatricula;
                 String url = "http://192.168.56.1:80/api_checador/docentes/" + idMatricula;
 
                 buscarDocente(url);
@@ -87,17 +96,17 @@ public class abcDocentes extends menu {
         btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Guardar("http://201.164.155.166/api_checador/actualizar-docente");
-               Guardar("http://192.168.56.1:80/api_checador/actualizar-docente");
+                //Guardar("http://201.164.155.166/api_checador/actualizar-docente");
+                Guardar("http://192.168.56.1:80/api_checador/actualizar-docente");
 
             }
         });
         btnBorrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Borrar("http://201.164.155.166/api_checador/eliminar-docente");
+             //Borrar("http://201.164.155.166/api_checador/eliminar-docente");
 
-                Borrar("http://192.168.56.1:80/api_checador/eliminar-docente");
+             Borrar("http://192.168.56.1:80/api_checador/eliminar-docente");
             }
         });
 

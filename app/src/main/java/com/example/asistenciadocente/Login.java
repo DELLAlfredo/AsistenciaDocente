@@ -54,7 +54,7 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Ha iniciado sesión correctamente",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Login.this, Clases.class);  //Creamos el intent y le indicamos desde donde vamos (this) y a donde vamos (OtraActividad.class)
                     startActivity(intent);  //Abrimos la otra actividad
-                    guardarPreferencias();
+
                 }else{
                     email.setError("Ingresa tu nombre de usuario correcto");
                     contraseña.setError("Ingresa la contraseña correcta");

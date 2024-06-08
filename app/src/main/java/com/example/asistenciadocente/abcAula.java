@@ -1,5 +1,6 @@
 package com.example.asistenciadocente;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class abcAula extends menu {
-    Button btnBuscarAula,btnEditarAula,btnBorrarAula,btnGuardarAula;
+    Button btnBuscarAula,btnEditarAula,btnBorrarAula,btnGuardarAula,ListaAula;
     EditText etNombreAula,etIdAula;
     RequestQueue requestQueue;
     ActivityAbcAulaBinding activityAbcAulaBinding;
@@ -41,17 +42,25 @@ public class abcAula extends menu {
         btnEditarAula=findViewById(R.id.btnEditarAula);
         btnBuscarAula=findViewById(R.id.btnBuscarAula);
         btnGuardarAula=findViewById(R.id.btnGuardarAula);
+        ListaAula=findViewById(R.id.ListaAula);
         etNombreAula=findViewById(R.id.etNombreAula);
         etIdAula=findViewById(R.id.etIdAula);
 
 
         /*--------------------------------------------------------*/
+        ListaAula.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(abcAula.this, ListaAula.class);  //Creamos el intent y le indicamos desde donde vamos (this) y a donde vamos (OtraActividad.class)
+                startActivity(intent);  //Abrimos la otra actividad
+            }
+        });
         btnGuardarAula.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-               // Insetar("http://201.164.155.166/api_checador/aulas");
-                Insetar("http://192.168.56.1:80/api_checador/aulas");
+              //Insetar("http://201.164.155.166/api_checador/aulas");
+                  Insetar("http://192.168.56.1:80/api_checador/aulas");
 
             }
         });
@@ -66,7 +75,7 @@ public class abcAula extends menu {
                     return;
                 }
 
-                //String url = "http://201.164.155.166/api_checador/aulas/" + idAula;
+               //String url = "http://201.164.155.166/api_checador/aulas/" + idAula;
                 String url = "http://192.168.56.1:80/api_checador/aulas/" + idAula;
 
                 buscarAula(url);
@@ -75,7 +84,7 @@ public class abcAula extends menu {
         btnEditarAula.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Insetar("http://201.164.155.166/api_checador/aulas/update");
+                //Insetar("http://201.164.155.166/api_checador/aulas/update");
                 Insetar("http://192.168.56.1:80/api_checador/aulas/update");
 
             }

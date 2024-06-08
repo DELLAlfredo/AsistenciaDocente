@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/f4"
+    tools:context=".ListaDocentes">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DOCENTES"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline26"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.34" />
+
+    <ScrollView
+        android:id="@+id/scrollvertical"
+        android:layout_width="match_parent"
+        android:layout_height="642dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_weight="1"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.275"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline26"
+        app:layout_constraintVertical_bias="0.272">
+
+
+        <TableLayout
+            android:id="@+id/tabla"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="1">
+
+
+            <!-- Fila de encabezados -->
+            <TableRow android:layout_height="80dp">
+
+                <TextView
+                    android:layout_width="161dp"
+                    android:layout_height="match_parent"
+                    android:layout_column="1"
+                    android:background="@android:color/holo_blue_light"
+                    android:padding="5dp"
+                    android:text="Matricula"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:layout_column="2"
+                    android:background="@android:color/holo_blue_light"
+                    android:padding="5dp"
+                    android:text="Nombre"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_column="3"
+                    android:background="@android:color/holo_blue_light"
+                    android:padding="5dp"
+                    android:text="Apellido"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_column="4"
+                    android:background="@android:color/holo_blue_light"
+                    android:padding="5dp"
+                    android:text="Academia"
+                    android:textStyle="bold" />
+
+
+            </TableRow>
+
+            <!-- Filas dinámicas para mostrar los datos -->
+            <!-- Se agregarán dinámicamente desde el código Java -->
+
+        </TableLayout>
+
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="145dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

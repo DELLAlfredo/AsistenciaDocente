@@ -1,32 +1,28 @@
 package com.example.asistenciadocente;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.asistenciadocente.databinding.ActivityClasesBinding;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -34,22 +30,38 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class Clases extends menu {
-    ActivityClasesBinding activityClasesBinding;
+public class EditarInforme extends AppCompatActivity {
     Spinner spDocentes,spAula,spHora, spOpcion;
     Button btnGuardarClases;
+    DatePicker dpfecha;
+
+    ImageButton Btncalendario;
+    EditText txtfecha;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityClasesBinding = ActivityClasesBinding.inflate(getLayoutInflater());
-        setContentView(activityClasesBinding.getRoot());
-        allocateActivityTitle("Clases");
+        setContentView(R.layout.activity_editar_informe);
 
         spDocentes = findViewById(R.id.spDocentes);
         spAula = findViewById(R.id.spAula);
         spHora = findViewById(R.id.spHora);
         spOpcion = findViewById(R.id.spOpcion);
         btnGuardarClases = findViewById(R.id.btnGuardarClases);
+        txtfecha = findViewById(R.id.etfecha);
+        dpfecha = findViewById(R.id.dtfecha);
+
+        txtfecha.setText(getfecha());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            dpfecha.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
+                @Override
+                public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                    String fechaSeleccionada = String.format("%04d-%02d-%02d", year, monthOfYear + 1, dayOfMonth);
+                    txtfecha.setText(fechaSeleccionada);
+                    dpfecha.setVisibility(View.GONE);
+                }
+            });
+        }
+
 
         String[] horas = {"7AM-8AM","8AM-9AM","9AM-10AM","10AM-11AM","11AM-12AM","12AM-1PM","1PM-2PM","2PM-3PM"};
         ArrayAdapter<String> Adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, horas);
@@ -58,11 +70,12 @@ public class Clases extends menu {
         ArrayAdapter<String> AdapterCrud = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, crud);
         spOpcion.setAdapter(AdapterCrud);
 
+        ////////////obtener docentes
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder ()
-              // .url("http://201.164.155.166/api_checador/obtener-docentes")
-               .url("http://192.168.56.1:80/api_checador/obtener-docentes")
+                // .url("http://201.164.155.166/api_checador/obtener-docentes")
+                .url("http://192.168.56.1:80/api_checador/obtener-docentes")
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
@@ -93,7 +106,7 @@ public class Clases extends menu {
                             @Override
                             public void run() {
                                 Spinner spinner = findViewById(R.id.spDocentes);
-                                ArrayAdapter<String> adapter = new ArrayAdapter<>(Clases.this, android.R.layout.simple_spinner_item, dataList);
+                                ArrayAdapter<String> adapter = new ArrayAdapter<>(EditarInforme.this, android.R.layout.simple_spinner_item, dataList);
                                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                 spinner.setAdapter(adapter);
                             }
@@ -104,12 +117,11 @@ public class Clases extends menu {
                 }
             }
         });
-
-
+//obtener aulas
         OkHttpClient clientAula = new OkHttpClient();
         Request aula = new Request.Builder ()
-             //.url("http://201.164.155.166/api_checador/aulas")
-                 .url("http://192.168.56.1:80/api_checador/aulas")
+                //.url("http://201.164.155.166/api_checador/aulas")
+                .url("http://192.168.56.1:80/api_checador/aulas")
                 .build();
 
         clientAula.newCall(aula).enqueue(new Callback() { //: hace una  llamada a una URL específica utilizando el cliente OkHttp y asocia un Callback para manejar la respuesta de la llamada de manera asíncrona.
@@ -139,8 +151,8 @@ public class Clases extends menu {
                             @Override
                             public void run() {
                                 Spinner spinner = findViewById(R.id.spAula);        //Obtiene una referencia al Spinner en la interfaz de usuario utilizando su ID = spAula.
-                                ArrayAdapter<String> adapter = new ArrayAdapter<>(Clases.this, android.R.layout.simple_spinner_item, dataList); //Crea un adaptador de ArrayAdapter para vincular los datos de dataList al Spinner. Utiliza el contexto de la actividad  Clases que es este activity,
-                                                                                                                                                        //para mostrar cada elemento en el Spinner y la lista de datos dataList.
+                                ArrayAdapter<String> adapter = new ArrayAdapter<>(EditarInforme.this, android.R.layout.simple_spinner_item, dataList); //Crea un adaptador de ArrayAdapter para vincular los datos de dataList al Spinner. Utiliza el contexto de la actividad  Clases que es este activity,
+                                //para mostrar cada elemento en el Spinner y la lista de datos dataList.
                                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // Especifica el diseño de vista desplegable para el adaptador del Spinner.
                                 spinner.setAdapter(adapter); //Asigna el adaptador al Spinner, lo que muestra los datos en el Spinner y permite al usuario seleccionar un elemento de la lista.
                             }
@@ -150,86 +162,55 @@ public class Clases extends menu {
                     }
                 }
             }
-        });  //En resumen, el código realiza una solicitud HTTP para obtener una lista de nombres de aulas desde un servidor. Luego, procesa la respuesta JSON obtenida,
-            // extrae los nombres de las aulas y los muestra en un Spinner en la interfaz de usuario de la actividad Clases.
-            // Esto se realiza de forma asíncrona utilizando un Callback para manejar la respuesta de la solicitud HTTP.
-
-        btnGuardarClases.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               guardarDatosClases();
-            } //ejecuta el metodo guardarDatosClases
         });
     }
-
-
-
-   private void guardarDatosClases() {
-        String docente = spDocentes.getSelectedItem().toString(); //Obtiene el elemento seleccionado del Spinner spDocentes y lo convierte en una cadena. Esto obtiene el valor seleccionado del docente.
-        String aula = spAula.getSelectedItem().toString();        //Obtiene el elemento seleccionado del Spinner spAula y lo convierte en una cadena. Esto obtiene el valor seleccionado del aula.
-        String hora = spHora.getSelectedItem().toString();        //Obtiene el elemento seleccionado del Spinner spHora y lo convierte en una cadena. Esto obtiene el valor seleccionado de la hora.
-        String opcion = spOpcion.getSelectedItem().toString();    //Obtiene el elemento seleccionado del Spinner spOpcion y lo convierte en una cadena. Esto obtiene el valor seleccionado de la opción.
-
-       // String URL= "http://201.164.155.166/api_checador/insertar-clase";
-       String URL= "http://192.168.56.1:80/api_checador/insertar-clase";
-
-       Calendar calendar = Calendar.getInstance();                      //Obtiene una instancia del calendario actual.
-       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());  //Crea un formato de fecha en el estilo "yyyy-MM-dd" utilizando el local predeterminado del dispositivo.
-       String fechaActual = dateFormat.format(calendar.getTime());                                    //Obtiene la fecha actual formateada según el formato establecido.
-
-
-       StringRequest request = new StringRequest(com.android.volley.Request.Method.POST, URL,  //Crea una solicitud de cadena (StringRequest) utilizando el método POST y la URL proporcionada. También se definen los manejadores de respuesta exitosa y de error.
-
-                new com.android.volley.Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        //repuesta exitosa
-
-                        if (response.equals("{\"message\":\"Ya existe un registro con estos valores\"}")) {
-                            Toast.makeText(Clases.this, "Ya existe un registro con estos valores", Toast.LENGTH_SHORT).show();
-
-                        } else if (response.equals(
-                                "{\"docentes\":\"" + docente + "\"," +
-                                "\"aula\":\"" + aula + "\",\"hora\":\"" + hora + "\"," +
-                                "\"opcion\":\"" + opcion + "\"," +
-                                "\"fecha\":\"" + fechaActual + "\"}")) {
-                            // Respuesta inesperada del servidor
-                            Toast.makeText(Clases.this, "Error servidor ", Toast.LENGTH_SHORT).show();
-
-                            Log.e("Unexpected Response", response);
-                        } else {
-                            // Iniciar actividad después de la autenticación exitosa
-                            Toast.makeText(Clases.this, "Clase Registrada Exitosamente", Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-                },
-                new com.android.volley.Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {                        // respuesta de error
-                       // Toast.makeText(getApplicationContext(), "Fallo", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
-                    }
-                }) {
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Salir");
+        builder.setMessage("¿Desea salir ?");
+        builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError { //Sobrescribe el método getParams() para proporcionar los parámetros de la solicitud HTTP. Los datos de la clase (docente, aula, hora, opcion y fechaActual) se agregan a un mapa de parámetros.
-                Map<String, String> parametros = new HashMap<>();
-                parametros.put("docentes", docente);
-                parametros.put("aula", aula);
-                parametros.put("hora", hora);
-                parametros.put("opcion", opcion);
-                parametros.put("fecha", fechaActual);
-                return parametros;
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(EditarInforme.this, Clases.class);  //Creamos el intent y le indicamos desde donde vamos (this) y a donde vamos (OtraActividad.class)
+                startActivity(intent);
             }
-        };
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
 
-        // Agregar la solicitud a la cola de solicitudes de Volley
-        RequestQueue requestQueue = Volley.newRequestQueue(this);   //Crea una nueva cola de solicitudes de Volley.
-        requestQueue.add(request);                                         //Agrega la solicitud a la cola de solicitudes de Volley para que se ejecute.
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
-    //En resumen, el código recopila los datos de la clase seleccionados por el usuario,
-    // formatea la fecha actual y realiza una solicitud HTTP para guardar los datos en un servidor.
+
+    //FECHA
+    public String getfecha(){
+
+        String dia = "";
+        if (dpfecha != null) {
+            dia = String.format("%02d", dpfecha.getDayOfMonth()-1);
+        }
+
+        String mes = "";
+        if (dpfecha != null) {
+            mes = String.format("%02d", dpfecha.getMonth() + 1);
+        }
+
+        String año = "";
+        if (dpfecha != null) {
+            año = String.format("%04d", dpfecha.getYear());
+        }
+
+        return año + "-" + mes + "-" + dia;
 
 
+    }
+
+    public void muestraCalendarioeditar(View View){
+        dpfecha.setVisibility(View.VISIBLE);
+    }
 }
