@@ -197,12 +197,13 @@
         android:layout_height="47dp"
         android:layout_below="@+id/spOpcion"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="35dp"
+        android:layout_marginStart="70dp"
         android:layout_marginTop="14dp"
-        android:layout_marginEnd="109dp"
+        android:layout_marginEnd="74dp"
         android:layout_toEndOf="@+id/etfecha"
         android:clickable="false"
-        android:onClick="muestraCalendarioeditar"
+        android:onClick="muestraCalendario"
+        app:layout_constraintBottom_toTopOf="@+id/guideline18"
         app:layout_constraintStart_toEndOf="@+id/etfecha"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.182"
@@ -210,22 +211,19 @@
 
     <DatePicker
         android:id="@+id/dtfecha"
-        android:layout_width="477dp"
-        android:layout_height="359dp"
-        android:layout_below="@+id/etfecha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:visibility="gone"
-
         android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
+        android:visibility="gone"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="3dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="0dp"
         android:background="@color/white"
         android:hapticFeedbackEnabled="false"
         android:headerBackground="@color/error"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-         />
+        app:layout_constraintStart_toStartOf="parent"/>
+
 
 </RelativeLayout>
