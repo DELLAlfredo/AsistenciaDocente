@@ -27,8 +27,10 @@ import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class EditarInforme extends AppCompatActivity {
@@ -62,7 +64,71 @@ public class EditarInforme extends AppCompatActivity {
                     dpfecha.setVisibility(View.GONE);
                 }
         });
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        btnGuardarClases.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String docente = spDocentes.getSelectedItem().toString();
+                String aula = spAula.getSelectedItem().toString();
+                String hora = spHora.getSelectedItem().toString();
+                String opcion = spOpcion.getSelectedItem().toString();
+                String fecha = txtfecha.getText().toString();
+
+                // Crear el JSON con los datos
+                JSONObject json = new JSONObject();
+                try {
+                    json.put("docentes", docente);
+                    json.put("aula", aula);
+                    json.put("hora", hora);
+                    json.put("opcion", opcion);
+                    json.put("fecha", fecha);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                // Realizar la solicitud HTTP
+                OkHttpClient client = new OkHttpClient();
+                MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+                RequestBody body = RequestBody.create(JSON, json.toString());
+
+                Request request = new Request.Builder()
+                        .url("http://192.168.56.1:80/api_checador/upsert_clase")
+                        .post(body)
+                        .build();
+
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(EditarInforme.this, "Error en la solicitud HTTP", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        final String responseData = response.body().string();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    JSONObject jsonResponse = new JSONObject(responseData);
+                                    String message = jsonResponse.getString("message");
+                                    Toast.makeText(EditarInforme.this, message, Toast.LENGTH_SHORT).show();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+        });
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         //spiners horas y eventos
         String[] horas = {"7AM-8AM","8AM-9AM","9AM-10AM","10AM-11AM","11AM-12AM","12AM-1PM","1PM-2PM","2PM-3PM"};
@@ -217,5 +283,7 @@ public class EditarInforme extends AppCompatActivity {
     public void muestraCalendarioeditar(View View){
         dpfecha.setVisibility(View.VISIBLE);
     }
+    // Dentro de la actividad EditarInforme
+
 
 }
