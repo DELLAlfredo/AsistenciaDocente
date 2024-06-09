@@ -334,7 +334,7 @@ public class Reporte extends menu {
 
         String dia = "";
         if (dpfecha != null) {
-            dia = String.format("%02d", dpfecha.getDayOfMonth()-1);
+            dia = String.format("%02d", dpfecha.getDayOfMonth());
         }
 
         String mes = "";

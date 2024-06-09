@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,6 +38,7 @@ public class EditarInforme extends AppCompatActivity {
 
     ImageButton Btncalendario;
     EditText txtfecha;
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,18 +53,18 @@ public class EditarInforme extends AppCompatActivity {
         dpfecha = findViewById(R.id.dtfecha);
 
         txtfecha.setText(getfecha());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            dpfecha.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
+
+        dpfecha.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
                 @Override
                 public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                     String fechaSeleccionada = String.format("%04d-%02d-%02d", year, monthOfYear + 1, dayOfMonth);
                     txtfecha.setText(fechaSeleccionada);
                     dpfecha.setVisibility(View.GONE);
                 }
-            });
-        }
+        });
 
 
+        //spiners horas y eventos
         String[] horas = {"7AM-8AM","8AM-9AM","9AM-10AM","10AM-11AM","11AM-12AM","12AM-1PM","1PM-2PM","2PM-3PM"};
         ArrayAdapter<String> Adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, horas);
         spHora.setAdapter(Adapter);
@@ -164,6 +166,8 @@ public class EditarInforme extends AppCompatActivity {
             }
         });
     }
+
+    //salir de configuracion de editar informes
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -192,7 +196,7 @@ public class EditarInforme extends AppCompatActivity {
 
         String dia = "";
         if (dpfecha != null) {
-            dia = String.format("%02d", dpfecha.getDayOfMonth()-1);
+            dia = String.format("%02d", dpfecha.getDayOfMonth());
         }
 
         String mes = "";
@@ -209,8 +213,9 @@ public class EditarInforme extends AppCompatActivity {
 
 
     }
-
+    //mostrar fecha cuando selecciones
     public void muestraCalendarioeditar(View View){
         dpfecha.setVisibility(View.VISIBLE);
     }
+
 }
