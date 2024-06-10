@@ -69,13 +69,14 @@ public class EditarInforme extends AppCompatActivity {
         btnGuardarClases.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //obtinen los balores de los campos
                 String docente = spDocentes.getSelectedItem().toString();
                 String aula = spAula.getSelectedItem().toString();
                 String hora = spHora.getSelectedItem().toString();
                 String opcion = spOpcion.getSelectedItem().toString();
                 String fecha = txtfecha.getText().toString();
 
-                // Crear el JSON con los datos
+                // Crear el JSON con los datos para almacenar los en la db del servidor
                 JSONObject json = new JSONObject();
                 try {
                     json.put("docentes", docente);
@@ -84,25 +85,32 @@ public class EditarInforme extends AppCompatActivity {
                     json.put("opcion", opcion);
                     json.put("fecha", fecha);
                 } catch (Exception e) {
+                    // Imprime la traza de la excepción en caso de error
                     e.printStackTrace();
                 }
 
-                // Realizar la solicitud HTTP
+                // Crear un cliente HTTP usando OkHttp
                 OkHttpClient client = new OkHttpClient();
+                // Define el tipo de contenido como JSON
                 MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+                // Crea el cuerpo de la solicitud con el objeto JSON
                 RequestBody body = RequestBody.create(JSON, json.toString());
 
+                // Construye la solicitud HTTP POST
                 Request request = new Request.Builder()
-                        .url("http://192.168.56.1:80/api_checador/upsert_clase")
-                        .post(body)
+                        .url("http://192.168.56.1:80/api_checador/Modificar_Registro")//URL de la api o endpoint
+                        .post(body)// Establece el método POST y el cuerpo de la solicitud
                         .build();
 
+                // Ejecuta la solicitud HTTP de manera asíncrona
                 client.newCall(request).enqueue(new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
+                        // En caso de fallo, ejecuta en el hilo principal de la UI
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                // Muestra un mensaje Toast indicando el error
                                 Toast.makeText(EditarInforme.this, "Error en la solicitud HTTP", Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -111,15 +119,21 @@ public class EditarInforme extends AppCompatActivity {
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
+                        // Obtiene la respuesta del servidor en forma de cadena
                         final String responseData = response.body().string();
+                        // Ejecuta en el hilo principal de la UI
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 try {
+                                    // Convierte la respuesta en un objeto JSON
                                     JSONObject jsonResponse = new JSONObject(responseData);
+                                    // Obtiene el mensaje de la respuesta JSON
                                     String message = jsonResponse.getString("message");
+                                    // Muestra el mensaje en un Toast
                                     Toast.makeText(EditarInforme.this, message, Toast.LENGTH_SHORT).show();
                                 } catch (Exception e) {
+                                    // Imprime la traza de la excepción en caso de error
                                     e.printStackTrace();
                                 }
                             }
