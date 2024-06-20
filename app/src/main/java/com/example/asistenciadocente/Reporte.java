@@ -97,7 +97,7 @@ public class Reporte extends menu {
         tabla = findViewById(R.id.tabla);
 
         // Realizar una solicitud a la API para obtener los datos
-        String url = "http://192.168.56.1:80/api_checador/obtener-clases"; // Reemplaza con la URL de tu API
+        String url = "http://201.164.155.166/api_checador/obtener-clases"; // Reemplaza con la URL de tu API
         //String url = "http://201.164.155.166/api_checador/obtener-clases";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -361,7 +361,7 @@ public class Reporte extends menu {
 
     private void llenaTablaConAPIFiltrada(String fecha, String hora, String opcion) {
        // String url = "http://201.164.155.166/api_checador/filtrar-reporte?fecha=" + fecha + "&hora=" + hora + "&opcion=" + opcion; // Reemplaza con la URL de tu API
-         String url = "http://192.168.56.1:80/api_checador/filtrar-reporte?fecha=" + fecha + "&hora=" + hora + "&opcion=" + opcion;
+         String url = "http://201.164.155.166/api_checador/filtrar-reporte?fecha=" + fecha + "&hora=" + hora + "&opcion=" + opcion;
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -478,7 +478,7 @@ public class Reporte extends menu {
 
     private void llenaTablaConAPIFiltradaporfehca(String fecha) {
         //String url = "http://201.164.155.166/api_checador/filtrar-clases-fecha?fecha=" + fecha; // Reemplaza con la URL de tu API
-        String url = "http://192.168.56.1:80/api_checador/filtrar-clases-fecha?fecha=" + fecha;
+        String url = "http://201.164.155.166/api_checador/filtrar-clases-fecha?fecha=" + fecha;
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -603,7 +603,7 @@ public class Reporte extends menu {
 
     private void llenaTablaConAPIFechahora(String fecha, String hora) {
         //String url = "http://201.164.155.166/api_checador/filtrar-fecha?fecha=" + fecha  + "&opcion=" + opcion; // Reemplaza con la URL de tu API
-        String url = "http://192.168.56.1:80/api_checador/filtrar-FECHAHORA?fecha=" + fecha  + "&hora=" + hora;
+        String url = "http://201.164.155.166:80/api_checador/filtrar-FECHAHORA?fecha=" + fecha  + "&hora=" + hora;
         RequestQueue queue = Volley.newRequestQueue(this);
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
@@ -717,7 +717,7 @@ public class Reporte extends menu {
     }
     private void llenaTablaConAPIFechaRegistro(String fecha, String opcion) {
         //String url = "http://201.164.155.166/api_checador/filtrar-fecha?fecha=" + fecha  + "&opcion=" + opcion; // Reemplaza con la URL de tu API
-        String url = "http://192.168.56.1:80/api_checador/filtrar-fecha?fecha=" + fecha  + "&opcion=" + opcion;
+        String url = "http://201.164.155.166:80/api_checador/filtrar-fecha?fecha=" + fecha  + "&opcion=" + opcion;
         RequestQueue queue = Volley.newRequestQueue(this);
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,

@@ -31,7 +31,7 @@ public class ListaAula extends AppCompatActivity {
 
     private void llenaTablaDocentes() {
         //String url = "http://201.164.155.166/api_checador/filtrar-clases-fecha?fecha=" + fecha; // Reemplaza con la URL de tu API
-        String url = "http://192.168.56.1:80/api_checador/obtener-AULAS";
+        String url = "http://201.164.155.166/api_checador/obtener-AULAS";
 
         RequestQueue queue = Volley.newRequestQueue(this);
 

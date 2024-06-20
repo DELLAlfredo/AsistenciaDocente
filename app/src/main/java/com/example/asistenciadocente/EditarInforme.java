@@ -98,7 +98,7 @@ public class EditarInforme extends AppCompatActivity {
 
                 // Construye la solicitud HTTP POST
                 Request request = new Request.Builder()
-                        .url("http://192.168.56.1:80/api_checador/Modificar_Registro")//URL de la api o endpoint
+                        .url("http://201.164.155.166/api_checador/Modificar_Registro")//URL de la api o endpoint
                         .post(body)// Establece el método POST y el cuerpo de la solicitud
                         .build();
 
@@ -156,8 +156,8 @@ public class EditarInforme extends AppCompatActivity {
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder ()
-                // .url("http://201.164.155.166/api_checador/obtener-docentes")
-                .url("http://192.168.56.1:80/api_checador/obtener-docentes")
+                 .url("http://201.164.155.166/api_checador/obtener-docentes")
+                //.url("http://192.168.11.152:80/api_checador/obtener-docentes")
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
@@ -202,8 +202,8 @@ public class EditarInforme extends AppCompatActivity {
 //obtener aulas
         OkHttpClient clientAula = new OkHttpClient();
         Request aula = new Request.Builder ()
-                //.url("http://201.164.155.166/api_checador/aulas")
-                .url("http://192.168.56.1:80/api_checador/aulas")
+                .url("http://201.164.155.166/api_checador/aulas")
+                //.url("http://192.168.11.152:80/api_checador/aulas")
                 .build();
 
         clientAula.newCall(aula).enqueue(new Callback() { //: hace una  llamada a una URL específica utilizando el cliente OkHttp y asocia un Callback para manejar la respuesta de la llamada de manera asíncrona.
