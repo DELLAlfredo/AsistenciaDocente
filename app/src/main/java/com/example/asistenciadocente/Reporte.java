@@ -1,8 +1,6 @@
 package com.example.asistenciadocente;
 
-import android.app.DatePickerDialog;
 import android.graphics.Typeface;
-import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -456,7 +454,7 @@ public class Reporte extends menu {
 
                                 }
                             }else {
-                                Toast.makeText(Reporte.this, "SIN DATOS EN ESTA BUSQUEDA", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Reporte.this, "Sin datos en esta busqueda", Toast.LENGTH_SHORT).show();
                             }
 
 
@@ -628,7 +626,7 @@ public class Reporte extends menu {
                             tabla.addView(headerRow);
                             if (response.length() == 0) {
                                 // Mostrar un mensaje indicando que no hay registros disponibles
-                                Toast.makeText(Reporte.this, "No se encontraron registros para la fecha y registro", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Reporte.this, "No se encontraron registros para la fecha y hora especificadas", Toast.LENGTH_SHORT).show();
                                 return;
                             }
                             // Agregar las filas con los datos filtrados
@@ -742,7 +740,7 @@ public class Reporte extends menu {
                             tabla.addView(headerRow);
                             if (response.length() == 0) {
                                 // Mostrar un mensaje indicando que no hay registros disponibles
-                                Toast.makeText(Reporte.this, "No se encontraron registros para la fecha y registro", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Reporte.this, "No se encontraron registros para la fecha y registro espesificados", Toast.LENGTH_SHORT).show();
                                 return;
                             }
                             // Agregar las filas con los datos filtrados

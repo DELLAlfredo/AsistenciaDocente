@@ -1,7 +1,6 @@
 package com.example.asistenciadocente;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +14,8 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.asistenciadocente.databinding.ActivityEditarInformeBinding;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,18 +33,23 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class EditarInforme extends AppCompatActivity {
+public class EditarInforme extends menuadministradores {
     Spinner spDocentes,spAula,spHora, spOpcion;
     Button btnGuardarClases;
     DatePicker dpfecha;
 
     ImageButton Btncalendario;
     EditText txtfecha;
+    ActivityEditarInformeBinding activityEditarInformeBinding;
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_informe);
+        activityEditarInformeBinding = ActivityEditarInformeBinding.inflate(getLayoutInflater());
+        setContentView(activityEditarInformeBinding.getRoot());
+        allocateActivityTitle("Editar Clases");
 
         spDocentes = findViewById(R.id.spDocentes);
         spAula = findViewById(R.id.spAula);
@@ -256,8 +261,7 @@ public class EditarInforme extends AppCompatActivity {
         builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(EditarInforme.this, Clases.class);  //Creamos el intent y le indicamos desde donde vamos (this) y a donde vamos (OtraActividad.class)
-                startActivity(intent);
+                finishAffinity(); // Cerrar todas las actividades y salir de la aplicación
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -294,7 +298,7 @@ public class EditarInforme extends AppCompatActivity {
 
     }
     //mostrar fecha cuando selecciones
-    public void muestraCalendarioeditar(View View){
+    public void muestraCalendarioeditarinforme(View View){
         dpfecha.setVisibility(View.VISIBLE);
     }
     // Dentro de la actividad EditarInforme

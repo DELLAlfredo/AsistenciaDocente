@@ -63,12 +63,12 @@
 
     <Spinner
         android:id="@+id/spAula"
-        android:layout_width="275dp"
+        android:layout_width="350dp"
         android:layout_height="54dp"
         android:layout_below="@+id/spDocentes"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="33dp"
+        android:layout_marginStart="53dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="20dp"
         android:layout_toEndOf="@+id/textView4"
         android:background="@drawable/customspiner"
@@ -141,11 +141,11 @@
 
     <Spinner
         android:id="@+id/spOpcion"
-        android:layout_width="279dp"
-        android:layout_height="51dp"
+        android:layout_width="352dp"
+        android:layout_height="52dp"
         android:layout_below="@+id/spHora"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="19dp"
+        android:layout_marginStart="9dp"
         android:layout_marginTop="49dp"
         android:layout_marginEnd="20dp"
         android:layout_toEndOf="@+id/textView6"
@@ -156,37 +156,19 @@
 
     <EditText
         android:id="@+id/etfecha"
-        android:layout_width="175dp"
-        android:layout_height="40dp"
+        android:layout_width="196dp"
+        android:layout_height="43dp"
         android:layout_below="@+id/spOpcion"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="23dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="162dp"
+        android:layout_toEndOf="@+id/textView8"
         android:background="@drawable/custumimput"
         android:ems="10"
         android:inputType="date"
-        app:layout_constraintBottom_toBottomOf="@+id/BtnCalendario"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/BtnCalendario"
         app:layout_constraintVertical_bias="0.071" />
-
-    <ImageButton
-        android:id="@+id/BtnCalendario"
-        android:layout_width="48dp"
-        android:layout_height="47dp"
-        android:layout_below="@+id/spOpcion"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="74dp"
-        android:layout_toEndOf="@+id/etfecha"
-        android:clickable="false"
-        android:onClick="muestraCalendario"
-        app:layout_constraintBottom_toTopOf="@+id/guideline18"
-        app:layout_constraintStart_toEndOf="@+id/etfecha"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.182"
-        app:srcCompat="@android:drawable/ic_menu_today" />
 
     <DatePicker
         android:id="@+id/dtfecha"
@@ -223,12 +205,28 @@
         android:layout_width="305dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="61dp"
-        android:layout_marginEnd="45dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="57dp"
         android:text="Modificar Registros"
         android:textColor="#EDEEF1"
-        android:textSize="30dp" />
+        android:textSize="35dp" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView6"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="44dp"
+        android:text="Fecha"
+        android:textColor="#F8F6F6"
+        android:textColorHighlight="@color/white"
+        android:textSize="24sp"/>
 
 
 </RelativeLayout>

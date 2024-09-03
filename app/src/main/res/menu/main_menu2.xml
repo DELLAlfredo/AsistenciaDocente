@@ -2,26 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_Clases"
-            android:title="Clases"
+            android:id="@+id/nav_EditarClases"
+            android:title="Editar Clases"
             android:icon="@drawable/clases"
             />
         <item
-            android:id="@+id/nav_Docentes"
-            android:title="Docentes"
+            android:id="@+id/nav_ReportesAsistencias"
+            android:title="Reportes Asistencias"
             android:icon="@drawable/docentes"
             />
-        <item
-            android:id="@+id/nav_Aulas"
-            android:title="Aulas"
-            android:icon="@drawable/aula"
-            />
 
-        <item
-            android:id="@+id/nav_Reporte_Semanal"
-            android:title="Reporte De Asistencia"
-            android:icon="@drawable/reporte"
-            />
         <!-- item
             android:id="@+id/nav_Administrador"
             android:title="Editar Informe"
@@ -32,7 +22,5 @@
             android:icon="@drawable/logout"
 
             />
-
-
     </group>
 </menu>

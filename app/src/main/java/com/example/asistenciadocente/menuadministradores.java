@@ -17,14 +17,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 
 
-public class menu extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class menuadministradores extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
 
 
 
     @Override
     public void setContentView(View view) {
-        drawerLayout = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_menu,null);
+        drawerLayout = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_menuadministradores,null);
         FrameLayout container = drawerLayout.findViewById(R.id.activitycontainer);
         container.addView(view);
 
@@ -44,15 +44,11 @@ public class menu extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         drawerLayout.closeDrawer(GravityCompat.START);
-        if (item.getItemId()== R.id.nav_Aulas)
-        {
-            Intent intent = new Intent(getApplicationContext(), abcAula.class);
+        if (item.getItemId()== R.id.nav_EditarClases){
+            Intent intent = new Intent(getApplicationContext(), EditarInforme.class);
             startActivity(intent);
-        }else if (item.getItemId()== R.id.nav_Docentes) {
-             Intent intent = new Intent(getApplicationContext(), abcDocentes.class);
-             startActivity(intent);
-        }else if (item.getItemId()== R.id.nav_Clases) {
-            Intent intent = new Intent(getApplicationContext(), Clases.class);
+        }else if (item.getItemId()== R.id.nav_ReportesAsistencias){
+            Intent intent = new Intent(getApplicationContext(), ReportesAsistencias.class);
             startActivity(intent);
         }else if (item.getItemId()== R.id.logout) {
             SharedPreferences preferences =getSharedPreferences("PreferenciasLogin", Context.MODE_PRIVATE);
@@ -60,10 +56,7 @@ public class menu extends AppCompatActivity implements NavigationView.OnNavigati
             Intent intent = new Intent(getApplicationContext(), Login.class);
             startActivity(intent);
             finish();
-        }else if (item.getItemId()== R.id.nav_Reporte_Semanal ){
-            Intent intent = new Intent(getApplicationContext(), Reporte.class);
-            startActivity(intent);
-        } /*else if (item.getItemId()== R.id.nav_Administrador ){
+        }/*else if (item.getItemId()== R.id.nav_Administrador ){
             Intent intent = new Intent(getApplicationContext(), AccesoAdministrador.class);
             startActivity(intent);
         }*/
