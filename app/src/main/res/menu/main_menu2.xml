@@ -8,14 +8,26 @@
             />
         <item
             android:id="@+id/nav_ReportesAsistencias"
-            android:title="Reportes Asistencias"
+            android:title="Informe General"
             android:icon="@drawable/docentes"
             />
 
-        <!-- item
-            android:id="@+id/nav_Administrador"
-            android:title="Editar Informe"
-            android:icon="@drawable/administrador" -->
+        <item
+            android:id="@+id/nav_ReporteAula"
+            android:title="Informe Aula"
+            android:icon="@drawable/aula" />
+        <item
+            android:id="@+id/nav_ReporteDocente"
+            android:title="Informe Docentes"
+            android:icon="@drawable/administrador" />
+        <item
+            android:id="@+id/nav_ReporteFechasemana"
+            android:title="Informe Semanal"
+            android:icon="@drawable/administrador" />
+        <item
+            android:id="@+id/nav_ReporteSemestral"
+            android:title="Informe Semestral"
+            android:icon="@drawable/administrador" />
         <item
             android:id="@+id/logout"
             android:title="Cerrar Sesion"

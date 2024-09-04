@@ -50,16 +50,25 @@ public class menuadministradores extends AppCompatActivity implements Navigation
         }else if (item.getItemId()== R.id.nav_ReportesAsistencias){
             Intent intent = new Intent(getApplicationContext(), ReportesAsistencias.class);
             startActivity(intent);
+        }else if (item.getItemId()== R.id.nav_ReporteAula){
+            Intent intent = new Intent(getApplicationContext(), InformeAula.class);
+            startActivity(intent);
+        }else if (item.getItemId()== R.id.nav_ReporteDocente){
+            Intent intent = new Intent(getApplicationContext(), InformeDocentes.class);
+            startActivity(intent);
+        }else if (item.getItemId()== R.id.nav_ReporteFechasemana){
+            Intent intent = new Intent(getApplicationContext(), InformeSemanal.class);
+            startActivity(intent);
+        }else if (item.getItemId()== R.id.nav_ReporteSemestral){
+            Intent intent = new Intent(getApplicationContext(), InformeSemestral.class);
+            startActivity(intent);
         }else if (item.getItemId()== R.id.logout) {
             SharedPreferences preferences =getSharedPreferences("PreferenciasLogin", Context.MODE_PRIVATE);
             preferences.edit().clear().commit();
             Intent intent = new Intent(getApplicationContext(), Login.class);
             startActivity(intent);
             finish();
-        }/*else if (item.getItemId()== R.id.nav_Administrador ){
-            Intent intent = new Intent(getApplicationContext(), AccesoAdministrador.class);
-            startActivity(intent);
-        }*/
+        }
         return false;
     }
     protected  void  allocateActivityTitle(String titleString){

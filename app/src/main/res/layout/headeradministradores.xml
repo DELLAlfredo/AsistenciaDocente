@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/baloo"
-        android:text="Asistencia Docentes"
+        android:text="Informe de Docentes"
         android:textColor="@color/white"
         android:textSize="25dp" />
 </LinearLayout>

@@ -1,19 +1,13 @@
 package com.example.asistenciadocente;
 
+import android.os.Bundle;
+
+import com.example.asistenciadocente.databinding.ActivityReportesAsistenciasBinding;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import android.app.ActionBar;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.os.Bundle;
-import android.view.Gravity;
-import android.widget.TableRow;
-import android.widget.TextView;
-
-import com.example.asistenciadocente.databinding.ActivityReportesAsistenciasBinding;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -29,7 +23,7 @@ public class ReportesAsistencias extends menuadministradores {
         setContentView(R.layout.activity_reportes_asistencias);
         reportesasistencias = ActivityReportesAsistenciasBinding.inflate(getLayoutInflater());
         setContentView(reportesasistencias.getRoot());
-        allocateActivityTitle("Reporte Asistencias");
+        allocateActivityTitle("Informe General");
 
         BarChart barChart = findViewById(R.id.barDataSet);
 
