@@ -51,12 +51,15 @@ dependencies {
     implementation 'com.github.koushikcse:LoadingButton:1.7'
     implementation 'com.itextpdf:itextg:5.5.10' //dependencia para pdf
 
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0' //dependencia para garicas
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0' //dependencia para graficas
     implementation 'com.android.volley:volley:1.2.1'
     implementation 'com.android.volley:volley:1.1.0'
 
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
-
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+    implementation 'com.android.volley:volley:1.2.1'
 
     //correo
     implementation 'com.sun.mail:android-mail:1.6.2'
