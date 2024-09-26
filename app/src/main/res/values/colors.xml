@@ -22,16 +22,17 @@
     <color name="IGEcolor">#de010a</color>
     <color name="IIAScolor">#737177</color>
 
-    <color name="colorImpartida">#00FF00</color> <!-- Green color for impartida -->
+    //COLORES DE OPCIONES
+    <color name="colordianolaboral">#000000</color> <!-- Green color for impartida -->
+    <color name="colorImpartida">#00B050</color> <!-- Green color for impartida -->
     <color name="colorNoImpartida">#FF0000</color> <!-- Red color for no impartida -->
-    <color name="colorRetardo">#FDD835</color> <!-- Green color for retardo -->
-    <color name="colorsuspencion">#FB8C00</color> <!-- Red color for no suspencion -->
-
-    <color name="colorEVENTO_ACADEMICO">#1E88E5</color> <!-- Green color for impartida -->
-    <color name="colorReunion">#DD3CB5</color> <!-- Green color for retardo -->
-    <color name="colorVISITAEMPRESARIAL">#00BFA5</color> <!-- Red color for no suspencion -->
-    <color name="colorACTIVIDADDECAMPO">#837B4C</color> <!-- Green color for impartida -->
-    <color name="colorJUSTIFICANTE">#5E35B1</color> <!-- Green color for retardo -->
+    <color name="colorSinalumnos">#7D7D7D</color> <!-- Green color for retardo -->
+    <color name="colorJustificacionAcademica">#FFC000</color> <!-- Red color for no suspencion -->
+    <color name="colorpermiso">#00B0F0</color> <!-- Green color for impartida -->
+    <color name="colorProblemasSalud">#002060</color> <!-- Green color for retardo -->
+    <color name="colorComision">#92D050</color> <!-- Red color for no suspencion -->
+    <color name="colorFalllaTecnica">#7030A0</color> <!-- Green color for impartida -->
+    <color name="colorClaseIncompleta">#FFFF00</color> <!-- Green color for retardo -->
 
 
     <color name="tabla">#33B5E5</color>

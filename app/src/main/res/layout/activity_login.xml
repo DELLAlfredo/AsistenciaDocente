@@ -187,7 +187,7 @@
                 android:background="@color/white"
                 android:drawableStart="@drawable/contrasena"
                 android:inputType="textPassword"
-                android:maxLength="10"
+                android:maxLength="20"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textColorHint="#757575"

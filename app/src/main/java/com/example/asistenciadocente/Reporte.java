@@ -73,7 +73,7 @@ public class Reporte extends menu {
         sphora.setAdapter(Adapterhora);
 
         spopcion = findViewById(R.id.spopcion);
-        String[] opcion = {"IMPARTIDA","NO IMPARTIDA","CLASE INCOMPLETA","SUSPENSION","EVENTO ACADEMICO","REUNION","VISITA EMPRESARIAL","ACTIVIDAD DE CAMPO","JUSTIFICANTE"};
+        String[] opcion = {"DIA NO LABORAL","CLASE IMPARTIDA","CLASE NO IMPARTIDA","GRUPO SIN ALUMNOS","JUSTIFICACION ACADEMICA","PERMISO","PROBLEMAS DE SALUD","COMISION","FALLA TECNICA DE AULA","CLASE INCOMPLETA"};
         ArrayAdapter<String> Adapteropcion = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, opcion);
         spopcion.setAdapter(Adapteropcion);
 
@@ -411,25 +411,27 @@ public class Reporte extends menu {
                                     TextView txtfecha = new TextView(Reporte.this);
                                     txtfecha.setText(fecha);
                                     int color = 0;
-                                    //"SUSPENCION","EVENTO ACADEMICO","REUNION","VISITA EMPRESARIAL","ACTIVIDAD DE CAMPO","JUSTIFICANTE"
-                                    if (opcion.equals("IMPARTIDA")) {
+                                    //{"DIA NO LABORAL","CLASE IMPARTIDA","CLASE NO IMPARTIDA","GRUPO SIN ALUMNOS","JUSTIFICACION ACADEMICA","PERMISO","PROBLEMAS DE SALUD","COMISION","FALLA TECNICA DE AULA","CLASE INCOMPLETA"}
+                                    if (opcion.equals("DIA NO LABORAL")){
+                                        color = getResources().getColor(R.color.colordianolaboral);
+                                    }else if (opcion.equals("IMPARTIDA")) {
                                         color = getResources().getColor(R.color.colorImpartida);
                                     } else if (opcion.equals("NO IMPARTIDA")){
                                         color = getResources().getColor(R.color.colorNoImpartida);
                                     } else if (opcion.equals("CLASE INCOMPLETA")) {
-                                        color = getResources().getColor(R.color.colorRetardo);
+                                        color = getResources().getColor(R.color.colorSinalumnos);
                                     } else if (opcion.equals("SUSPENSION")) {
-                                        color = getResources().getColor(R.color.colorsuspencion);
+                                        color = getResources().getColor(R.color.colorJustificacionAcademica);
                                     }   else if (opcion.equals("EVENTO ACADEMICO")) {
-                                    color = getResources().getColor(R.color.colorEVENTO_ACADEMICO);
+                                    color = getResources().getColor(R.color.colorpermiso);
                                     } else if (opcion.equals("REUNION")) {
-                                        color = getResources().getColor(R.color.colorReunion);
+                                        color = getResources().getColor(R.color.colorProblemasSalud);
                                     }  else if (opcion.equals("VISITA EMPRESARIAL")) {
-                                    color = getResources().getColor(R.color.colorVISITAEMPRESARIAL);
+                                    color = getResources().getColor(R.color.colorComision);
                                     } else if (opcion.equals("ACTIVIDAD DE CAMPO")) {
-                                        color = getResources().getColor(R.color.colorACTIVIDADDECAMPO);
+                                        color = getResources().getColor(R.color.colorFalllaTecnica);
                                     }else if (opcion.equals("JUSTIFICANTE")) {
-                                        color = getResources().getColor(R.color.colorJUSTIFICANTE);
+                                        color = getResources().getColor(R.color.colorClaseIncompleta);
                                     }
                                     int colortabla = 0;
 
@@ -538,24 +540,26 @@ public class Reporte extends menu {
 
                                 // Obtener el color de fondo según la opción
                                 int color = 0;
-                                if (opcion.equals("IMPARTIDA")) {
+                                if (opcion.equals("DIA NO LABORAL")){
+                                    color = getResources().getColor(R.color.colordianolaboral);
+                                }else if (opcion.equals("IMPARTIDA")) {
                                     color = getResources().getColor(R.color.colorImpartida);
                                 } else if (opcion.equals("NO IMPARTIDA")){
                                     color = getResources().getColor(R.color.colorNoImpartida);
                                 } else if (opcion.equals("CLASE INCOMPLETA")) {
-                                    color = getResources().getColor(R.color.colorRetardo);
+                                    color = getResources().getColor(R.color.colorSinalumnos);
                                 } else if (opcion.equals("SUSPENSION")) {
-                                    color = getResources().getColor(R.color.colorsuspencion);
+                                    color = getResources().getColor(R.color.colorJustificacionAcademica);
                                 }   else if (opcion.equals("EVENTO ACADEMICO")) {
-                                    color = getResources().getColor(R.color.colorEVENTO_ACADEMICO);
+                                    color = getResources().getColor(R.color.colorpermiso);
                                 } else if (opcion.equals("REUNION")) {
-                                    color = getResources().getColor(R.color.colorReunion);
+                                    color = getResources().getColor(R.color.colorProblemasSalud);
                                 }  else if (opcion.equals("VISITA EMPRESARIAL")) {
-                                    color = getResources().getColor(R.color.colorVISITAEMPRESARIAL);
+                                    color = getResources().getColor(R.color.colorComision);
                                 } else if (opcion.equals("ACTIVIDAD DE CAMPO")) {
-                                    color = getResources().getColor(R.color.colorACTIVIDADDECAMPO);
+                                    color = getResources().getColor(R.color.colorFalllaTecnica);
                                 }else if (opcion.equals("JUSTIFICANTE")) {
-                                    color = getResources().getColor(R.color.colorJUSTIFICANTE);
+                                    color = getResources().getColor(R.color.colorClaseIncompleta);
                                 }
                                 // Establecer el color de fondo de la fila
 
@@ -656,24 +660,26 @@ public class Reporte extends menu {
                                 TextView txtfecha = new TextView(Reporte.this);
                                 txtfecha.setText(fecha);
                                 int color = 0;
-                                if (opcion.equals("IMPARTIDA")) {
+                                if (opcion.equals("DIA NO LABORAL")){
+                                    color = getResources().getColor(R.color.colordianolaboral);
+                                }else if (opcion.equals("IMPARTIDA")) {
                                     color = getResources().getColor(R.color.colorImpartida);
                                 } else if (opcion.equals("NO IMPARTIDA")){
                                     color = getResources().getColor(R.color.colorNoImpartida);
                                 } else if (opcion.equals("CLASE INCOMPLETA")) {
-                                    color = getResources().getColor(R.color.colorRetardo);
+                                    color = getResources().getColor(R.color.colorSinalumnos);
                                 } else if (opcion.equals("SUSPENSION")) {
-                                    color = getResources().getColor(R.color.colorsuspencion);
+                                    color = getResources().getColor(R.color.colorJustificacionAcademica);
                                 }   else if (opcion.equals("EVENTO ACADEMICO")) {
-                                    color = getResources().getColor(R.color.colorEVENTO_ACADEMICO);
+                                    color = getResources().getColor(R.color.colorpermiso);
                                 } else if (opcion.equals("REUNION")) {
-                                    color = getResources().getColor(R.color.colorReunion);
+                                    color = getResources().getColor(R.color.colorProblemasSalud);
                                 }  else if (opcion.equals("VISITA EMPRESARIAL")) {
-                                    color = getResources().getColor(R.color.colorVISITAEMPRESARIAL);
+                                    color = getResources().getColor(R.color.colorComision);
                                 } else if (opcion.equals("ACTIVIDAD DE CAMPO")) {
-                                    color = getResources().getColor(R.color.colorACTIVIDADDECAMPO);
+                                    color = getResources().getColor(R.color.colorFalllaTecnica);
                                 }else if (opcion.equals("JUSTIFICANTE")) {
-                                    color = getResources().getColor(R.color.colorJUSTIFICANTE);
+                                    color = getResources().getColor(R.color.colorClaseIncompleta);
                                 }
                                 // Establecer el color de fondo de la fila
 
@@ -770,24 +776,26 @@ public class Reporte extends menu {
                                 TextView txtfecha = new TextView(Reporte.this);
                                 txtfecha.setText(fecha);
                                 int color = 0;
-                                if (opcion.equals("IMPARTIDA")) {
+                                if (opcion.equals("DIA NO LABORAL")){
+                                    color = getResources().getColor(R.color.colordianolaboral);
+                                }else if (opcion.equals("IMPARTIDA")) {
                                     color = getResources().getColor(R.color.colorImpartida);
                                 } else if (opcion.equals("NO IMPARTIDA")){
                                     color = getResources().getColor(R.color.colorNoImpartida);
                                 } else if (opcion.equals("CLASE INCOMPLETA")) {
-                                    color = getResources().getColor(R.color.colorRetardo);
+                                    color = getResources().getColor(R.color.colorSinalumnos);
                                 } else if (opcion.equals("SUSPENSION")) {
-                                    color = getResources().getColor(R.color.colorsuspencion);
+                                    color = getResources().getColor(R.color.colorJustificacionAcademica);
                                 }   else if (opcion.equals("EVENTO ACADEMICO")) {
-                                    color = getResources().getColor(R.color.colorEVENTO_ACADEMICO);
+                                    color = getResources().getColor(R.color.colorpermiso);
                                 } else if (opcion.equals("REUNION")) {
-                                    color = getResources().getColor(R.color.colorReunion);
+                                    color = getResources().getColor(R.color.colorProblemasSalud);
                                 }  else if (opcion.equals("VISITA EMPRESARIAL")) {
-                                    color = getResources().getColor(R.color.colorVISITAEMPRESARIAL);
+                                    color = getResources().getColor(R.color.colorComision);
                                 } else if (opcion.equals("ACTIVIDAD DE CAMPO")) {
-                                    color = getResources().getColor(R.color.colorACTIVIDADDECAMPO);
+                                    color = getResources().getColor(R.color.colorFalllaTecnica);
                                 }else if (opcion.equals("JUSTIFICANTE")) {
-                                    color = getResources().getColor(R.color.colorJUSTIFICANTE);
+                                    color = getResources().getColor(R.color.colorClaseIncompleta);
                                 }
                                 // Establecer el color de fondo de la fila
 

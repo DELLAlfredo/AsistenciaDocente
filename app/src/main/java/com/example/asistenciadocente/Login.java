@@ -18,7 +18,7 @@ public class Login extends AppCompatActivity {
     // representar los elementos de la interfaz de usuario en el archivo de diseño XML (activity_main.xml).
     EditText email,contraseña;
     Button ingresar;
-    String Usuario="Admin",Paswword="@admin", Usuario2="Admin2",Paswword2="@admin2";
+    String Usuario="Supervisor Academico",Paswword="@Adminchecador", Usuario2="SUBACADEMICO",Paswword2="@AdminAcademico";
     //En el método onCreate, se establece el contenido de la actividad utilizando el archivo de diseño activity_main.xml. Luego,
     // se asignan los elementos de la interfaz de usuario a las variables correspondientes utilizando findViewById.
     @Override

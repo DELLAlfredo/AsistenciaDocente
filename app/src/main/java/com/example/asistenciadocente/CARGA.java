@@ -29,9 +29,9 @@ public class CARGA extends AppCompatActivity {
 
                 if (sesion) {
                     Intent intent;
-                    if (usuario.equals("Admin")) {
+                    if (usuario.equals("Supervisor Academico")) {
                         intent = new Intent(getApplicationContext(), Clases.class);
-                    } else if (usuario.equals("Admin2")) {
+                    } else if (usuario.equals("SUBACADEMICO")) {
                         intent = new Intent(getApplicationContext(), EditarInforme.class);
                     } else {
                         // Si por alguna razón el usuario guardado no coincide, se dirige al Login

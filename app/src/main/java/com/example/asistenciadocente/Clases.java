@@ -54,7 +54,7 @@ public class Clases extends menu {
         String[] horas = {"7AM-8AM","8AM-9AM","9AM-10AM","10AM-11AM","11AM-12AM","12AM-1PM","1PM-2PM","2PM-3PM"};
         ArrayAdapter<String> Adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, horas);
         spHora.setAdapter(Adapter);
-        String[] crud = {"IMPARTIDA","NO IMPARTIDA","CLASE INCOMPLETA","SUSPENSION","EVENTO ACADEMICO","REUNION","VISITA EMPRESARIAL","ACTIVIDAD DE CAMPO","JUSTIFICANTE"};
+        String[] crud = {"DIA NO LABORAL","CLASE IMPARTIDA","CLASE NO IMPARTIDA","GRUPO SIN ALUMNOS","JUSTIFICACION ACADEMICA","PERMISO","PROBLEMAS DE SALUD","COMISION","FALLA TECNICA DE AULA","CLASE INCOMPLETA"};
         ArrayAdapter<String> AdapterCrud = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, crud);
         spOpcion.setAdapter(AdapterCrud);
 
