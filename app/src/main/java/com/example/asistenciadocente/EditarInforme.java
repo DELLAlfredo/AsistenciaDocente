@@ -62,12 +62,12 @@ public class EditarInforme extends menuadministradores {
         txtfecha.setText(getfecha());
 
         dpfecha.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
-                @Override
-                public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                    String fechaSeleccionada = String.format("%04d-%02d-%02d", year, monthOfYear + 1, dayOfMonth);
-                    txtfecha.setText(fechaSeleccionada);
-                    dpfecha.setVisibility(View.GONE);
-                }
+            @Override
+            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                String fechaSeleccionada = String.format("%04d-%02d-%02d", year, monthOfYear + 1, dayOfMonth);
+                txtfecha.setText(fechaSeleccionada);
+                dpfecha.setVisibility(View.GONE);
+            }
         });
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -161,7 +161,7 @@ public class EditarInforme extends menuadministradores {
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder ()
-                 .url("http://201.164.155.166/api_checador/obtener-docentes")
+                .url("http://201.164.155.166/api_checador/obtener-docentes")
                 //.url("http://192.168.11.152:80/api_checador/obtener-docentes")
                 .build();
 
