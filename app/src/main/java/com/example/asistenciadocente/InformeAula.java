@@ -2,6 +2,7 @@ package com.example.asistenciadocente;
 
 import android.app.DatePickerDialog;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.os.Environment;
@@ -22,6 +23,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.asistenciadocente.databinding.ActivityInformeAulaBinding;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -221,7 +223,19 @@ public class InformeAula extends menuadministradores {
             barDataSet.setColors(colors);
             BarData barData = new BarData(barDataSet);
             barChart.setData(barData);
-
+            barChart.setTouchEnabled(true);
+            barChart.setDrawBorders(true);
+            barChart.setDrawValueAboveBar(true);
+            barChart.setHighlightFullBarEnabled(true);
+            barChart.getXAxis().setSpaceMax(0.1f);
+            barChart.getXAxis().setGranularity(1f);
+            barChart.getXAxis().setGranularityEnabled(true);
+            barChart.setExtraLeftOffset(10f);
+            barChart.setExtraRightOffset(10f);
+            barChart.getXAxis().setLabelRotationAngle(-45f);
+            barChart.getXAxis().setPosition(XAxis.XAxisPosition.TOP_INSIDE);
+            barDataSet.setValueTextSize(15f); //tamaño de los numeros
+            barChart.invalidate(); // Refresca la gráfica
             barChart.getXAxis().setValueFormatter(new ValueFormatter() {
                 @Override
                 public String getFormattedValue(float value) {
@@ -239,7 +253,8 @@ public class InformeAula extends menuadministradores {
             PieData pieData = new PieData(pieDataSet);
             pieChart.setData(pieData);
             pieChart.invalidate();
-
+            pieDataSet.setValueTextColor(Color.WHITE);
+            pieDataSet.setValueTextSize(15f); //tamaño de los numeros
         } catch (JSONException e) {
             Log.e("API", "Error procesando la respuesta: " + e.getMessage());
         }

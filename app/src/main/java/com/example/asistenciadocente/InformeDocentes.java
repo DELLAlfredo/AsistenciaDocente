@@ -1,7 +1,10 @@
 package com.example.asistenciadocente;
 
+import static com.itextpdf.text.pdf.PdfName.I;
+
 import android.app.DatePickerDialog;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.os.Environment;
@@ -20,6 +23,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.asistenciadocente.databinding.ActivityInformeDocentesBinding;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -80,7 +84,6 @@ public class InformeDocentes extends menuadministradores {
 
         Request request = new Request.Builder()
                 .url("http://201.164.155.166/api_checador/obtener-docentes")
-                //.url("http://192.168.11.152:80/api_checador/obtener-docentes")
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
@@ -293,12 +296,25 @@ public class InformeDocentes extends menuadministradores {
             barDataSet.setColors(colors);
             BarData barData = new BarData(barDataSet);
             barChart.setData(barData);
-
+            barChart.setTouchEnabled(true);
+            barChart.setDrawBorders(true);
+            barChart.setDrawValueAboveBar(true);
+            barChart.setHighlightFullBarEnabled(true);
+            barChart.getXAxis().setSpaceMax(0.01f);
+            barChart.getXAxis().setGranularity(1f);
+            barChart.getXAxis().setGranularityEnabled(true);
+            barChart.setExtraLeftOffset(10f);
+            barChart.setExtraRightOffset(10f);
+            barChart.getXAxis().setLabelRotationAngle(-45f);
+            barDataSet.setValueTextSize(15f); //tamaño de los numeros
+            barChart.getXAxis().setPosition(XAxis.XAxisPosition.TOP_INSIDE);
+            barChart.invalidate(); // Refresca la gráfica
             barChart.getXAxis().setValueFormatter(new ValueFormatter() {
                 @Override
                 public String getFormattedValue(float value) {
                     int index = (int) value;
                     return index < barLabels.size() ? barLabels.get(index) : "";
+
                 }
             });
 
@@ -311,7 +327,8 @@ public class InformeDocentes extends menuadministradores {
             PieData pieData = new PieData(pieDataSet);
             pieChart.setData(pieData);
             pieChart.invalidate();
-
+            pieDataSet.setValueTextSize(15f); //tamaño de los numeros
+            pieDataSet.setValueTextColor(Color.WHITE); //COLOR NUMEROS
         } catch (JSONException e) {
             Log.e("API", "Error procesando la respuesta: " + e.getMessage());
         }
@@ -340,7 +357,7 @@ public class InformeDocentes extends menuadministradores {
             file.mkdirs();
         }
 
-        File pdfFile = new File(directoryPath, "informe_aula.pdf");
+        File pdfFile = new File(directoryPath, "informe_Docente.pdf");
 
         try {
             pdfDocument.writeTo(new FileOutputStream(pdfFile));

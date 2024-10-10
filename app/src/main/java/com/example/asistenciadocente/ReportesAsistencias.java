@@ -75,7 +75,7 @@ public class ReportesAsistencias extends menuadministradores {
         setContentView(R.layout.activity_reportes_asistencias);
         activityReportesAsistenciasBinding = activityReportesAsistenciasBinding.inflate(getLayoutInflater());
         setContentView(activityReportesAsistenciasBinding.getRoot());
-        allocateActivityTitle("Informe Semestral");
+        allocateActivityTitle("Informe General");
 
         barChart = findViewById(R.id.barDataSet);
         pieChart = findViewById(R.id.pieChart);
@@ -155,43 +155,47 @@ public class ReportesAsistencias extends menuadministradores {
         datePickerDialog.show();
     }
 
-    private void fetchChartData() {
-        if (startDate.isEmpty() || endDate.isEmpty()) {
-            Log.e("API", "Fecha de inicio o fin no seleccionadas.");
-            return;
+
+
+
+        private void fetchChartData() {
+            if (startDate.isEmpty() || endDate.isEmpty()) {
+                Log.e("API", "Fecha de inicio o fin no seleccionadas.");
+                return;
+            }
+            String url = "https://201.164.155.166/api_checador/opciones?fecha_inicio=" + startDate + "&fecha_fin=" + endDate;
+
+            // Obtener la carrera seleccionada en el Spinner
+
+            RequestQueue queue = Volley.newRequestQueue(this);
+
+            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                    com.android.volley.Request.Method.GET,
+                    url,
+                    null,
+                    new com.android.volley.Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            processApiResponse(response);
+                        }
+                    },
+                    new com.android.volley.Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.e("API", "Error en la solicitud API: " + error.getMessage());
+                        }
+                    }
+            );
+
+            queue.add(jsonArrayRequest);
         }
-
-        String url = "https://201.164.155.166/api_checador/opciones?fecha_inicio=" + startDate + "&fecha_fin=" + endDate;
-
-        RequestQueue queue = Volley.newRequestQueue(this);
-
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
-                Request.Method.GET,
-                url,
-                null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        processApiResponse(response);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("API", "Error en la solicitud API: " + error.getMessage());
-                    }
-                }
-        );
-
-        queue.add(jsonArrayRequest);
-    }
 
     private void processApiResponse(JSONArray response) {
         try {
             ArrayList<BarEntry> barEntries = new ArrayList<>();
             final ArrayList<String> barLabels = new ArrayList<>();
             ArrayList<PieEntry> pieEntries = new ArrayList<>();
-            ArrayList<Integer> colors = new ArrayList<>(); // Lista de colores
+            ArrayList<Integer> colors = new ArrayList<>();
 
             // Crear un Map con los colores específicos para cada opción
             Map<String, Integer> colorMap = new HashMap<>();
@@ -207,78 +211,62 @@ public class ReportesAsistencias extends menuadministradores {
             colorMap.put("CLASE INCOMPLETA", ContextCompat.getColor(this, R.color.colorClaseIncompleta));
 
             for (int i = 0; i < response.length(); i++) {
-                try {
-                    JSONObject jsonObject = response.getJSONObject(i);
+                JSONObject jsonObject = response.getJSONObject(i);
+                String opcion = jsonObject.getString("opcion");
+                int cantidad = jsonObject.getInt("cantidad");
 
-                    String opcion = jsonObject.getString("opcion");
-                    int cantidad = jsonObject.getInt("cantidad");
+                // Añadir entradas a las gráficas
+                barEntries.add(new BarEntry(i, cantidad));
+                barLabels.add(opcion);
+                pieEntries.add(new PieEntry(cantidad, opcion));
 
-                    // Añadir entradas a las gráficas
-                    barEntries.add(new BarEntry(i, cantidad));
-                    barLabels.add(opcion);
-                    pieEntries.add(new PieEntry(cantidad, opcion));
-
-                    // Asignar el color correspondiente basado en el nombre de la opción
-                    if (colorMap.containsKey(opcion)) {
-                        colors.add(colorMap.get(opcion));
-                    } else {
-                        colors.add(ContextCompat.getColor(this, R.color.white)); // Color por defecto si no encuentra la opción
-                    }
-                } catch (JSONException e) {
-                    Log.e("API", "JSON Parsing error: " + e.getMessage());
+                if (colorMap.containsKey(opcion)) {
+                    colors.add(colorMap.get(opcion));
+                } else {
+                    colors.add(ContextCompat.getColor(this, R.color.white));
                 }
             }
 
             // Configurar gráfico de barras
-            if (!barEntries.isEmpty()) {
-                BarDataSet barDataSet = new BarDataSet(barEntries, "Cantidad por Opción");
-                barDataSet.setColors(colors); // Asigna los colores personalizados
-                BarData barData = new BarData(barDataSet);
-                barChart.setData(barData);
+            BarDataSet barDataSet = new BarDataSet(barEntries, "Cantidad por Opción");
+            barDataSet.setColors(colors);
+            BarData barData = new BarData(barDataSet);
+            barChart.setData(barData);
+            barChart.setTouchEnabled(true);
+            barChart.setDrawBorders(true);
+            barChart.setDrawValueAboveBar(true);
+            barChart.setHighlightFullBarEnabled(true);
+            barChart.getXAxis().setSpaceMax(0.1f);
+            barChart.getXAxis().setGranularity(1f);
+            barChart.getXAxis().setGranularityEnabled(true);
+            barChart.setExtraLeftOffset(10f);
+            barChart.setExtraRightOffset(10f);
+            barChart.getXAxis().setLabelRotationAngle(-45f);
+            barDataSet.setValueTextSize(15f); //tamaño de los numeros
+            barChart.getXAxis().setPosition(XAxis.XAxisPosition.TOP_INSIDE);
+            barChart.invalidate(); // Refresca la gráfica
+            barChart.getXAxis().setValueFormatter(new ValueFormatter() {
+                @Override
+                public String getFormattedValue(float value) {
+                    int index = (int) value;
+                    return index < barLabels.size() ? barLabels.get(index) : "";
 
-                barChart.getXAxis().setValueFormatter(new ValueFormatter() {
-                    @Override
-                    public String getFormattedValue(float value) {
-                        int index = (int) value;
-                        return index < barLabels.size() ? barLabels.get(index) : "";
-                    }
-                });
+                }
+            });
 
-                barChart.setTouchEnabled(true);
-                barChart.setDrawBorders(true);
-                barChart.setDrawValueAboveBar(true);
-                barChart.setHighlightFullBarEnabled(true);
-                barChart.getXAxis().setSpaceMax(0.1f);
-                barChart.getXAxis().setGranularity(1f);
-                barChart.getXAxis().setGranularityEnabled(true);
-                barChart.setExtraLeftOffset(10f);
-                barChart.setExtraRightOffset(10f);
-                barChart.getXAxis().setLabelRotationAngle(-45f);
-                barChart.getXAxis().setPosition(XAxis.XAxisPosition.TOP_INSIDE);
-                barChart.invalidate(); // Refresca la gráfica
-            }
+            barChart.invalidate();
 
             // Configurar gráfico de pastel
-            if (!pieEntries.isEmpty()) {
-                PieDataSet pieDataSet = new PieDataSet(pieEntries, "");
-                pieDataSet.setColors(colors); // Asigna los colores personalizados
+            PieDataSet pieDataSet = new PieDataSet(pieEntries, "");
+            pieDataSet.setColors(colors);
 
-                PieData pieData = new PieData(pieDataSet);
-                pieChart.setData(pieData);
+            PieData pieData = new PieData(pieDataSet);
+            pieChart.setData(pieData);
+            pieChart.invalidate();
 
-                pieChart.setDrawEntryLabels(true);
-                pieChart.setEntryLabelTextSize(8f);
-                pieChart.setEntryLabelColor(Color.BLACK);
-                pieChart.getLegend().setEnabled(true);
-                pieChart.getLegend().setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
-                pieChart.getLegend().setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
-                pieChart.getLegend().setTextSize(8f);
-                pieChart.getLegend().setTextColor(Color.BLACK);
-
-                pieChart.invalidate(); // Refresca la gráfica
-            }
-
-        } catch (Exception e) {
+            pieDataSet.setValueTextSize(15f); //tamaño de los numeros
+            pieDataSet.setValueTextColor(Color.WHITE); //COLOR NUMEROS
+        } catch (JSONException e) {
             Log.e("API", "Error procesando la respuesta: " + e.getMessage());
         }
     }
