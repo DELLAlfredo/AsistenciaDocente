@@ -34,7 +34,7 @@
     <RelativeLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="473dp"
+        android:layout_height="511dp"
         android:layout_below="@+id/spopcion"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
@@ -131,7 +131,17 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.8180575" />
-
+    <Button
+        android:id="@+id/btnfechaYHora"
+        android:layout_width="139dp"
+        android:layout_height="65dp"
+        android:layout_above="@+id/BtnBusqueda_filtrada"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginBottom="12dp"
+        android:layout_toEndOf="@+id/btnFiltradofecha"
+        android:text="Buscar por fecha y hora" />
     <Button
         android:id="@+id/btnFiltradofecha"
         android:layout_width="176dp"
@@ -264,16 +274,6 @@
         app:layout_constraintStart_toEndOf="@+id/spopcion"
         app:layout_constraintTop_toTopOf="@+id/spopcion" />
 
-    <Button
-        android:id="@+id/btnfechaYHora"
-        android:layout_width="139dp"
-        android:layout_height="65dp"
-        android:layout_above="@+id/BtnBusqueda_filtrada"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="22dp"
-        android:layout_marginEnd="33dp"
-        android:layout_marginBottom="12dp"
-        android:layout_toEndOf="@+id/btnFiltradofecha"
-        android:text="Buscar por fecha y hora" />
+
 
 </RelativeLayout>

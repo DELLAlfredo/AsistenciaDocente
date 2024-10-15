@@ -446,11 +446,11 @@ public class Reporte extends menu {
                                     dataRow.addView(txtopcion);
                                     dataRow.addView(txtfecha);
                                     //colores de a tipografia
-                                    txtdocentes.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.white));
-                                    txtaula.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.white));
-                                    txthora.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.white));
+                                    txtdocentes.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
+                                    txtaula.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
+                                    txthora.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
                                     txtopcion.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.white));
-                                    txtfecha.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.white));
+                                    txtfecha.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
                                     // Agregar la fila a la tabla
                                     tabla.addView(dataRow);
 
@@ -578,11 +578,11 @@ public class Reporte extends menu {
 
 
                                 // Establecer color de texto y estilo
-                                txtdocentes.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.white));
-                                txtaula.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.white));
-                                txthora.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.white));
+                                txtdocentes.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
+                                txtaula.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
+                                txthora.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
                                 txtopcion.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.white));
-                                txtfecha.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.white));
+                                txtfecha.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
 
                                 // Agregar la fila a la tabla
                                 tabla.addView(dataRow);
@@ -695,11 +695,11 @@ public class Reporte extends menu {
                                 dataRow.addView(txtopcion);
                                 dataRow.addView(txtfecha);
 
-                                txtdocentes.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.white));
-                                txtaula.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.white));
-                                txthora.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.white));
+                                txtdocentes.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
+                                txtaula.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
+                                txthora.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
                                 txtopcion.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.white));
-                                txtfecha.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.white));
+                                txtfecha.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
                                 // Agregar la fila a la tabla
                                 tabla.addView(dataRow);
                             }
@@ -810,11 +810,11 @@ public class Reporte extends menu {
                                 dataRow.addView(txtopcion);
                                 dataRow.addView(txtfecha);
 
-                                txtdocentes.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.white));
-                                txtaula.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.white));
-                                txthora.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.white));
+                                txtdocentes.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
+                                txtaula.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
+                                txthora.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
                                 txtopcion.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.white));
-                                txtfecha.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.white));
+                                txtfecha.setTextColor(getResources().getColor(com.kusu.loadingbutton.R.color.Black));
                                 // Agregar la fila a la tabla
                                 tabla.addView(dataRow);
                             }

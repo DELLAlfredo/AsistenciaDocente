@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -46,11 +47,14 @@ public class menu extends AppCompatActivity implements NavigationView.OnNavigati
         drawerLayout.closeDrawer(GravityCompat.START);
         if (item.getItemId()== R.id.nav_Aulas)
         {
-            Intent intent = new Intent(getApplicationContext(), abcAula.class);
-            startActivity(intent);
+            Toast.makeText(this, "Sin acceso", Toast.LENGTH_SHORT).show();
+            //Intent intent = new Intent(getApplicationContext(), abcAula.class);
+            //startActivity(intent);
         }else if (item.getItemId()== R.id.nav_Docentes) {
-             Intent intent = new Intent(getApplicationContext(), abcDocentes.class);
-             startActivity(intent);
+            Toast.makeText(this, "Sin acceso", Toast.LENGTH_SHORT).show();
+
+            //Intent intent = new Intent(getApplicationContext(), abcDocentes.class);
+             //startActivity(intent);
         }else if (item.getItemId()== R.id.nav_Clases) {
             Intent intent = new Intent(getApplicationContext(), Clases.class);
             startActivity(intent);
