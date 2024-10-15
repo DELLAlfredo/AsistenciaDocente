@@ -40,6 +40,7 @@ import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -304,6 +305,10 @@ public class ReportesAsistencias extends menuadministradores {
         // Finalizar la página
         pdfDocument.finishPage(page);
 
+        // Obtener la fecha actual en el formato deseado
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String currentDate = dateFormat.format(new Date());
+
         // Guardar el archivo en el almacenamiento externo
         String directoryPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) + "/Reportes/";
         File file = new File(directoryPath);
@@ -311,7 +316,8 @@ public class ReportesAsistencias extends menuadministradores {
             file.mkdirs(); // Crear el directorio si no existe
         }
 
-        String fileName = "Reporte_Asistencias.pdf";
+        // Formar el nombre del archivo con la fecha
+        String fileName = "Informe_" + startDate + "_a_" + endDate + ".pdf";
         File filePath = new File(directoryPath + fileName);
 
         try {

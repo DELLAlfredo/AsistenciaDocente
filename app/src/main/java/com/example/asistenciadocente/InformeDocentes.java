@@ -1,7 +1,5 @@
 package com.example.asistenciadocente;
 
-import static com.itextpdf.text.pdf.PdfName.I;
-
 import android.app.DatePickerDialog;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -357,7 +355,17 @@ public class InformeDocentes extends menuadministradores {
             file.mkdirs();
         }
 
-        File pdfFile = new File(directoryPath, "informe_Docente.pdf");
+        // Generar un nombre de archivo único
+        String baseFileName = "informe_Docente";
+        String fileExtension = ".pdf";
+        int fileIndex = 1;
+        File pdfFile;
+
+        do {
+            String fileName = baseFileName + "_" + fileIndex + fileExtension;
+            pdfFile = new File(directoryPath, fileName);
+            fileIndex++;
+        } while (pdfFile.exists()); // Repetir hasta encontrar un nombre que no exista
 
         try {
             pdfDocument.writeTo(new FileOutputStream(pdfFile));
@@ -369,4 +377,5 @@ public class InformeDocentes extends menuadministradores {
             pdfDocument.close();
         }
     }
+
 }

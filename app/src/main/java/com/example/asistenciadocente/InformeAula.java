@@ -301,7 +301,17 @@ public class InformeAula extends menuadministradores {
             file.mkdirs();
         }
 
-        File pdfFile = new File(directoryPath, "informe_Carrera.pdf");
+        // Generar un nombre de archivo único
+        String baseFileName = "informe_Aula";
+        String fileExtension = ".pdf";
+        int fileIndex = 1;
+        File pdfFile;
+
+        do {
+            String fileName = baseFileName + "_" + fileIndex + fileExtension;
+            pdfFile = new File(directoryPath, fileName);
+            fileIndex++;
+        } while (pdfFile.exists()); // Repetir hasta encontrar un nombre que no exista
 
         try {
             pdfDocument.writeTo(new FileOutputStream(pdfFile));
