@@ -56,6 +56,9 @@ public class menuadministradores extends AppCompatActivity implements Navigation
         }else if (item.getItemId()== R.id.nav_ReporteDocente){
             Intent intent = new Intent(getApplicationContext(), InformeDocentes.class);
             startActivity(intent);
+        }else if (item.getItemId()== R.id.nav_ReporteTabla){
+            Intent intent = new Intent(getApplicationContext(), reporteadmin.class);
+            startActivity(intent);
         }/*else if (item.getItemId()== R.id.nav_ReporteFechasemana){
             Intent intent = new Intent(getApplicationContext(), InformeSemanal.class);
             startActivity(intent);

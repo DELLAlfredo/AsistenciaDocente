@@ -25,7 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.asistenciadocente.databinding.ActivityReporteBinding;
+import com.example.asistenciadocente.databinding.ActivityReporteadminBinding;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
@@ -47,9 +47,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-
-public class Reporte extends menu {
-    ActivityReporteBinding activityReporteBinding;
+public class reporteadmin extends menuadministradores {
+    ActivityReporteadminBinding activityReporteadminBinding;
     Spinner sphora,spopcion;
     EditText txtfecha;
 
@@ -63,9 +62,9 @@ public class Reporte extends menu {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityReporteBinding = ActivityReporteBinding.inflate(getLayoutInflater());
-        setContentView(activityReporteBinding.getRoot());
-        allocateActivityTitle("Reporte");
+        activityReporteadminBinding = ActivityReporteadminBinding.inflate(getLayoutInflater());
+        setContentView(activityReporteadminBinding.getRoot());
+        allocateActivityTitle("Reporte Tabla");
 
         sphora = findViewById(R.id.sphora);
         String[] hora = {"7AM-8AM", "8AM-9AM", "9AM-10AM", "10AM-11AM", "11AM-12AM", "12AM-1PM", "1PM-2PM", "2PM-3PM"};
@@ -121,22 +120,22 @@ public class Reporte extends menu {
                                 String fecha = resultado.getString("fecha");
 
                                 // Crear una nueva fila en la tabla
-                                TableRow fila = new TableRow(Reporte.this);
+                                TableRow fila = new TableRow(reporteadmin.this);
 
                                 // Crear los TextViews para mostrar los datos en la fila
-                                TextView txtdocentes = new TextView(Reporte.this);
+                                TextView txtdocentes = new TextView(reporteadmin.this);
                                 txtdocentes.setText(docentes);
 
-                                TextView txtaula = new TextView(Reporte.this);
+                                TextView txtaula = new TextView(reporteadmin.this);
                                 txtaula.setText(aula);
 
-                                TextView txthora = new TextView(Reporte.this);
+                                TextView txthora = new TextView(reporteadmin.this);
                                 txthora.setText(hora);
 
-                                TextView txtopcion = new TextView(Reporte.this);
+                                TextView txtopcion = new TextView(reporteadmin.this);
                                 txtopcion.setText(opcion);
 
-                                TextView txtfecha = new TextView(Reporte.this);
+                                TextView txtfecha = new TextView(reporteadmin.this);
                                 txtfecha.setText(fecha);
 
 
@@ -372,10 +371,10 @@ public class Reporte extends menu {
 
                         try {
                             // Crear la fila de encabezados
-                            TableRow headerRow = new TableRow(Reporte.this);
+                            TableRow headerRow = new TableRow(reporteadmin.this);
                             String[] headers = {"Nombre de Docente", "Aula", "Hora","Accion","Fecha"};
                             for (String header : headers) {
-                                TextView textView = new TextView(Reporte.this);
+                                TextView textView = new TextView(reporteadmin.this);
                                 textView.setText(header);
                                 textView.setPadding(5, 5, 5, 5);
                                 textView.setBackgroundResource(R.color.tabla);
@@ -387,7 +386,7 @@ public class Reporte extends menu {
                                 // Agregar las filas con los datos filtrados
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject rowData = response.getJSONObject(i);
-                                    TableRow dataRow = new TableRow(Reporte.this);
+                                    TableRow dataRow = new TableRow(reporteadmin.this);
 
                                     // Obtener los valores de las columnas de la respuesta JSON
                                     String docentes = rowData.getString("docentes");
@@ -396,19 +395,19 @@ public class Reporte extends menu {
                                     String opcion = rowData.getString("opcion");
                                     String fecha = rowData.getString("fecha");
                                     // Crear los TextViews para mostrar los datos en la fila
-                                    TextView txtdocentes = new TextView(Reporte.this);
+                                    TextView txtdocentes = new TextView(reporteadmin.this);
                                     txtdocentes.setText(docentes);
 
-                                    TextView txtaula = new TextView(Reporte.this);
+                                    TextView txtaula = new TextView(reporteadmin.this);
                                     txtaula.setText(aula);
 
-                                    TextView txthora = new TextView(Reporte.this);
+                                    TextView txthora = new TextView(reporteadmin.this);
                                     txthora.setText(hora);
 
-                                    TextView txtopcion = new TextView(Reporte.this);
+                                    TextView txtopcion = new TextView(reporteadmin.this);
                                     txtopcion.setText(opcion);
 
-                                    TextView txtfecha = new TextView(Reporte.this);
+                                    TextView txtfecha = new TextView(reporteadmin.this);
                                     txtfecha.setText(fecha);
                                     int color = 0;
                                     //{"DIA NO LABORAL","CLASE IMPARTIDA","CLASE NO IMPARTIDA","GRUPO SIN ALUMNOS","JUSTIFICACION ACADEMICA","PERMISO","PROBLEMAS DE SALUD","COMISION","FALLA TECNICA DE AULA","CLASE INCOMPLETA"}
@@ -456,7 +455,7 @@ public class Reporte extends menu {
 
                                 }
                             }else {
-                                Toast.makeText(Reporte.this, "Sin datos en esta busqueda", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(reporteadmin.this, "Sin datos en esta busqueda", Toast.LENGTH_SHORT).show();
                             }
 
 
@@ -491,10 +490,10 @@ public class Reporte extends menu {
 
                         try {
                             // Crear la fila de encabezados
-                            TableRow headerRow = new TableRow(Reporte.this);
+                            TableRow headerRow = new TableRow(reporteadmin.this);
                             String[] headers = {"Nombre de Docente", "Aula", "Hora", "Acción", "Fecha"};
                             for (String header : headers) {
-                                TextView textView = new TextView(Reporte.this);
+                                TextView textView = new TextView(reporteadmin.this);
                                 textView.setText(header);
                                 textView.setPadding(5, 5, 5, 5);
                                 textView.setBackgroundResource(R.color.tabla);
@@ -506,14 +505,14 @@ public class Reporte extends menu {
                             // Verificar si el array de respuesta está vacío
                             if (response.length() == 0) {
                                 // Mostrar un mensaje indicando que no hay registros disponibles
-                                Toast.makeText(Reporte.this, "No se encontraron registros para la fecha especificada", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(reporteadmin.this, "No se encontraron registros para la fecha especificada", Toast.LENGTH_SHORT).show();
                                 return;
                             }
 
                             // Agregar las filas con los datos filtrados
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject rowData = response.getJSONObject(i);
-                                TableRow dataRow = new TableRow(Reporte.this);
+                                TableRow dataRow = new TableRow(reporteadmin.this);
 
                                 // Obtener los valores de las columnas de la respuesta JSON
                                 String docentes = rowData.getString("docentes");
@@ -523,19 +522,19 @@ public class Reporte extends menu {
                                 String fecha = rowData.getString("fecha");
 
                                 // Crear los TextViews para mostrar los datos en la fila
-                                TextView txtdocentes = new TextView(Reporte.this);
+                                TextView txtdocentes = new TextView(reporteadmin.this);
                                 txtdocentes.setText(docentes);
 
-                                TextView txtaula = new TextView(Reporte.this);
+                                TextView txtaula = new TextView(reporteadmin.this);
                                 txtaula.setText(aula);
 
-                                TextView txthora = new TextView(Reporte.this);
+                                TextView txthora = new TextView(reporteadmin.this);
                                 txthora.setText(hora);
 
-                                TextView txtopcion = new TextView(Reporte.this);
+                                TextView txtopcion = new TextView(reporteadmin.this);
                                 txtopcion.setText(opcion);
 
-                                TextView txtfecha = new TextView(Reporte.this);
+                                TextView txtfecha = new TextView(reporteadmin.this);
                                 txtfecha.setText(fecha);
 
                                 // Obtener el color de fondo según la opción
@@ -616,10 +615,10 @@ public class Reporte extends menu {
 
                         try {
                             // Crear la fila de encabezados
-                            TableRow headerRow = new TableRow(Reporte.this);
+                            TableRow headerRow = new TableRow(reporteadmin.this);
                             String[] headers = {"Nombre de Docente", "Aula", "Hora","Accion","Fecha"};
                             for (String header : headers) {
-                                TextView textView = new TextView(Reporte.this);
+                                TextView textView = new TextView(reporteadmin.this);
                                 textView.setText(header);
                                 textView.setPadding(5, 5, 5, 5);
                                 textView.setBackgroundResource(R.color.tabla);
@@ -629,13 +628,13 @@ public class Reporte extends menu {
                             tabla.addView(headerRow);
                             if (response.length() == 0) {
                                 // Mostrar un mensaje indicando que no hay registros disponibles
-                                Toast.makeText(Reporte.this, "No se encontraron registros para la fecha y hora especificadas", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(reporteadmin.this, "No se encontraron registros para la fecha y hora especificadas", Toast.LENGTH_SHORT).show();
                                 return;
                             }
                             // Agregar las filas con los datos filtrados
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject rowData = response.getJSONObject(i);
-                                TableRow dataRow = new TableRow(Reporte.this);
+                                TableRow dataRow = new TableRow(reporteadmin.this);
 
                                 // Obtener los valores de las columnas de la respuesta JSON
                                 String docentes = rowData.getString("docentes");
@@ -644,19 +643,19 @@ public class Reporte extends menu {
                                 String opcion = rowData.getString("opcion");
                                 String fecha = rowData.getString("fecha");
                                 // Crear los TextViews para mostrar los datos en la fila
-                                TextView txtdocentes = new TextView(Reporte.this);
+                                TextView txtdocentes = new TextView(reporteadmin.this);
                                 txtdocentes.setText(docentes);
 
-                                TextView txtaula = new TextView(Reporte.this);
+                                TextView txtaula = new TextView(reporteadmin.this);
                                 txtaula.setText(aula);
 
-                                TextView txthora = new TextView(Reporte.this);
+                                TextView txthora = new TextView(reporteadmin.this);
                                 txthora.setText(hora);
 
-                                TextView txtopcion = new TextView(Reporte.this);
+                                TextView txtopcion = new TextView(reporteadmin.this);
                                 txtopcion.setText(opcion);
 
-                                TextView txtfecha = new TextView(Reporte.this);
+                                TextView txtfecha = new TextView(reporteadmin.this);
                                 txtfecha.setText(fecha);
                                 int color = 0;
                                 //{"DIA NO LABORAL","CLASE IMPARTIDA","CLASE NO IMPARTIDA","GRUPO SIN ALUMNOS","JUSTIFICACION ACADEMICA","PERMISO","PROBLEMAS DE SALUD","COMISION","FALLA TECNICA DE AULA","CLASE INCOMPLETA"}
@@ -731,10 +730,10 @@ public class Reporte extends menu {
 
                         try {
                             // Crear la fila de encabezados
-                            TableRow headerRow = new TableRow(Reporte.this);
+                            TableRow headerRow = new TableRow(reporteadmin.this);
                             String[] headers = {"Nombre de Docente", "Aula", "Hora","Accion","Fecha"};
                             for (String header : headers) {
-                                TextView textView = new TextView(Reporte.this);
+                                TextView textView = new TextView(reporteadmin.this);
                                 textView.setText(header);
                                 textView.setPadding(5, 5, 5, 5);
                                 textView.setBackgroundResource(R.color.tabla);
@@ -744,13 +743,13 @@ public class Reporte extends menu {
                             tabla.addView(headerRow);
                             if (response.length() == 0) {
                                 // Mostrar un mensaje indicando que no hay registros disponibles
-                                Toast.makeText(Reporte.this, "No se encontraron registros para la fecha y registro espesificados", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(reporteadmin.this, "No se encontraron registros para la fecha y registro espesificados", Toast.LENGTH_SHORT).show();
                                 return;
                             }
                             // Agregar las filas con los datos filtrados
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject rowData = response.getJSONObject(i);
-                                TableRow dataRow = new TableRow(Reporte.this);
+                                TableRow dataRow = new TableRow(reporteadmin.this);
 
                                 // Obtener los valores de las columnas de la respuesta JSON
                                 String docentes = rowData.getString("docentes");
@@ -759,19 +758,19 @@ public class Reporte extends menu {
                                 String opcion = rowData.getString("opcion");
                                 String fecha = rowData.getString("fecha");
                                 // Crear los TextViews para mostrar los datos en la fila
-                                TextView txtdocentes = new TextView(Reporte.this);
+                                TextView txtdocentes = new TextView(reporteadmin.this);
                                 txtdocentes.setText(docentes);
 
-                                TextView txtaula = new TextView(Reporte.this);
+                                TextView txtaula = new TextView(reporteadmin.this);
                                 txtaula.setText(aula);
 
-                                TextView txthora = new TextView(Reporte.this);
+                                TextView txthora = new TextView(reporteadmin.this);
                                 txthora.setText(hora);
 
-                                TextView txtopcion = new TextView(Reporte.this);
+                                TextView txtopcion = new TextView(reporteadmin.this);
                                 txtopcion.setText(opcion);
 
-                                TextView txtfecha = new TextView(Reporte.this);
+                                TextView txtfecha = new TextView(reporteadmin.this);
                                 txtfecha.setText(fecha);
                                 int color = 0;
                                 //{"DIA NO LABORAL","CLASE IMPARTIDA","CLASE NO IMPARTIDA","GRUPO SIN ALUMNOS","JUSTIFICACION ACADEMICA","PERMISO","PROBLEMAS DE SALUD","COMISION","FALLA TECNICA DE AULA","CLASE INCOMPLETA"}
@@ -833,3 +832,4 @@ public class Reporte extends menu {
         queue.add(jsonArrayRequest);
     }
 }
+

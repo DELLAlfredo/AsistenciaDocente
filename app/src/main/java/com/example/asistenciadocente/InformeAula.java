@@ -227,15 +227,21 @@ public class InformeAula extends menuadministradores {
             barChart.setDrawBorders(true);
             barChart.setDrawValueAboveBar(true);
             barChart.setHighlightFullBarEnabled(true);
-            barChart.getXAxis().setSpaceMax(0.1f);
+            barChart.getXAxis().setSpaceMax(0.01f);
             barChart.getXAxis().setGranularity(1f);
             barChart.getXAxis().setGranularityEnabled(true);
             barChart.setExtraLeftOffset(10f);
             barChart.setExtraRightOffset(10f);
             barChart.getXAxis().setLabelRotationAngle(-45f);
-            barChart.getXAxis().setPosition(XAxis.XAxisPosition.TOP_INSIDE);
             barDataSet.setValueTextSize(15f); //tamaño de los numeros
+            barChart.getXAxis().setPosition(XAxis.XAxisPosition.TOP_INSIDE);
             barChart.invalidate(); // Refresca la gráfica
+            barDataSet.setValueFormatter(new ValueFormatter() {
+                @Override
+                public String getFormattedValue(float value) {
+                    return String.format(Locale.getDefault(), "%.0f", value); // Muestra el valor sin decimales
+                }
+            });
             barChart.getXAxis().setValueFormatter(new ValueFormatter() {
                 @Override
                 public String getFormattedValue(float value) {
@@ -250,15 +256,27 @@ public class InformeAula extends menuadministradores {
             PieDataSet pieDataSet = new PieDataSet(pieEntries, "");
             pieDataSet.setColors(colors);
 
-            PieData pieData = new PieData(pieDataSet);
-            pieChart.setData(pieData);
-            pieChart.invalidate();
+            // Configura el formateador para los valores del DataSet
+            pieDataSet.setValueFormatter(new ValueFormatter() {
+                @Override
+                public String getFormattedValue(float value) {
+                    return String.format(Locale.getDefault(), "%.0f", value); // Mostrará el valor sin decimales
+                }
+            });
+
+// Ajusta el tamaño y color del texto de los valores
+            pieDataSet.setValueTextSize(15f);
             pieDataSet.setValueTextColor(Color.WHITE);
-            pieDataSet.setValueTextSize(15f); //tamaño de los numeros
+
+// Actualiza los datos del gráfico
+            pieChart.setData(new PieData(pieDataSet));
+            pieChart.invalidate(); // Refresh del gráfico
+
         } catch (JSONException e) {
             Log.e("API", "Error procesando la respuesta: " + e.getMessage());
         }
     }
+
 
     private void createPdf() {
         int pageWidth = 1000;
@@ -283,7 +301,7 @@ public class InformeAula extends menuadministradores {
             file.mkdirs();
         }
 
-        File pdfFile = new File(directoryPath, "informe_aula.pdf");
+        File pdfFile = new File(directoryPath, "informe_Carrera.pdf");
 
         try {
             pdfDocument.writeTo(new FileOutputStream(pdfFile));

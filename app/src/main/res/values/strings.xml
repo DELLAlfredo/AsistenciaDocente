@@ -48,4 +48,5 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="title_activity_acceso_administrador">AccesoAdministrador</string>
+    <string name="title_activity_reporteadmin">reporteadmin</string>
 </resources>

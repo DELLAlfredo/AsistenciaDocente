@@ -20,11 +20,11 @@
             android:id="@+id/nav_ReporteDocente"
             android:title="Informe Docentes"
             android:icon="@drawable/docentes" />
-     <!-- item
-            android:id="@+id/nav_ReporteFechasemana"
-            android:title="Informe Semanal"
-            android:icon="@drawable/administrador" />
         <item
+            android:id="@+id/nav_ReporteTabla"
+            android:title="Informe Tabla"
+            android:icon="@drawable/administrador" />
+        <!--item
             android:id="@+id/nav_ReporteSemestral"
             android:title="Informe Semestral"
             android:icon="@drawable/administrador" /-->
