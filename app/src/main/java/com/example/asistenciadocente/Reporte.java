@@ -102,7 +102,7 @@ public class Reporte extends menu {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            // Obtener el array de resultados de la respuesta JSON
+                            // aver Obtener el array de resultados de la respuesta JSON
                             JSONArray resultados = response.getJSONArray("results");
 
                             // Limpiar la tabla antes de agregar los nuevos datos
